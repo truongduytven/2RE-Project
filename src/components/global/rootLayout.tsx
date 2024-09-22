@@ -9,7 +9,7 @@ export default function RootLayout() {
       <div className='flex min-h-[70%] pt-10'>
         <Outlet />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
