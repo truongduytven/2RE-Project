@@ -11,7 +11,7 @@ import { Search } from 'lucide-react'
 
 export default function Header() {
   return (
-    <header className='w-full'>
+    <header className='w-full mt-5'>
       <Container>
         <div className='flex w-full h-20 justify-between items-end'>
           <div>
