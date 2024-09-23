@@ -9,3 +9,13 @@ export type User = {
   address?: string
   gender: Gender
 }
+
+export type Product = {
+  id: number
+  name: string
+  image: string
+  size: string
+  cond: string
+  price: string
+  type: string
+}

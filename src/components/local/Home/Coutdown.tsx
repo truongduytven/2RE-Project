@@ -33,7 +33,7 @@ const CountdownTimer: React.FC = () => {
           <div className='flex flex-col gap-4 items-center'>
             <div
               key={unit}
-              className='number-countdown w-16 h-16 flex justify-center items-center shadow-custom rounded-lg text-3xl mx-2 relative'
+              className='number-countdown bg-white w-16 h-16 flex justify-center items-center shadow-custom rounded-lg text-3xl mx-2 relative'
             >
               {value}
             </div>

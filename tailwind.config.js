@@ -7,6 +7,9 @@ export default {
 	],
 	theme: {
 		extend: {
+			backgroundImage: theme => ({
+				'radiant-gradient': 'radial-gradient(circle at center, #f6f6f6, #ffffff)',
+			}),
 			boxShadow: {
 				'custom': '0 0 5px rgba(0, 0, 0, 0.3)',
 			},
