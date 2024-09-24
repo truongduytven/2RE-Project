@@ -8,9 +8,11 @@ import Brand from '@/assets/brands.png'
 import Follow from '@/assets/follow.png'
 import { Button } from '@/components/ui/button'
 import SlideShow from '@/components/local/Home/SlideShow'
-import SlideShowRating from '@/components/local/Home/SlideShowRating'
 import CountdownTimer from '@/components/local/Home/Coutdown'
 import Arrivals from '@/components/local/Home/Arrivals'
+import Sub1 from '@/assets/sub1.png'
+import Sub2 from '@/assets/sub2.png'
+import Subscribe from '@/components/local/Home/Subscribe'
 
 export default function HomePage() {
   return (
@@ -74,11 +76,17 @@ export default function HomePage() {
         </div>
         <img src={Follow} />
       </div>
-      <div className='bg-gray-500 w-full flex flex-col justify-center items-center'>
-        <SlideShowRating />
-      </div>
-      <div>
-
+      {/* <div className='w-full flex flex-col justify-center items-center'>
+        <SlideRating />
+      </div> */}
+      <div className='w-full flex justify-center'>
+        <div className=' w-full max-w-6xl flex'>
+          <img className='scale-75' src={Sub1} alt='subscrition' />
+          <div className='flex flex-col justify-center'>
+            <Subscribe />
+          </div>
+          <img className='scale-75' src={Sub2} alt='subscrition' />
+        </div>
       </div>
     </div>
   )
