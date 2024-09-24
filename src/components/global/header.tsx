@@ -1,5 +1,5 @@
 import Container from './Container'
-import Logo from '@/assets/Logo.jpeg'
+import Logo from '@/assets/Logo.png'
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -15,7 +15,7 @@ export default function Header() {
       <Container>
         <div className='flex w-full h-20 justify-between items-end'>
           <div>
-            <img src={Logo} className='w-30 h-20' />
+            <img src={Logo} className='w-24 h-24' />
           </div>
           <div>
             <NavigationMenu>

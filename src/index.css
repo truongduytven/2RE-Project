@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.volkov-font {
+  font-family: 'Volkov', sans-serif;
+}
+
+
 body {
   font-family: 'Poppins', sans-serif;
 }

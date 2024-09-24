@@ -35,31 +35,19 @@ export default function SlideShow() {
         className='mySwiper'
       >
         <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-1.jpg' />
+          <img src='https://i.pinimg.com/564x/9a/6c/c0/9a6cc02c9beb72b314e93416daea041a.jpg' />
         </SwiperSlide>
         <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-2.jpg' />
+          <img src='https://i.pinimg.com/736x/fb/8d/94/fb8d9437bcba7207d1195ebd85c51574.jpg' />
         </SwiperSlide>
         <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-3.jpg' />
+          <img src='https://i.pinimg.com/564x/f3/76/18/f3761899995636f3af116d70cbc12474.jpg' />
         </SwiperSlide>
         <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-4.jpg' />
+          <img src='https://i.pinimg.com/564x/6b/a9/9e/6ba99eaa116a329a1aa462cf79dec250.jpg' />
         </SwiperSlide>
         <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-5.jpg' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-6.jpg' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-7.jpg' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-8.jpg' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-9.jpg' />
+          <img src='https://i.pinimg.com/564x/a8/72/ff/a872ff233b799d050a87b0a7913815f3.jpg' />
         </SwiperSlide>
 
         <div className='w-full flex justify-center'>
