@@ -4,7 +4,7 @@ import { formatCurrency } from '@/lib/utils'
 
 function ProductCard(props: Product) {
   return (
-    <Card className='flex flex-col justify-center start p-4 shadow-sm border-none'>
+    <Card className='flex flex-col justify-center start p-4 shadow-md border-none'>
       <div className='w-64 h-44 overflow-hidden rounded-md'>
         <img className='w-full h-full object-cover' src={props.image} alt={props.name} />
       </div>
