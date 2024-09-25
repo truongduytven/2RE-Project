@@ -19,3 +19,14 @@ export type Product = {
   price: string
   type: string
 }
+export interface ProductDetail {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  size: string;
+  color: string[];
+  mainImage: string;
+  relatedImages: string[];
+}
+
