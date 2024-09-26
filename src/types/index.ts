@@ -18,6 +18,7 @@ export type Product = {
   cond: string
   price: string
   type: string
+  brand: string
 }
 export interface ProductDetail {
   id: string;

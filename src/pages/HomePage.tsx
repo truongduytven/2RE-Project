@@ -42,7 +42,7 @@ export default function HomePage() {
         <div className='w-full max-w-5xl flex justify-between'>
           <div className='p-5 flex flex-col gap-14 '>
             <div>
-              <h2 className='text-2xl font-bold'>This week's products</h2>
+              <h2 className='text-3xl font-bold volkov-font'>This week's products</h2>
               <p className='text-sm'>Limited quantity</p>
             </div>
             <div>
@@ -57,8 +57,8 @@ export default function HomePage() {
         </div>
       </div>
       <div className='flex justify-center items-center w-full py-20'>
-        <div className='flex flex-col bg-radiant-gradient items-center justify-center w-full max-w-5xl gap-10'>
-          <div className='text-6xl font-semibold'>New Arrivals</div>
+        <div className='flex flex-col items-center justify-center w-full max-w-5xl gap-10'>
+          <div className='text-6xl font-semibold volkov-font'>New Arrivals</div>
           <div>
             <Arrivals />
           </div>
@@ -69,16 +69,13 @@ export default function HomePage() {
       </div>
       <div className='w-full flex flex-col justify-center items-center gap-20 py-20 bg-gradient-to-b from-[#f9f9f9] to-white'>
         <div className='flex flex-col items-center gap-8'>
-          <p className='text-4xl font-semibold'>Follow Us On Fanpage</p>
+          <p className='text-4xl font-semibold volkov-font'>Follow Us On Fanpage</p>
           <p className='text-sm'>
             To not miss the latest offers, new and unique products at extremely affordable prices.
           </p>
         </div>
         <img src={Follow} />
       </div>
-      {/* <div className='w-full flex flex-col justify-center items-center'>
-        <SlideRating />
-      </div> */}
       <div className='w-full flex justify-center'>
         <div className=' w-full max-w-6xl flex'>
           <img className='scale-75' src={Sub1} alt='subscrition' />
