@@ -1,4 +1,3 @@
-import FilterShop from '@/components/local/Shop/FilterShop'
 import ListProduct from '@/components/local/Shop/ListProduct'
 import {
   Breadcrumb,
@@ -10,8 +9,8 @@ import {
 
 export default function ShopPage() {
   return (
-    <div className='w-full min-h-screen flex flex-col'>
-      <div className='w-full flex justify-center mt-5'>
+    <div className='w-full min-h-screen flex flex-col gap-20 my-10'>
+      <div className='w-full flex justify-center'>
         <div className='flex flex-col justify-center items-center'>
           <div className='volkov-font text-4xl mb-5'>Fashion</div>
           <Breadcrumb className='text-sm'>
@@ -20,7 +19,7 @@ export default function ShopPage() {
                 <BreadcrumbLink href='/'>Home</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
-              <BreadcrumbItem>Shop</BreadcrumbItem>
+              <BreadcrumbItem className='font-bold'>Shop</BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>

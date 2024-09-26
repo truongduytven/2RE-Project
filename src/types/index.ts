@@ -18,4 +18,5 @@ export type Product = {
   cond: string
   price: string
   type: string
+  brand: string
 }
