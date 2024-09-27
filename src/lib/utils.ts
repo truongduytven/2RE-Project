@@ -5,13 +5,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatCurrency(value: string) {
-  // Create a new number formatter for Vietnamese locale with custom options
+export function formatCurrency(value: number) {
   const formatter = new Intl.NumberFormat('vi-VN', {
-    style: 'decimal', // use decimal formatting
-    minimumFractionDigits: 0, // ensure no fractional part is shown
+    style: 'decimal', 
+    minimumFractionDigits: 0,
   });
-
-  // Format the value and append 'VNĐ'
-  return `${formatter.format(Number(value))} VNĐ`;
+  return `${formatter.format(value)} VNĐ`;
 }
+
+export function formatProductType(type: string) {
+  return type.replace(/([A-Z])/g, ' $1').trim();
+}
+

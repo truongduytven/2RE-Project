@@ -6,7 +6,7 @@ export default function RootLayout() {
   return (
     <div className='h-screen relative'>
       <Header />
-      <div className='flex min-h-[70%] pt-10'>
+      <div className='min-h-[70%] pt-10'>
         <Outlet />
       </div>
       <Footer />

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ProductCard from './ProductCard'
-import { DataArrivals } from '@/components/local/Home/DataArrivals'
+import { DataArrivals } from '@/lib/DataArrivals'
 import { Button } from '@/components/ui/button'
 
 export default function Arrivals() {
