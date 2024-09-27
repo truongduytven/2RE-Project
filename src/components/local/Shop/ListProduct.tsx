@@ -2,7 +2,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Check } from 'lucide-react'
 import { useState } from 'react'
-import { DataArrivals } from '../Home/DataArrivals'
+import { DataArrivals } from '../../../lib/DataArrivals'
 import {
   Pagination,
   PaginationContent,
@@ -12,6 +12,7 @@ import {
   PaginationPrevious
 } from '@/components/ui/pagination'
 import { formatCurrency } from '@/lib/utils'
+import { Link } from 'react-router-dom'
 const PRODUCTS_PER_PAGE = 9
 
 const sizes = ['S', 'M', 'L', 'XL']
@@ -33,43 +34,48 @@ export default function ListProduct() {
 
   const [currentPage, setCurrentPage] = useState<number>(1)
 
+  const calNewPrice = (price: number, sale: number) => {
+    return price - (price * sale) / 100
+  }
+
   const getFilteredProducts = () => {
-
     return DataArrivals.filter((product) => {
-
-      const matchesSize = selectedSize ? product.size === selectedSize : true;
+      const newPrice = calNewPrice(product.price, product.sale);
+      const matchesSize = selectedSize ? product.size === selectedSize : true
 
       const matchesPrice = selectedPriceRange
         ? (() => {
-            const price = parseFloat(product.price);
-            if (selectedPriceRange === '0 VND - 200.000 VND') return price >= 0 && price <= 200000;
-            if (selectedPriceRange === '200.000 VND - 400.000 VND') return price > 200000 && price <= 400000;
-            if (selectedPriceRange === '400.000 VND - 600.000 VND') return price > 400000 && price <= 600000;
-            if (selectedPriceRange === '600.000 VND - 800.000 VND') return price > 600000 && price <= 800000;
-            if (selectedPriceRange === 'Over 800.000 VND') return price > 800000;
-            return true;
+            if (selectedPriceRange === '0 VND - 200.000 VND') return newPrice >= 0 && newPrice <= 200000
+            if (selectedPriceRange === '200.000 VND - 400.000 VND') return newPrice > 200000 && newPrice <= 400000
+            if (selectedPriceRange === '400.000 VND - 600.000 VND') return newPrice > 400000 && newPrice <= 600000
+            if (selectedPriceRange === '600.000 VND - 800.000 VND') return newPrice > 600000 && newPrice <= 800000
+            if (selectedPriceRange === 'Over 800.000 VND') return newPrice > 800000
+            return true
           })()
-        : true;
+        : true
 
-      const matchesBrand = selectedBrand.length > 0 ? selectedBrand.includes(product.brand) : true;
+      const matchesBrand = selectedBrand.length > 0 ? selectedBrand.includes(product.brand) : true
 
-      const matchesCollection = selectedCollection ? product.type === selectedCollection : true;
+      const matchesCollection = selectedCollection ? product.type === selectedCollection : true
 
-      return matchesSize && matchesPrice && matchesBrand && matchesCollection;
-    });
-  };
+      return matchesSize && matchesPrice && matchesBrand && matchesCollection
+    })
+  }
 
   const filteredProducts = getFilteredProducts()
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE)
 
-  const paginatedProducts = filteredProducts.slice((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE)
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * PRODUCTS_PER_PAGE,
+    currentPage * PRODUCTS_PER_PAGE
+  )
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
-    });
-  };
+    })
+  }
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
@@ -111,7 +117,7 @@ export default function ListProduct() {
   }
 
   const handlePriceSelection = (range: string) => {
-    if(selectedPriceRange === range) {
+    if (selectedPriceRange === range) {
       setSelectedPriceRange(null)
       return
     }
@@ -207,22 +213,39 @@ export default function ListProduct() {
       <div className='flex flex-grow flex-col' style={{ flex: '3.5' }}>
         {paginatedProducts.length > 0 ? (
           <div className='grid grid-cols-3 p-5 gap-4 gap-y-14'>
-          {paginatedProducts.map((product) => (
-            <div className='w-full h-full flex flex-col gap-4'>
-              <div className='w-60 h-80'>
-                <img className='w-full h-full object-cover' src={product.image} alt={product.name} />
-              </div>
-              <div className='font-bold truncate'>{product.name}</div>
-              <div>{formatCurrency(product.price)}</div>
-            </div>
-          ))}
-        </div>
+            {paginatedProducts.map((product) => (
+              <Link to={`/productDetails/` + product.id}>
+                <div className='w-full h-full flex flex-col gap-4'>
+                  <div className='w-60 h-80'>
+                    <img className='w-full h-full object-cover' src={product.mainImage} alt={product.name} />
+                  </div>
+                  <div className='font-bold truncate'>{product.name}</div>
+                  <div className='flex gap-2 items-center'>
+                    {product.sale > 0 ? (
+                      <div className='font-medium'>{formatCurrency(calNewPrice(product.price, product.sale))}</div>
+                    ) : (
+                      <div className='font-medium'>{formatCurrency(product.price)}</div>
+                    )}
+                    {product.sale > 0 && (
+                      <div className='line-through text-gray-500 opacity-70 text-xs'>
+                        {formatCurrency(product.price)}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         ) : (
           <div className='flex justify-center items-center'>No products found</div>
         )}
         <div className='mt-4 flex justify-center'>
           <Pagination>
-            {totalPages > 0 && <PaginationPrevious className='cursor-pointer' onClick={handlePreviousPage}>Previous</PaginationPrevious>}
+            {totalPages > 0 && (
+              <PaginationPrevious className='cursor-pointer' onClick={handlePreviousPage}>
+                Previous
+              </PaginationPrevious>
+            )}
             <PaginationContent>
               {[...Array(totalPages)].map((_, index) => (
                 <PaginationItem key={index}>
@@ -232,7 +255,11 @@ export default function ListProduct() {
                 </PaginationItem>
               ))}
             </PaginationContent>
-            {totalPages > 0 && <PaginationNext className='cursor-pointer' onClick={handleNextPage}>Next</PaginationNext>}
+            {totalPages > 0 && (
+              <PaginationNext className='cursor-pointer' onClick={handleNextPage}>
+                Next
+              </PaginationNext>
+            )}
           </Pagination>
         </div>
       </div>

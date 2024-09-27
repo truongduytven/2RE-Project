@@ -13,12 +13,15 @@ export type User = {
 export type Product = {
   id: number
   name: string
-  image: string
+  mainImage: string
+  relatedImages: string[]
   size: string
+  // color: string
   cond: string
-  price: string
+  price: number
   type: string
   brand: string
+  sale: number
 }
 export interface ProductDetail {
   id: string;
