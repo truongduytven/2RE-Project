@@ -16,7 +16,7 @@ import Subscribe from '@/components/local/Home/Subscribe'
 
 export default function HomePage() {
   return (
-    <div className='min-h-screen flex flex-col'>
+    <div className='min-h-screen flex flex-col mx-auto'>
       <div className='w-full flex justify-center'>
         <div className='w-full gap-3 flex justify-between max-w-5xl'>
           <div className='w-1/3 bg-[#E0E0E0] p-4 rounded-lg'>
@@ -35,7 +35,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className='my-5'>
+      <div className='flex justify-center my-5'>
         <img src={Brand} alt='brand' />
       </div>
       <div className='flex justify-center bg-[#FAFAFA]'>

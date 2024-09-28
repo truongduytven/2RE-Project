@@ -30,7 +30,7 @@ export default function Header() {
                   <NavigationMenuLink href='/product'>Product</NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
-                  <NavigationMenuLink href='/product'>Cart</NavigationMenuLink>
+                  <NavigationMenuLink href='/cart'>Cart</NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
