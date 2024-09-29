@@ -1,7 +1,6 @@
-// import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Check } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DataArrivals } from '../../../lib/DataArrivals'
 import {
   Pagination,
@@ -32,17 +31,28 @@ export default function ListProduct() {
   const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(null)
   const [selectedCollection, setSelectedCollection] = useState<string | null>(null)
 
-  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    const savedPage = localStorage.getItem('currentPage')
+    return savedPage ? parseInt(savedPage, 10) : 1
+  })
 
   const calNewPrice = (price: number, sale: number) => {
     return price - (price * sale) / 100
   }
 
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage.toString())
+  }, [currentPage])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [selectedBrand, selectedSize, selectedPriceRange, selectedCollection])
+
   const getFilteredProducts = () => {
     return DataArrivals.filter((product) => {
-      const newPrice = calNewPrice(product.price, product.sale);
-      const matchesSize = selectedSize ? product.size === selectedSize : true
+      const newPrice = calNewPrice(product.price, product.sale)
 
+      const matchesSize = selectedSize ? product.size === selectedSize : true
       const matchesPrice = selectedPriceRange
         ? (() => {
             if (selectedPriceRange === '0 VND - 200.000 VND') return newPrice >= 0 && newPrice <= 200000
