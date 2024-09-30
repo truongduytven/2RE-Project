@@ -18,7 +18,7 @@ export const DataArrivals: Product[] = [
     type: 'MenFashion',
     shopName: 'Adidas Official Store',
     shopId: 'Shop1',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ export const DataArrivals: Product[] = [
     type: 'MenFashion',
     shopName: 'Nike Official Store',
     shopId: 'Shop2',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 3,
@@ -49,14 +49,14 @@ export const DataArrivals: Product[] = [
       'https://i.pinimg.com/564x/8a/13/b4/8a13b4a1d77c214914e2db9451e3f8b1.jpg'
     ],
     brand: 'Puma',
-    size: 'XL',
+    size: 'Free',
     cond: '85',
     price: 250000,
     sale: 0,
     type: 'MenFashion',
     shopName: 'Puma Official Store',
     shopId: 'Shop3',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 4,
@@ -75,7 +75,7 @@ export const DataArrivals: Product[] = [
     type: 'WomenFashion',
     shopName: 'Converse Official Store',
     shopId: 'Shop4',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 5,
@@ -94,7 +94,7 @@ export const DataArrivals: Product[] = [
     type: 'WomenFashion',
     shopName: 'Adidas Official Store',
     shopId: 'Shop1',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 6,
@@ -113,7 +113,7 @@ export const DataArrivals: Product[] = [
     type: 'MenFashion',
     shopName: 'Nike Official Store',
     shopId: 'Shop2',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 7,
@@ -132,7 +132,7 @@ export const DataArrivals: Product[] = [
     type: 'WomenFashion',
     shopName: 'Puma Official Store',
     shopId: 'Shop3',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 8,
@@ -151,7 +151,7 @@ export const DataArrivals: Product[] = [
     type: 'MenFashion',
     shopName: 'Converse Official Store',
     shopId: 'Shop4',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 9,
@@ -163,14 +163,14 @@ export const DataArrivals: Product[] = [
       'https://i.pinimg.com/736x/3c/54/0b/3c540bb7f40f536baa87dc0336280215.jpg'
     ],
     brand: 'Adidas',
-    size: 'XS',
+    size: 'S',
     cond: '89',
     price: 220000,
     sale: 0,
     type: 'WomenFashion',
     shopName: 'Adidas Official Store',
     shopId: 'Shop1',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 10,
@@ -182,14 +182,14 @@ export const DataArrivals: Product[] = [
       'https://i.pinimg.com/736x/3c/54/0b/3c540bb7f40f536baa87dc0336280215.jpg'
     ],
     brand: 'Nike',
-    size: '42',
+    size: 'XL',
     cond: '100',
     price: 450000,
     sale: 0,
     type: 'MenFashion',
     shopName: 'Nike Official Store',
     shopId: 'Shop2',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 11,
@@ -201,14 +201,14 @@ export const DataArrivals: Product[] = [
       'https://i.pinimg.com/736x/3c/54/0b/3c540bb7f40f536baa87dc0336280215.jpg'
     ],
     brand: 'Puma',
-    size: '38',
+    size: 'L',
     cond: '85',
     price: 320000,
     sale: 0,
     type: 'WomenFashion',
     shopName: 'Puma Official Store',
     shopId: 'Shop3',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 12,
@@ -220,14 +220,14 @@ export const DataArrivals: Product[] = [
       'https://i.pinimg.com/736x/3c/54/0b/3c540bb7f40f536baa87dc0336280215.jpg'
     ],
     brand: 'Converse',
-    size: 'M-L',
+    size: 'L',
     cond: '80',
     price: 280000,
     sale: 0,
     type: 'MenFashion',
     shopName: 'Converse Official Store',
     shopId: 'Shop4',
-    collection: 'New Arrivals'
+    collection: 'NewArrivals'
   },
   {
     id: 13,
@@ -243,10 +243,10 @@ export const DataArrivals: Product[] = [
     cond: '90',
     price: 100000,
     sale: 10,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Adidas Official Store',
     shopId: 'Shop1',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 14,
@@ -262,10 +262,10 @@ export const DataArrivals: Product[] = [
     cond: '85',
     price: 120000,
     sale: 15,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Nike Official Store',
     shopId: 'Shop2',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 15,
@@ -281,10 +281,10 @@ export const DataArrivals: Product[] = [
     cond: '92',
     price: 180000,
     sale: 20,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Puma Official Store',
     shopId: 'Shop3',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 16,
@@ -300,10 +300,10 @@ export const DataArrivals: Product[] = [
     cond: '88',
     price: 250000,
     sale: 25,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Converse Official Store',
     shopId: 'Shop4',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 17,
@@ -315,14 +315,14 @@ export const DataArrivals: Product[] = [
       'https://i.pinimg.com/564x/0f/b3/2e/0fb32e95a03cf03a230f593f6ca0fada.jpg'
     ],
     brand: 'Adidas',
-    size: '42',
+    size: 'Free',
     cond: '93',
     price: 300000,
     sale: 30,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Adidas Official Store',
     shopId: 'Shop1',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 18,
@@ -338,10 +338,10 @@ export const DataArrivals: Product[] = [
     cond: '90',
     price: 400000,
     sale: 40,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Nike Official Store',
     shopId: 'Shop2',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 19,
@@ -353,14 +353,14 @@ export const DataArrivals: Product[] = [
       'https://i.pinimg.com/564x/0f/b3/2e/0fb32e95a03cf03a230f593f6ca0fada.jpg'
     ],
     brand: 'Puma',
-    size: '41',
+    size: 'XL',
     cond: '95',
     price: 280000,
     sale: 35,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Puma Official Store',
     shopId: 'Shop3',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 20,
@@ -372,14 +372,14 @@ export const DataArrivals: Product[] = [
       'https://i.pinimg.com/564x/0f/b3/2e/0fb32e95a03cf03a230f593f6ca0fada.jpg'
     ],
     brand: 'Converse',
-    size: '38',
+    size: 'L',
     cond: '85',
     price: 320000,
     sale: 30,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Converse Official Store',
     shopId: 'Shop4',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 21,
@@ -395,10 +395,10 @@ export const DataArrivals: Product[] = [
     cond: '89',
     price: 450000,
     sale: 25,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Adidas Official Store',
     shopId: 'Shop1',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 22,
@@ -414,10 +414,10 @@ export const DataArrivals: Product[] = [
     cond: '91',
     price: 200000,
     sale: 15,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Nike Official Store',
     shopId: 'Shop2',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 23,
@@ -433,10 +433,10 @@ export const DataArrivals: Product[] = [
     cond: '95',
     price: 150000,
     sale: 10,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Puma Official Store',
     shopId: 'Shop3',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   },
   {
     id: 24,
@@ -452,9 +452,9 @@ export const DataArrivals: Product[] = [
     cond: '85',
     price: 120000,
     sale: 10,
-    type: 'DiscountDeal',
+    type: 'DiscountDeals',
     shopName: 'Converse Official Store',
     shopId: 'Shop4',
-    collection: 'DiscountDeal'
+    collection: 'DiscountDeals'
   }
 ]

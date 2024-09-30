@@ -10,11 +10,11 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
-import { formatCurrency } from '@/lib/utils'
-import { Link } from 'react-router-dom'
+import { formatCurrency, formatProductType } from '@/lib/utils'
+import { Link, useLocation } from 'react-router-dom'
 const PRODUCTS_PER_PAGE = 9
 
-const sizes = ['S', 'M', 'L', 'XL']
+const sizes = ['S', 'M', 'L', 'XL', 'Free']
 const priceRanges = [
   '0 VND - 200.000 VND',
   '200.000 VND - 400.000 VND',
@@ -23,7 +23,7 @@ const priceRanges = [
   'Over 800.000 VND'
 ]
 const brands = ['Adidas', 'Nike', 'Puma', 'Converse', 'Vans', 'New Balance', 'Reebok', 'Fila', 'Balenciaga', 'Gucci']
-const collections = ['Best sellers', 'New arrivals', 'Trending', 'Discount deals']
+const collections = ['BestSellers', 'NewArrivals', 'Trending', 'DiscountDeals']
 
 export default function ListProduct() {
   const [selectedBrand, setSelectedBrand] = useState<string[]>([])
@@ -36,6 +36,16 @@ export default function ListProduct() {
     return savedPage ? parseInt(savedPage, 10) : 1
   })
 
+  const location = useLocation()
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const collectionParam = params.get('collection')
+    if (collectionParam) {
+      setSelectedCollection(collectionParam)
+    }
+  }, [location])
+
   const calNewPrice = (price: number, sale: number) => {
     return price - (price * sale) / 100
   }
@@ -45,13 +55,14 @@ export default function ListProduct() {
   }, [currentPage])
 
   useEffect(() => {
-    setCurrentPage(1)
+    if (selectedBrand.length > 0 || selectedSize || selectedPriceRange || selectedCollection) {
+      setCurrentPage(1)
+    }
   }, [selectedBrand, selectedSize, selectedPriceRange, selectedCollection])
 
   const getFilteredProducts = () => {
     return DataArrivals.filter((product) => {
       const newPrice = calNewPrice(product.price, product.sale)
-
       const matchesSize = selectedSize ? product.size === selectedSize : true
       const matchesPrice = selectedPriceRange
         ? (() => {
@@ -66,7 +77,7 @@ export default function ListProduct() {
 
       const matchesBrand = selectedBrand.length > 0 ? selectedBrand.includes(product.brand) : true
 
-      const matchesCollection = selectedCollection ? product.type === selectedCollection : true
+      const matchesCollection = selectedCollection ? product.collection === selectedCollection : true
 
       return matchesSize && matchesPrice && matchesBrand && matchesCollection
     })
@@ -209,7 +220,7 @@ export default function ListProduct() {
                   {collections.map((collection) => (
                     <div className='flex justify-between' onClick={() => handleCollectionSelection(collection)}>
                       <button key={collection} className={`border-none border-gray-300 text-left px-2 py-1 rounded`}>
-                        {collection}
+                        {formatProductType(collection)}
                       </button>
                       {selectedCollection === collection && <Check size={20} />}
                     </div>
@@ -223,13 +234,14 @@ export default function ListProduct() {
       <div className='flex flex-grow flex-col' style={{ flex: '3.5' }}>
         {paginatedProducts.length > 0 ? (
           <div className='grid grid-cols-3 p-5 gap-4 gap-y-14'>
-            {paginatedProducts.map((product) => (
-              <Link to={`/productDetails/` + product.id}>
-                <div className='w-full h-full flex flex-col gap-4'>
+            {paginatedProducts.map((product, index) => (
+              <Link key={index} to={`/productDetails/` + product.id}>
+                <div className='w-full h-full flex flex-col gap-3'>
                   <div className='w-60 h-80'>
                     <img className='w-full h-full object-cover' src={product.mainImage} alt={product.name} />
                   </div>
-                  <div className='font-bold truncate'>{product.name}</div>
+                  <div className='font-bold truncate volkov-font'>{product.name}</div>
+                  <div className='text-sm'>{product.size}</div>
                   <div className='flex gap-2 items-center'>
                     {product.sale > 0 ? (
                       <div className='font-medium'>{formatCurrency(calNewPrice(product.price, product.sale))}</div>

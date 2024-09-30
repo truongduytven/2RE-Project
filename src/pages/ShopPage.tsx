@@ -6,8 +6,19 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { useEffect } from 'react'
 
 export default function ShopPage() {
+  useEffect(() => {
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+
+    scrollToTop()
+  }, [])
   return (
     <div className='w-full flex flex-col gap-20 my-10'>
       <div className='w-full flex justify-center'>

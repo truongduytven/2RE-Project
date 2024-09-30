@@ -9,6 +9,7 @@ type CartContextType = {
     cart: string[]
     addToCart: (productId: string) => void
     removeFromCart: (productId: string) => void
+    setCart: React.Dispatch<React.SetStateAction<string[]>>
     clearCart: () => void
     quantityInCart: number
 }
@@ -28,6 +29,7 @@ const CartProvider = ({ children }: CartproviderProps) => {
 
     const removeFromCart = (productId: string) => {
         setCart(cart.filter((id) => id !== productId))
+        console.log(cart.filter((id) => id !== productId))
     }
 
     const clearCart = () => {
@@ -39,7 +41,7 @@ const CartProvider = ({ children }: CartproviderProps) => {
     }, [cart])
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, quantityInCart }}>
+        <CartContext.Provider value={{ cart, addToCart, setCart, removeFromCart, clearCart, quantityInCart }}>
             {children}
         </CartContext.Provider>
     )

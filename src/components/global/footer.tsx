@@ -47,7 +47,7 @@ export default function Footer() {
                 <div className='text-xs sm:text-base'>+8496 416 0769</div>
                 <div className='text-xs sm:text-base'>2re2hand@gmail.com</div>
                 <div className='text-xs sm:text-base'>
-                  <a href='/'>https://2ReSecondHand.vercel.app/</a>
+                  <a href='/'>https://2re-secondhand.vercel.app/</a>
                 </div>
               </div>
             </div>
