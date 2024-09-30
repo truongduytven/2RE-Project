@@ -13,6 +13,7 @@ import Arrivals from '@/components/local/Home/Arrivals'
 import Sub1 from '@/assets/sub1.png'
 import Sub2 from '@/assets/sub2.png'
 import Subscribe from '@/components/local/Home/Subscribe'
+import { Link } from 'react-router-dom'
 
 export default function HomePage() {
   return (
@@ -24,7 +25,9 @@ export default function HomePage() {
           </div>
           <div className='w-1/3 max-h-full flex flex-col justify-between items-center'>
             <img src={Banner3} alt='banner' />
-            <Button>Shop now</Button>
+            <Link to='/shop'>
+              <Button>Shop now</Button>
+            </Link>
             <div className='relative w-full'>
               <img src={Banner4} alt='banner' className='w-full' />
               <div className='absolute bottom-0 w-full h-1/2 rounded-lg bg-[#E0E0E0] -z-50'></div>
@@ -46,7 +49,9 @@ export default function HomePage() {
               <p className='text-sm'>Limited quantity</p>
             </div>
             <div>
-              <Button>Buy Now</Button>
+              <Link to='/shop?collection=DiscountDeals'>
+                <Button>Buy Now</Button>
+              </Link>
             </div>
             <div>
               <h3 className='text-xl font-bold'>Hurry, Before It's Too Late!</h3>
@@ -63,7 +68,9 @@ export default function HomePage() {
             <Arrivals />
           </div>
           <div>
-            <Button>View More</Button>
+            <Link to='/shop?collection=NewArrivals'>
+              <Button>View More</Button>
+            </Link>
           </div>
         </div>
       </div>

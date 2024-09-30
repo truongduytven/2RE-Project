@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <CartProvider>
-        <Toaster richColors closeButton/>
+        <Toaster richColors />
         <App />
       </CartProvider>
     </BrowserRouter>

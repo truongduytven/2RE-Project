@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
 
 export default function Subscribe() {
   const form = useForm<z.infer<typeof subschema>>({
@@ -13,10 +14,16 @@ export default function Subscribe() {
       email: ''
     }
   })
+
+  const onSubmit = (data: z.infer<typeof subschema>) => {
+    console.log(data)
+    form.reset()
+    toast.success('Subscribed successfully')
+  }
   return (
     <div className='w-full'>
       <Form {...form}>
-        <form className='w-full flex flex-col items-center gap-8'>
+        <form className='w-full flex flex-col items-center gap-8' onSubmit={form.handleSubmit(onSubmit)}>
           <div className='shadow-lg'>
             <p className='volkov-font text-4xl w-full text-center'>Subscribe To Our Newsletter</p>
             <p className='font-light text-gray-400 p-4 text-xs text-center'>

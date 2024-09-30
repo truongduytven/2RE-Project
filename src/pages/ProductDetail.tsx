@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Product } from '@/types'
 import { useNavigate, useParams } from 'react-router-dom'
-import ProductRelated from '../ProductRelated/ProductRelated'
+import ProductRelated from './ProductRelated'
 import Container from '@/components/global/Container'
 import { Badge } from '@/components/ui/badge'
 import { ArrowLeft, Star } from 'lucide-react'
@@ -18,6 +18,16 @@ const ProductDetails: React.FC = () => {
   const { addToCart } = useCartContext()
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    }
+    scrollToTop()
+  }, [])
 
   useEffect(() => {
     const fetchProduct = async (productId: string) => {
@@ -115,7 +125,7 @@ const ProductDetails: React.FC = () => {
                     {formatCurrency(product.price - (product.price * product.sale) / 100)}
                   </p>
                   <p className='text-lg text-gray-600 line-through'>{formatCurrency(product.price)}</p>
-                  <Badge className='bg-red-500'>Save {product.sale}%</Badge>
+                  <Badge className='bg-red-500 hover:bg-red-600'>Save {product.sale}%</Badge>
                 </div>
               ) : (
                 <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
