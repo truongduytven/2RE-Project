@@ -4,12 +4,14 @@ import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
+  NavigationMenuList
 } from '@/components/ui/navigation-menu'
 import { Button } from '../ui/button'
 import { Search } from 'lucide-react'
+import { useCartContext } from '@/contexts/CartContext'
 
 export default function Header() {
+  const { quantityInCart } = useCartContext()
   return (
     <header className='w-full mt-5'>
       <Container>
@@ -30,7 +32,12 @@ export default function Header() {
                   <NavigationMenuLink href='/product'>Product</NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
-                  <NavigationMenuLink href='/product'>Cart</NavigationMenuLink>
+                  <NavigationMenuLink href='/cart'>Cart</NavigationMenuLink>
+                  {!!quantityInCart && (
+                    <div className='bg-red-500 text-slate-50 absolute rounded-full w-4 h-4 text-sm flex justify-center items-center -top-2 -right-4'>
+                      {quantityInCart}
+                    </div>
+                  )}
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
@@ -39,9 +46,7 @@ export default function Header() {
             <Button variant='outline' size='icon'>
               <Search className='h-4 w-4' />
             </Button>
-            <Button>
-              Sign In
-            </Button>
+            <Button>Sign In</Button>
           </div>
         </div>
       </Container>

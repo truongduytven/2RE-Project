@@ -22,6 +22,9 @@ export type Product = {
   type: string
   brand: string
   sale: number
+  shopName: string
+  shopId: string
+  collection: string
 }
 export interface ProductDetail {
   id: string;

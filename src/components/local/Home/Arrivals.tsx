@@ -14,6 +14,10 @@ export default function Arrivals() {
   const filteredProducts =
     DataArrivals.filter((product) => product.type === selectedType)
 
+  if(filteredProducts.length > 6) {
+    filteredProducts.length = 6;
+  }
+
   // Function to add active class
   const getButtonClass = (type: string) => {
     return `${selectedType === type ? 'hover:bg-black hover:text-white' : 'bg-[#FAFAFA] text-[#8A8A8A] shadow-none hover:bg-[#FAFAFA] hover:text-[#8A8A8A]' }`;

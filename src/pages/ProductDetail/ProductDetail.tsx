@@ -4,17 +4,21 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ProductRelated from '../ProductRelated/ProductRelated'
 import Container from '@/components/global/Container'
 import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Eye, Minus, Plus, Star } from 'lucide-react'
+import { ArrowLeft, Star } from 'lucide-react'
 import { DataArrivals } from '@/lib/DataArrivals'
 import { formatCurrency, formatProductType } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
+import { useCartContext } from '@/contexts/CartContext'
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const [product, setProduct] = useState<Product | null>(null)
   const [mainImage, setMainImage] = useState<string>('')
   const [isHovering, setIsHovering] = useState<boolean>(false)
+  const { addToCart } = useCartContext()
+
   const navigate = useNavigate()
+
   useEffect(() => {
     const fetchProduct = async (productId: string) => {
       const productData = DataArrivals.filter((product) => product.id.toString() === productId)[0]
@@ -26,6 +30,12 @@ const ProductDetails: React.FC = () => {
       fetchProduct(id)
     }
   }, [id])
+
+  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+    addToCart(product!.id.toString())
+    toast.success('Product added to cart')
+  }
 
   const handleImageHover = (image: string) => {
     setMainImage(image)
@@ -67,8 +77,10 @@ const ProductDetails: React.FC = () => {
       <div className='container mx-auto'>
         <div className='flex flex-col gap-10'>
           <div className='flex justify-start items-center gap-2'>
-            <ArrowLeft size={16}/>
-            <button className='hover:underline' onClick={() => navigate(-1)}>Back</button>
+            <ArrowLeft size={16} />
+            <button className='hover:underline' onClick={() => navigate(-1)}>
+              Back
+            </button>
           </div>
           <div className='flex flex-row gap-14'>
             <div className='flex flex-1 flex-row gap-4'>
@@ -91,23 +103,28 @@ const ProductDetails: React.FC = () => {
               />
             </div>
 
-            {/* Info Section */}
             <div className='flex flex-1 flex-col gap-8 flex-grow h-full'>
               <div className='flex justify-between items-center'>
                 <p className='text-3xl volkov-font font-semibold'>{product.name}</p>
                 <Star strokeWidth={1} color='black' className='w-8 h-8 p-2 border rounded-full' />
               </div>
 
-              <div className='flex justify-start gap-3 items-center'>
+              {product.sale > 0 ? (
+                <div className='flex justify-start gap-3 items-center'>
+                  <p className='text-2xl font-bold'>
+                    {formatCurrency(product.price - (product.price * product.sale) / 100)}
+                  </p>
+                  <p className='text-lg text-gray-600 line-through'>{formatCurrency(product.price)}</p>
+                  <Badge className='bg-red-500'>Save {product.sale}%</Badge>
+                </div>
+              ) : (
                 <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
-                <p className='text-lg text-gray-600 line-through'>{formatCurrency(product.price)}</p>
-                <Badge className='bg-red-500'>Save {product.sale}%</Badge>
-              </div>
-              {/* <div className='flex justify-start items-center gap-2'>
-              <Eye className='w-5 h-5' /> <p>24 people are viewing this right now</p>
-            </div> */}
+              )}
 
               <div className='flex flex-col gap-4'>
+                <div className='flex gap-2 items-center'>
+                  <strong>Shop:</strong> {product.shopName}
+                </div>
                 <div className='flex gap-2 items-center'>
                   <strong>Size:</strong> {product.size}
                 </div>
@@ -122,7 +139,10 @@ const ProductDetails: React.FC = () => {
                 </div>
               </div>
               <div className='w-full h-full flex items-end gap-10'>
-                <button className='bg-white border-2 border-black rounded-md px-4 py-2 font-bold hover:bg-black hover:text-white'>
+                <button
+                  onClick={handleAddToCart}
+                  className='bg-white border-2 border-black rounded-md px-4 py-2 font-bold hover:bg-black hover:text-white'
+                >
                   Add to Cart
                 </button>
               </div>
