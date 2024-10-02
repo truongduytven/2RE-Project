@@ -153,7 +153,7 @@ export default function ListProduct() {
   }
 
   return (
-    <div className='w-full flex justify-center max-w-5xl'>
+    <div className='w-full flex justify-center max-w-5xl mr-5'>
       <div className='flex flex-grow' style={{ flex: '1' }}>
         <div className='flex flex-col gap-5 w-full'>
           <div className='flex w-full justify-between'>
@@ -236,17 +236,22 @@ export default function ListProduct() {
           <div className='grid grid-cols-3 p-5 gap-4 gap-y-14'>
             {paginatedProducts.map((product, index) => (
               <Link key={index} to={`/productDetails/` + product.id}>
-                <div className='w-full h-full flex flex-col gap-3'>
-                  <div className='w-60 h-80'>
-                    <img className='w-full h-full object-cover' src={product.mainImage} alt={product.name} />
-                  </div>
-                  <div className='font-bold truncate volkov-font'>{product.name}</div>
-                  <div className='text-sm'>{product.size}</div>
+                <div className='w-full h-full flex flex-col gap-3 transition-transform duration-300 hover:-translate-y-2'>
+                <div className='w-60 h-80 rounded-lg overflow-hidden'>
+                  <img className='w-full h-full object-cover' src={product.mainImage} alt={product.name} />
+                </div>
+
+                  <div className='font-bold truncate volkov-font'>{product.name} ({product.size})</div>
+                  {/* <div className='text-sm'>{product.size}</div> */}
                   <div className='flex gap-2 items-center'>
                     {product.sale > 0 ? (
-                      <div className='font-medium'>{formatCurrency(calNewPrice(product.price, product.sale))}</div>
+                     <div className='font-medium'>
+                       <span className='text-sm'></span>{formatCurrency(calNewPrice(product.price, product.sale))}
+                     </div>
                     ) : (
-                      <div className='font-medium'>{formatCurrency(product.price)}</div>
+                      <div className='font-medium'>
+                        <span className='text-sm'></span>{formatCurrency(product.price)}
+                      </div>
                     )}
                     {product.sale > 0 && (
                       <div className='line-through text-gray-500 opacity-70 text-xs'>

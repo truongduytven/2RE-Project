@@ -10,7 +10,7 @@ export function formatCurrency(value: number) {
     style: 'decimal', 
     minimumFractionDigits: 0,
   });
-  return `${formatter.format(value)} VNĐ`;
+  return `${formatter.format(value)} (VNĐ)`;
 }
 
 export function formatProductType(type: string) {
