@@ -10,8 +10,9 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
-import { formatCurrency, formatProductType } from '@/lib/utils'
-import { Link, useLocation } from 'react-router-dom'
+import {formatProductType } from '@/lib/utils'
+import {useLocation } from 'react-router-dom'
+import ProductCard from './ProductCard'
 const PRODUCTS_PER_PAGE = 9
 
 const sizes = ['S', 'M', 'L', 'XL', 'Free']
@@ -168,7 +169,7 @@ export default function ListProduct() {
             <AccordionItem value='item-1'>
               <AccordionTrigger>Size</AccordionTrigger>
               <AccordionContent>
-                <div className='grid grid-cols-4 gap-2 mb-4'>
+                <div className='grid grid-cols-4 gap-2 mb-4 px-2'>
                   {sizes.map((size) => (
                     <button
                       key={size}
@@ -235,32 +236,7 @@ export default function ListProduct() {
         {paginatedProducts.length > 0 ? (
           <div className='grid grid-cols-3 p-5 gap-4 gap-y-14'>
             {paginatedProducts.map((product, index) => (
-              <Link key={index} to={`/productDetails/` + product.id}>
-                <div className='w-full h-full flex flex-col gap-3 transition-transform duration-300 hover:-translate-y-2'>
-                <div className='w-60 h-80 rounded-lg overflow-hidden'>
-                  <img className='w-full h-full object-cover' src={product.mainImage} alt={product.name} />
-                </div>
-
-                  <div className='font-bold truncate volkov-font'>{product.name} ({product.size})</div>
-                  {/* <div className='text-sm'>{product.size}</div> */}
-                  <div className='flex gap-2 items-center'>
-                    {product.sale > 0 ? (
-                     <div className='font-medium'>
-                       <span className='text-sm'></span>{formatCurrency(calNewPrice(product.price, product.sale))}
-                     </div>
-                    ) : (
-                      <div className='font-medium'>
-                        <span className='text-sm'></span>{formatCurrency(product.price)}
-                      </div>
-                    )}
-                    {product.sale > 0 && (
-                      <div className='line-through text-gray-500 opacity-70 text-xs'>
-                        {formatCurrency(product.price)}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </Link>
+              <ProductCard key={index} product={product} />
             ))}
           </div>
         ) : (
