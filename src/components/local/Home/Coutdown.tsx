@@ -13,7 +13,7 @@ const CountdownTimer: React.FC = () => {
     const minutes = Math.floor((distance % (3600 * 1000)) / (60 * 1000))
     const seconds = Math.floor((distance % (60 * 1000)) / 1000)
 
-    return { days: days, hr: hours, mins: minutes, sec: seconds }
+    return { ngày: days, giờ: hours, phút: minutes, giây: seconds }
   }
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())

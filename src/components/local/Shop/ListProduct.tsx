@@ -25,7 +25,7 @@ const priceRanges = [
   'Over 800.000 VND'
 ]
 const brands = ['Adidas', 'Nike', 'Puma', 'Converse', 'Vans', 'New Balance', 'Reebok', 'Fila', 'Balenciaga', 'Gucci']
-const collections = ['BestSellers', 'NewArrivals', 'Trending', 'DiscountDeals']
+const collections = ['NewArrivals', 'Trending', 'DiscountDeals']
 
 export default function ListProduct() {
   const [selectedBrand, setSelectedBrand] = useState<string[]>([])
@@ -170,27 +170,27 @@ export default function ListProduct() {
 
   return (
     <div className='flex flex-col items-center'>
-      {searchQuery && <div className='font-semibold text-xl mb-2'>Result search for '{searchQuery}'</div>}
+      {searchQuery && <div className='font-semibold text-xl mb-2'>Kết quả tìm kiếm cho '{searchQuery}'</div>}
       <div className='w-full flex justify-center max-w-5xl mr-5'>
         <div className='flex flex-grow' style={{ flex: '1' }}>
           {/* Filter Sidebar */}
           <div className='flex flex-col gap-5 w-full'>
             <div className='flex w-full justify-between'>
-              <div className='text-2xl'>Filters</div>
+              <div className='text-2xl'>Bộ lọc</div>
               {(selectedSize ||
                 selectedPriceRange ||
                 selectedBrand.length !== 0 ||
                 selectedCollection ||
                 searchQuery) && (
                 <button className='border px-2 rounded-md text-sm' onClick={handleReset}>
-                  Reset
+                  Tạo lại
                 </button>
               )}
             </div>
             <Accordion type='multiple' defaultValue={['item-1', 'item-2', 'item-3', 'item-4']}>
               {/* Size Filter */}
               <AccordionItem value='item-1'>
-                <AccordionTrigger>Size</AccordionTrigger>
+                <AccordionTrigger>Kích cỡ</AccordionTrigger>
                 <AccordionContent>
                   <div className='grid grid-cols-4 gap-2 mb-4 px-2'>
                     {sizes.map((size) => (
@@ -207,7 +207,7 @@ export default function ListProduct() {
               </AccordionItem>
               {/* Price Filter */}
               <AccordionItem value='item-2'>
-                <AccordionTrigger>Price</AccordionTrigger>
+                <AccordionTrigger>Giá</AccordionTrigger>
                 <AccordionContent>
                   <div className='flex flex-col'>
                     {priceRanges.map((range, index) => (
@@ -224,7 +224,7 @@ export default function ListProduct() {
               </AccordionItem>
               {/* Brand Filter */}
               <AccordionItem value='item-3'>
-                <AccordionTrigger>Brand</AccordionTrigger>
+                <AccordionTrigger>Thương hiệu</AccordionTrigger>
                 <AccordionContent>
                   <div className='flex flex-wrap gap-2 mb-4'>
                     {brands.map((brand) => (
@@ -241,13 +241,13 @@ export default function ListProduct() {
               </AccordionItem>
               {/* Collection Filter */}
               <AccordionItem value='item-4'>
-                <AccordionTrigger>Collections</AccordionTrigger>
+                <AccordionTrigger>Bộ sưu tập</AccordionTrigger>
                 <AccordionContent>
                   <div className='flex flex-col gap-2'>
                     {collections.map((collection) => (
                       <div className='flex justify-between' onClick={() => handleCollectionSelection(collection)}>
                         <button key={collection} className={`border-none border-gray-300 text-left px-2 py-1 rounded`}>
-                          {formatProductType(collection)}
+                          {collection === 'NewArrivals' ? 'Hàng mới về' : collection === 'Trending' ? 'Xu hướng' : 'Ưu đãi'}
                         </button>
                         {selectedCollection === collection && <Check size={20} />}
                       </div>
@@ -267,14 +267,14 @@ export default function ListProduct() {
               ))}
             </div>
           ) : (
-            <div className='flex justify-center items-center'>No products found</div>
+            <div className='flex justify-center items-center'>Không tìm thấy sản phẩm</div>
           )}
           {/* Pagination */}
           <div className='mt-4 flex justify-center'>
             <Pagination>
               {totalPages > 0 && (
                 <PaginationPrevious className='cursor-pointer' onClick={handlePreviousPage}>
-                  Previous
+                  Trước
                 </PaginationPrevious>
               )}
               <PaginationContent>
@@ -288,7 +288,7 @@ export default function ListProduct() {
               </PaginationContent>
               {totalPages > 0 && (
                 <PaginationNext className='cursor-pointer' onClick={handleNextPage}>
-                  Next
+                  Sau
                 </PaginationNext>
               )}
             </Pagination>

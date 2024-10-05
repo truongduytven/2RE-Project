@@ -12,18 +12,18 @@ export default function Checkout() {
     <div className='w-full justify-center my-5'>
       <Container>
         <div className='flex flex-col items-center gap-8'>
-          <div className='volkov-font text-4xl'>Checkout</div>
+          <div className='text-4xl'>Thanh toán</div>
           <Breadcrumb className='text-sm'>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                <BreadcrumbLink href='/'>Trang chủ</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href='/cart'>Cart</BreadcrumbLink>
+                <BreadcrumbLink href='/cart'>Giỏ hàng</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
-              <BreadcrumbItem className='font-bold'>Checkout</BreadcrumbItem>
+              <BreadcrumbItem className='font-bold'>Thanh toán</BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
           <div className='w-full flex '>
@@ -40,7 +40,7 @@ export default function Checkout() {
                           <img src={product.mainImage} className='w-full h-full object-cover' alt={product.name} />
                         </div>
                         <div>
-                          <div className='volkov-font text-base'>{product.name}</div>
+                          <div className='text-base'>{product.name}</div>
                           <div className='text-sm'>{product.size}</div>
                         </div>
                       </div>
@@ -58,7 +58,7 @@ export default function Checkout() {
                   ))}
                   <hr></hr>
                   <div className='w-full flex justify-between'>
-                    <div>Total</div>
+                    <div>Tổng cộng</div>
                     <div>
                       {formatCurrency(
                         selectedProducts.reduce(

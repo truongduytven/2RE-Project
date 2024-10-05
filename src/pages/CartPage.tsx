@@ -6,18 +6,18 @@ export default function CartPage() {
     <div className='w-full min-h-screen flex flex-col gap-20 my-10'>
       <div className='w-full flex justify-center'>
         <div className='flex flex-col justify-center items-center'>
-          <div className='volkov-font text-4xl mb-5'>Shopping cart</div>
+          <div className='text-4xl mb-5'>Giỏ hàng mua sắm</div>
           <Breadcrumb className='text-sm'>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                <BreadcrumbLink href='/'>Trang chủ</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href='/products'>Product</BreadcrumbLink>
+                <BreadcrumbLink href='/products'>Sản phẩm</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
-              <BreadcrumbItem className='font-bold'>Shopping cart</BreadcrumbItem>
+              <BreadcrumbItem className='font-bold'>Giỏ hàng</BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>

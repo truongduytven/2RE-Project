@@ -72,7 +72,7 @@ export default function ProductInCart() {
       {cart.length === 0 ? (
         <div className='flex w-full justify-center'>
           <div>
-            Your cart is empty.{' '}
+            Giỏ hàng của bạn rỗng.{' '}
           </div>
         </div>
       ) : isLoading ? (
@@ -88,12 +88,12 @@ export default function ProductInCart() {
                     onCheckedChange={handleSelectAll}
                   />
                 </TableHead>
-                <TableHead className='w-24 font-bold text-center'>Image</TableHead>
-                <TableHead className='w-64 font-bold'>Name Product</TableHead>
-                <TableHead className='w-60 font-bold'>Shop Name</TableHead>
-                <TableHead className='w-24 font-bold text-center'>Size</TableHead>
-                <TableHead className='w-24 font-bold text-center'>Cond</TableHead>
-                <TableHead className='w-32 font-bold text-center'>Price</TableHead>
+                <TableHead className='w-24 font-bold text-center'>Hình ảnh</TableHead>
+                <TableHead className='w-64 font-bold'>Tên sản phẩm</TableHead>
+                <TableHead className='w-60 font-bold'>Tên cửa hàng</TableHead>
+                <TableHead className='w-24 font-bold text-center'>Kích cỡ</TableHead>
+                <TableHead className='w-24 font-bold text-center'>Tình trạng</TableHead>
+                <TableHead className='w-32 font-bold text-center'>Giá</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -121,7 +121,7 @@ export default function ProductInCart() {
             <TableFooter>
               <TableRow>
                 <TableCell colSpan={6} className='font-bold py-4'>
-                  Total Price
+                  Tổng số tiền
                 </TableCell>
                 <TableCell className='font-bold text-center'>
                   {formatCurrency(
@@ -138,7 +138,7 @@ export default function ProductInCart() {
             <AlertDialog>
               <AlertDialogTrigger disabled={selectedProductDetails.length === 0}>
                 <Button variant='destructive' disabled={selectedProducts.length === 0}>
-                  Delete {selectedProducts.length} selected
+                  Xóa {selectedProducts.length} được chọn
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -159,13 +159,13 @@ export default function ProductInCart() {
             </AlertDialog>
             <Button disabled={selectedProducts.length === 0}>
               <Link to='/checkout' state={{ selectedProducts: selectedProductDetails }}>
-                Checkout {selectedProducts.length} products
+                Thanh toán {selectedProducts.length} sản phẩm
               </Link>
             </Button>
           </div>
         </div>
       ) : (
-        <div>Product not found</div>
+        <div>Không tìm thấy sản phẩm</div>
       )}
     </Container>
   )

@@ -32,8 +32,8 @@ export default function SignUpForm() {
     <div className='w-full h-full flex justify-center items-center py-4 lg:p-8'>
       <div className='w-2/3 mx-auto flex flex-col justify-center space-y-6'>
         <div className='flex flex-col items-center'>
-          <div className='volkov-font font-medium text-2xl flex items-center'>
-            Sign up to <img className='w-10 h-10' src={Logo} alt='logo app' /> with
+          <div className='font-medium text-2xl flex items-center'>
+            Đăng kí <img className='w-10 h-10' src={Logo} alt='logo app' /> với
           </div>
         </div>
         <Form {...form}>
@@ -46,7 +46,7 @@ export default function SignUpForm() {
                   <FormControl>
                     <div className='w-full grid items-center gap-1.5'>
                       <Label htmlFor='email'>
-                        Full Name
+                        Tên đầy đủ
                         {/* <span className='text-red-500'>*</span> */}
                       </Label>
                       <Input {...field} id='email' placeholder='Ex: Alex' />
@@ -82,7 +82,7 @@ export default function SignUpForm() {
                     <FormControl>
                       <div className='w-full grid items-center gap-1.5'>
                         <Label htmlFor='password'>
-                          Phone Number
+                          Số điện thoại
                           {/* <span className='text-red-500'>*</span> */}
                         </Label>
                         <Input {...field} id='password' type='tel' placeholder='Ex: 0xxxxxxxx' />
@@ -101,10 +101,10 @@ export default function SignUpForm() {
                     <FormControl>
                       <div className='w-full grid items-center gap-1.5'>
                         <Label htmlFor='password'>
-                          Password
+                          Mật khẩu
                           {/* <span className='text-red-500'>*</span> */}
                         </Label>
-                        <Input {...field} id='password' type='password' placeholder='Type password' />
+                        <Input {...field} id='password' type='password' placeholder='Nhập mật khẩu' />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -119,10 +119,10 @@ export default function SignUpForm() {
                     <FormControl>
                       <div className='w-full grid items-center gap-1.5'>
                         <Label htmlFor='password'>
-                          Confirm Password
+                          Xác nhận mật khẩu
                           {/* <span className='text-red-500'>*</span> */}
                         </Label>
-                        <Input {...field} id='password' type='password' placeholder='Type confirm pass' />
+                        <Input {...field} id='password' type='password' placeholder='Xác nhận' />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -132,7 +132,7 @@ export default function SignUpForm() {
             </div>
 
             <Button type='submit' className='w-full'>
-              Sign up
+              Đăng kí
             </Button>
           </form>
         </Form>
@@ -141,7 +141,7 @@ export default function SignUpForm() {
             <span className='w-full border-t' />
           </div>
           <div className='relative flex justify-center text-xs uppercase'>
-            <span className='px-2 bg-background text-muted-foreground'>Or continue with</span>
+            <span className='px-2 bg-background text-muted-foreground'>Hoặc tiếp tục với</span>
           </div>
         </div>
         <Button
@@ -153,13 +153,13 @@ export default function SignUpForm() {
           //   disabled={isLoggingGoogle}
         >
           <img className='mr-2 w-7 h-7' alt='google' src={googleIcon} />
-          Sign up with Google
+          Tiếp tục với Google
           {/* {isLoggingGoogle && <Shell className='w-4 h-4 ml-1 animate-spin' />} */}
         </Button>
         <p className='mx-auto text-sm'>
-          You have an account?{' '}
+          Bạn đã có tài khoản?{' '}
           <Link className='text-primary hover:underline font-bold' to='/auth/sign-in'>
-            Sign in now
+            Đăng nhập ngay
           </Link>
         </p>
       </div>

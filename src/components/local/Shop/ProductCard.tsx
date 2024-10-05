@@ -3,7 +3,6 @@ import { useCartContext } from '@/contexts/CartContext'
 import { formatCurrency } from '@/lib/utils'
 import { Product } from '@/types'
 import { Link } from 'react-router-dom'
-import ShoppingCartPlus from '@/assets/shopping_cart_plus.svg'
 import { toast } from 'sonner'
 
 type Props = {
@@ -18,7 +17,7 @@ export default function ProductCard({ product }: Props) {
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     addToCart(product.id.toString())
-    toast.success('Product added to cart')
+    toast.success('Thêm sản phẩm vào giỏ hàng thành công!')
   }
   return (
     <Link to={`/productDetails/` + product.id}>
@@ -31,8 +30,8 @@ export default function ProductCard({ product }: Props) {
         </div>
 
         <div className='flex gap-1'>
-          <div className='font-bold truncate volkov-font'>{product.name}</div>
-          <div className='font-bold volkov-font'>({product.size})</div>
+          <div className='font-bold truncate'>{product.name}</div>
+          <div className='font-bold'>({product.size})</div>
         </div>
         <div className='flex gap-2 items-center'>
           {product.sale > 0 ? (
@@ -51,8 +50,8 @@ export default function ProductCard({ product }: Props) {
           )}
         </div>
         <div className='flex items-center justify-between w-full gap-3'>
-          <Button className='flex-1' variant='outline'>Compare</Button>
-          <Button className='flex-1' onClick={handleAddToCart}>Add to cart</Button>
+          <Button className='flex-1' variant='outline'>So sánh</Button>
+          <Button className='flex-1' onClick={handleAddToCart}>Thêm vào giỏ</Button>
         </div>
       </div>
     </Link>

@@ -14,7 +14,7 @@ export default function SignUp() {
         <div className="flex-1 w-full h-full bg-red-300 rounded-tr-lg rounded-br-lg">
             <img className="w-full h-full object-cover rounded-tr-lg rounded-br-lg" src="https://i.pinimg.com/736x/45/20/84/4520843969ecefe5d2ecad32ee257074.jpg" alt="" />
         </div>
-        <Button onClick={() => navigate(-1)} variant='ghost' className="absolute top-6 left-6"><ArrowLeft className="w-3 h-3"/> Return home</Button>
+        <Button onClick={() => navigate(-1)} variant='ghost' className="absolute top-6 left-6"><ArrowLeft className="w-3 h-3"/> Trở về trang chủ</Button>
     </div>
   )
 }

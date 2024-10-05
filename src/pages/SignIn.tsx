@@ -14,7 +14,7 @@ export default function SignIn() {
         <div className="flex-1 w-full h-full border rounded-tr-lg rounded-br-lg">
             <LoginForm />
         </div>
-        <Button onClick={() => navigate(-1)} variant='ghost' className="absolute top-6 left-6"><ArrowLeft className="w-3 h-3"/> Return home</Button>
+        <Button onClick={() => navigate(-1)} variant='ghost' className="absolute top-6 left-6"><ArrowLeft className="w-3 h-3"/>Trở về trang chủ</Button>
     </div>
   )
 }

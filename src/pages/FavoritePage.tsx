@@ -20,14 +20,14 @@ const FavoritePage: React.FC = () => {
     <div className='w-full flex flex-col gap-20 my-10'>
       <div className='w-full flex justify-center'>
         <div className='flex flex-col justify-center items-center'>
-          <div className='volkov-font text-4xl mb-5'>Favorite Product</div>
+          <div className='text-4xl mb-5'>Sản phẩm yêu thích</div>
           <Breadcrumb className='text-sm'>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                <BreadcrumbLink href='/'>Trang chủ</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
-              <BreadcrumbItem className='font-bold'>Favorite</BreadcrumbItem>
+              <BreadcrumbItem className='font-bold'>Yêu thích</BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
@@ -44,7 +44,7 @@ const FavoritePage: React.FC = () => {
             </div>
           ) : (
             <div className='flex items-center justify-center'>
-              <p className='text-center text-gray-500'>No favorite products added yet.</p>
+              <p className='text-center text-gray-500'>Không có sản phẩm yêu thích nào được thêm!</p>
             </div>
           )}
         </Container>
