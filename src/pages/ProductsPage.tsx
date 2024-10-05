@@ -20,7 +20,7 @@ export default function ProductsPage() {
     scrollToTop()
   }, [])
   return (
-    <div className='w-full flex flex-col gap-20 my-10'>
+    <div className='w-full flex flex-col gap-10 my-10'>
       <div className='w-full flex justify-center'>
         <div className='flex flex-col justify-center items-center'>
           <div className='volkov-font text-4xl mb-5'>Fashion</div>

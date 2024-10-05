@@ -4,9 +4,9 @@ import { Outlet } from 'react-router-dom'
 
 export default function RootLayout() {
   return (
-    <div className='h-screen relative'>
+    <div className='h-screen relative '>
       <Header />
-      <div className='min-h-[70%] pt-10'>
+      <div className='min-h-[70%] pt-10 mt-24'>
         <Outlet />
       </div>
       <Footer />
