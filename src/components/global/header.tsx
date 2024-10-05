@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Container from './Container'
 import Logo from '@/assets/Logo.png'
 import {
@@ -7,42 +8,86 @@ import {
   NavigationMenuList
 } from '@/components/ui/navigation-menu'
 import { Button } from '../ui/button'
-import { Search, ShoppingCart } from 'lucide-react'
+import { Search, SearchIcon, ShoppingCart, X } from 'lucide-react' // Import cancel icon
 import { useCartContext } from '@/contexts/CartContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ProfileButton from '../local/Profile/ProfileButton'
 
 export default function Header() {
   const { quantityInCart } = useCartContext()
+  const [isSearchMode, setIsSearchMode] = useState(false) // Manage search mode
+  const [searchQuery, setSearchQuery] = useState('') // Store search input
+  const navigate = useNavigate();
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      navigate(`/products?search=${searchQuery}`)
+      setIsSearchMode(false) // Close search input after navigation
+    }
+  }
   return (
-    <header className='w-full mt-5'>
+    <header className='w-full pt-5 fixed top-0 left-0 bg-white z-50'>
       <Container>
         <div className='flex w-full h-20 justify-between items-end'>
           <div className='flex-1'>
-            <img src={Logo} className='w-24 h-24' />
+            <Link to='/'>
+              <img src={Logo} className='w-24 h-24' />
+            </Link>
           </div>
-          <div className='flex-1 flex justify-center'>
-            <NavigationMenu>
-              <NavigationMenuList className='flex gap-6 justify-center items-center mb-2'>
-                <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
-                  <NavigationMenuLink href='/'>Home</NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
-                  <NavigationMenuLink href='/shop'>Shop</NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
-                  <NavigationMenuLink href='/favorite'>Favorite</NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
-                  <NavigationMenuLink href='/compare'>Compare</NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+          <div className='flex justify-center' style={{ flex: '2.5' }}>
+            {isSearchMode ? (
+              <div className='flex relative w-full items-center gap-2'>
+                <input
+                  type='text'
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder='Tìm kiếm...'
+                  className='w-full border border-gray-300 rounded-lg py-2 px-4 mb-1'
+                  onKeyDown={handleSearch}
+                />
+                {/* <Button
+                  variant='ghost'
+                  size='icon'
+                  className='absolute right-0'
+                  onClick={() => setIsSearchMode(false)} // Cancel search
+                >
+                  <SearchIcon />
+                </Button> */}
+              </div>
+            ) : (
+              // Navigation Menu
+              <NavigationMenu>
+                <NavigationMenuList className='flex gap-10 justify-center items-center mb-2'>
+                  <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
+                    <NavigationMenuLink href='/'>Trang chủ</NavigationMenuLink>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
+                    <NavigationMenuLink href='/products'>Sản phẩm</NavigationMenuLink>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
+                    <NavigationMenuLink href='/favorite'>Yêu thích</NavigationMenuLink>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
+                    <NavigationMenuLink href='/compare'>So sánh</NavigationMenuLink>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            )}
           </div>
+
+          {/* Action Buttons */}
           <div className='flex-1 flex gap-4 mb-2 justify-end'>
-            <Button variant='outline' size='icon'>
-              <Search className='h-6 w-6' />
-            </Button>
+            {/* Search Button */}
+            {isSearchMode ? (
+              <Button variant='outline' onClick={() => setIsSearchMode(false)}>
+                Hủy bỏ
+              </Button>
+            ) : (
+              <Button variant='outline' size='icon' onClick={() => setIsSearchMode(true)}>
+                <Search className='h-6 w-6' />
+              </Button>
+            )}
+
+            {/* Cart Button */}
             <Button variant='outline' size='icon' className='relative shrink-0'>
               <Link to='/cart'>
                 <ShoppingCart className='h-6 w-6' />
@@ -53,7 +98,9 @@ export default function Header() {
                 )}
               </Link>
             </Button>
-            <ProfileButton className='shrink-0'/>
+
+            {/* Profile Button */}
+            <ProfileButton className='shrink-0' />
           </div>
         </div>
       </Container>

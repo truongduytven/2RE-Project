@@ -52,7 +52,7 @@ export default function ProductCard({ product }: Props) {
         </div>
         <div className='flex items-center justify-between w-full gap-3'>
           <Button className='flex-1' variant='outline'>Compare</Button>
-          <Button className='flex-1' >Add to cart</Button>
+          <Button className='flex-1' onClick={handleAddToCart}>Add to cart</Button>
         </div>
       </div>
     </Link>

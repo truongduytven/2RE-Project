@@ -25,7 +25,7 @@ export default function HomePage() {
           </div>
           <div className='w-1/3 max-h-full flex flex-col justify-between items-center'>
             <img src={Banner3} alt='banner' />
-            <Link to='/shop'>
+            <Link to='/products'>
               <Button>Shop now</Button>
             </Link>
             <div className='relative w-full'>
@@ -49,7 +49,7 @@ export default function HomePage() {
               <p className='text-sm'>Limited quantity</p>
             </div>
             <div>
-              <Link to='/shop?collection=DiscountDeals'>
+              <Link to='/products?collection=DiscountDeals'>
                 <Button>Buy Now</Button>
               </Link>
             </div>
@@ -68,7 +68,7 @@ export default function HomePage() {
             <Arrivals />
           </div>
           <div>
-            <Link to='/shop?collection=NewArrivals'>
+            <Link to='/products?collection=NewArrivals'>
               <Button>View More</Button>
             </Link>
           </div>
