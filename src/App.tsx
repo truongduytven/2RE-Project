@@ -7,6 +7,7 @@ import CartPage from "./pages/CartPage"
 import Checkout from "./pages/Checkout"
 import FavoritePage from "./pages/FavoritePage"
 import NotFound from "./pages/NotFound"
+import Compare from "./pages/Compare"
 
 function App() {
   return <>
@@ -18,6 +19,7 @@ function App() {
         <Route path='/shop' element={<ShopPage />} />
         <Route path='/favorite' element={<FavoritePage />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/compare" element={<Compare />} />
       </Route>
       <Route path='*' element={<NotFound />} />
     </Routes>

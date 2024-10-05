@@ -25,10 +25,9 @@ export default function ProductCard({ product }: Props) {
       <div className='w-full h-full flex flex-col gap-3 transition-transform duration-300 hover:-translate-y-2'>
         <div className='w-60 h-80 rounded-lg overflow-hidden relative'>
           <img className='w-full h-full object-cover' src={product.mainImage} alt={product.name} />
-          <Button onClick={handleAddToCart} className='absolute top-2 right-2' variant='outline' size='icon'>
+          {/* <Button onClick={handleAddToCart} className='absolute top-2 right-2' variant='outline' size='icon'>
             <img src={ShoppingCartPlus} alt='Add to cart' className='w-6 h-6' />
-            {/* <PackagePlus className='w-6 h-6' /> */}
-          </Button>
+          </Button> */}
         </div>
 
         <div className='flex gap-1'>
@@ -50,6 +49,10 @@ export default function ProductCard({ product }: Props) {
           {product.sale > 0 && (
             <div className='line-through text-gray-500 opacity-70 text-xs'>{formatCurrency(product.price)}</div>
           )}
+        </div>
+        <div className='flex items-center justify-between w-full gap-3'>
+          <Button className='flex-1' variant='outline'>Compare</Button>
+          <Button className='flex-1' >Add to cart</Button>
         </div>
       </div>
     </Link>
