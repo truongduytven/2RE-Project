@@ -22,7 +22,7 @@ const ProductRelated: React.FC<ProductRelatedListProps> = ({ products }) => {
   return (
     <div className="mb-4">
       <div className="border-b-4 border-black -mb-4">
-        <h2 className="text-3xl font-bold pt-4 pb-2 pl-2">Product related</h2>
+        <h2 className="text-3xl font-bold pt-4 pb-2 pl-2">Sản phẩm liên quan</h2>
       </div>
       <div className='grid grid-cols-5'>
         {listProducts.map((product) => (

@@ -48,7 +48,7 @@ const ProductDetails: React.FC = () => {
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     addToCart(product!.id.toString())
-    toast.success('Product added to cart')
+    toast.success('Thêm sản phẩm vào giỏ hàng thành công!')
   }
 
   const handleImageHover = (image: string) => {
@@ -66,7 +66,7 @@ const ProductDetails: React.FC = () => {
   }
 
   if (!product) {
-    return <div>Loading product details...</div>
+    return <div>Đang tải chi tiết sản phẩm...</div>
   }
 
   const relatedProducts = [
@@ -97,7 +97,7 @@ const ProductDetails: React.FC = () => {
           <div className='flex justify-start items-center gap-2'>
             <ArrowLeft size={16} />
             <button className='hover:underline' onClick={() => navigate(-1)}>
-              Back
+              Trở về
             </button>
           </div>
           <div className='flex flex-row gap-14'>
@@ -123,7 +123,7 @@ const ProductDetails: React.FC = () => {
 
             <div className='flex flex-1 flex-col gap-8 flex-grow h-full'>
               <div className='flex justify-between items-center'>
-                <p className='text-3xl volkov-font font-semibold'>{product.name}</p>
+                <p className='text-3xl font-semibold'>{product.name}</p>
                 <Heart
                   strokeWidth={1}
                   color={isFavorite ? 'red' : 'black'}
@@ -139,7 +139,7 @@ const ProductDetails: React.FC = () => {
                     {formatCurrency(product.price - (product.price * product.sale) / 100)}
                   </p>
                   <p className='text-lg text-gray-600 line-through'>{formatCurrency(product.price)}</p>
-                  <Badge className='bg-red-500 hover:bg-red-600'>Save {product.sale}%</Badge>
+                  <Badge className='bg-red-500 hover:bg-red-600'>Giảm {product.sale}%</Badge>
                 </div>
               ) : (
                 <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
@@ -147,19 +147,19 @@ const ProductDetails: React.FC = () => {
 
               <div className='flex flex-col gap-4'>
                 <div className='flex gap-2 items-center'>
-                  <strong>Shop:</strong> {product.shopName}
+                  <strong>Tên cửa hàng:</strong> {product.shopName}
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <strong>Size:</strong> {product.size}
+                  <strong>Kích cỡ:</strong> {product.size}
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <strong>Brand:</strong> {product.brand}
+                  <strong>Thương hiệu:</strong> {product.brand}
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <strong>Cond:</strong> {product.cond}%
+                  <strong>Tình trạng:</strong> {product.cond}%
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <strong>Type:</strong> {formatProductType(product.type)}
+                  <strong>Loại:</strong> {formatProductType(product.type)}
                 </div>
               </div>
               <div className='w-full h-full flex items-end gap-10'>
@@ -167,7 +167,7 @@ const ProductDetails: React.FC = () => {
                   onClick={handleAddToCart}
                   className='bg-white border-2 border-black rounded-md px-4 py-2 font-bold hover:bg-black hover:text-white'
                 >
-                  Add to Cart
+                  Thêm vào giỏ
                 </button>
               </div>
             </div>

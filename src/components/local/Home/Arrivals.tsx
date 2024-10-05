@@ -25,13 +25,13 @@ export default function Arrivals() {
     <div>
       <div className='flex justify-center space-x-10 p-4'>
         <Button onClick={() => handleNavClick('MenFashion')} className={getButtonClass('MenFashion')}>
-          Men's Fashion
+          Thời trang nam
         </Button>
         <Button onClick={() => handleNavClick('WomenFashion')} className={getButtonClass('WomenFashion')}>
-          Women's Fashion
+          Thời trang nữ
         </Button>
         <Button onClick={() => handleNavClick('DiscountDeal')} className={getButtonClass('DiscountDeal')}>
-          Discount Deals
+          Ưu đãi giảm giá
         </Button>
       </div>
       {filteredProducts.length > 0 ? (

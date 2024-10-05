@@ -18,17 +18,16 @@ export default function Subscribe() {
   const onSubmit = (data: z.infer<typeof subschema>) => {
     console.log(data)
     form.reset()
-    toast.success('Subscribed successfully')
+    toast.success('Đăng kí thành công!')
   }
   return (
     <div className='w-full'>
       <Form {...form}>
         <form className='w-full flex flex-col items-center gap-8' onSubmit={form.handleSubmit(onSubmit)}>
           <div className='shadow-lg'>
-            <p className='volkov-font text-4xl w-full text-center'>Subscribe To Our Newsletter</p>
+            <p className='text-4xl w-full text-center'>Đăng ký nhận bản tin</p>
             <p className='font-light text-gray-400 p-4 text-xs text-center'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque duis ultrices sollicitudin aliquam
-              sem. Scelerisque duis ultrices sollicitudin{' '}
+              Đăng kí bằng email của bạn để nhận được những thông báo về ưu đãi về sản phẩm mới và những ưu đãi mới nhất của chúng tôi{' '}
             </p>
             <FormField
               control={form.control}
@@ -42,7 +41,7 @@ export default function Subscribe() {
               )}
             />
           </div>
-          <Button className='font-thin text-xs'>Subcribe Now</Button>
+          <Button className='font-thin text-xs'>Đăng ký ngay</Button>
         </form> 
       </Form>
     </div>

@@ -29,8 +29,8 @@ export default function LoginForm() {
     <div className='w-full h-full flex justify-center items-center py-4 lg:p-8'>
       <div className='w-2/3 mx-auto flex flex-col justify-center space-y-6'>
         <div className='flex flex-col items-center'>
-          <div className='volkov-font font-medium text-2xl flex items-center'>
-            Sign In to <img className='w-10 h-10' src={Logo} alt='logo app' /> with
+          <div className='font-medium text-2xl flex items-center'>
+            Đăng nhập <img className='w-10 h-10' src={Logo} alt='logo app' /> với
           </div>
         </div>
         <Form {...form}>
@@ -60,12 +60,12 @@ export default function LoginForm() {
                   <FormControl>
                     <div className='w-full grid items-center gap-1.5'>
                       <Label htmlFor='password'>
-                        Password<span className='text-red-500'>*</span>
+                        Mật khẩu<span className='text-red-500'>*</span>
                       </Label>
                       <Input {...field} id='password' type='password' placeholder='input password' />
                       <div className='w-full flex justify-end'>
                         <Link to='/forgetpassword'>
-                          <div className='text-xs hover:font-bold hover:underline'>Forget password ?</div>
+                          <div className='text-xs hover:font-bold hover:underline'>Quên mật khẩu ?</div>
                         </Link>
                       </div>
                     </div>
@@ -75,7 +75,7 @@ export default function LoginForm() {
               )}
             />
             <Button type='submit' className='w-full'>
-              Sign in
+              Đăng nhập
             </Button>
           </form>
         </Form>
@@ -84,7 +84,7 @@ export default function LoginForm() {
             <span className='w-full border-t' />
           </div>
           <div className='relative flex justify-center text-xs uppercase'>
-            <span className='px-2 bg-background text-muted-foreground'>Or continue with</span>
+            <span className='px-2 bg-background text-muted-foreground'>Hoặc tiếp tục với</span>
           </div>
         </div>
         <Button
@@ -96,13 +96,13 @@ export default function LoginForm() {
           //   disabled={isLoggingGoogle}
         >
           <img className='mr-2 w-7 h-7' alt='google' src={googleIcon} />
-          Sign in with Google
+          Đăng nhập với Google
           {/* {isLoggingGoogle && <Shell className='w-4 h-4 ml-1 animate-spin' />} */}
         </Button>
         <p className='mx-auto text-sm'>
-          Don't have an account?{' '}
+          Không có tài khoản?{' '}
           <Link className='text-primary hover:underline font-bold' to='/auth/sign-up'>
-            Sign up
+            Đăng kí ngay
           </Link>
         </p>
       </div>

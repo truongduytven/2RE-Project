@@ -13,8 +13,7 @@ export default function CheckoutForm() {
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      firstname: '',
-      lastname: '',
+      fullname: '',
       email: '',
       address: '',
       phonenumber: '',
@@ -29,7 +28,7 @@ export default function CheckoutForm() {
     <div className='flex flex-col w-full'>
       <Form {...form}>
         <form className='flex flex-col gap-4 px-10' onSubmit={form.handleSubmit(onSubmit)}>
-          <div className='w-full flex volkov-font text-2xl'>Contact</div>
+          <div className='w-full flex text-2xl'>Liên hệ</div>
           <FormField
             control={form.control}
             name='email'
@@ -47,42 +46,23 @@ export default function CheckoutForm() {
               </FormItem>
             )}
           />
-          <div className='flex gap-4'>
-            <FormField
-              control={form.control}
-              name='firstname'
-              render={({ field }) => (
-                <FormItem className='flex-1'>
-                  <FormControl>
-                    <div className='w-full grid items-center gap-1.5'>
-                      <Label htmlFor='firstname'>
-                        First Name<span className='text-red-500'>*</span>
-                      </Label>
-                      <Input {...field} id='firstname' placeholder='Alex' />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='lastname'
-              render={({ field }) => (
-                <FormItem className='flex-1'>
-                  <FormControl>
-                    <div className='w-full grid items-center gap-1.5'>
-                      <Label htmlFor='lastname'>
-                        Last Name<span className='text-red-500'>*</span>
-                      </Label>
-                      <Input {...field} id='lastname' placeholder='Peter' />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name='fullname'
+            render={({ field }) => (
+              <FormItem className='flex-1'>
+                <FormControl>
+                  <div className='w-full grid items-center gap-1.5'>
+                    <Label htmlFor='firstname'>
+                      Tên đầy đủ<span className='text-red-500'>*</span>
+                    </Label>
+                    <Input {...field} id='firstname' placeholder='Alex' />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name='phonenumber'
@@ -91,7 +71,7 @@ export default function CheckoutForm() {
                 <FormControl>
                   <div className='w-full grid items-center gap-1.5'>
                     <Label htmlFor='phonenumber'>
-                      Phone Number<span className='text-red-500'>*</span>
+                      Số điện thoại<span className='text-red-500'>*</span>
                     </Label>
                     <Input {...field} id='phonenumber' placeholder='It must be 10 digits' />
                   </div>
@@ -108,7 +88,7 @@ export default function CheckoutForm() {
                 <FormControl>
                   <div className='w-full grid items-center gap-1.5'>
                     <Label htmlFor='address'>
-                      Address<span className='text-red-500'>*</span>
+                      Địa chỉ<span className='text-red-500'>*</span>
                     </Label>
                     <Input {...field} id='address' placeholder='Ex: Duong so 6, phuong 12, Go Vap' />
                   </div>
@@ -117,7 +97,7 @@ export default function CheckoutForm() {
               </FormItem>
             )}
           />
-          <div className='w-full flex volkov-font text-2xl'>Payment Method</div>
+          <div className='w-full flex  text-2xl'>Phương thức thanh toán</div>
           <FormField
             control={form.control}
             name='paymentmethod'
@@ -136,9 +116,13 @@ export default function CheckoutForm() {
                       </FormControl>
                       <FormLabel className='flex items-center gap-4 py-3 font-normal cursor-pointer'>
                         <div>
-                          <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZcQPC-zWVyFOu9J2OGl0j2D220D49D0Z7BQ&s' alt='' className='w-8 h-w-8 ml-9' />
+                          <img
+                            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZcQPC-zWVyFOu9J2OGl0j2D220D49D0Z7BQ&s'
+                            alt=''
+                            className='w-8 h-w-8 ml-9'
+                          />
                         </div>
-                        MoMo Payment
+                        QR Pay
                       </FormLabel>
                     </FormItem>
                     <FormItem className='flex items-center pl-4 space-y-0 border rounded-md'>
@@ -147,9 +131,13 @@ export default function CheckoutForm() {
                       </FormControl>
                       <FormLabel className='flex items-center gap-4 py-3 font-normal cursor-pointer'>
                         <div>
-                          <img src='https://img.freepik.com/free-vector/gold-coins-banknotes-3d-cartoon-style-icon-stack-coins-with-dollar-sign-wad-money-cash-savings-flat-vector-illustration-wealth-economy-finance-profit-currency-concept_74855-25998.jpg' alt='' className='w-8 mb-2 h-w-8 ml-9' />
+                          <img
+                            src='https://img.freepik.com/free-vector/gold-coins-banknotes-3d-cartoon-style-icon-stack-coins-with-dollar-sign-wad-money-cash-savings-flat-vector-illustration-wealth-economy-finance-profit-currency-concept_74855-25998.jpg'
+                            alt=''
+                            className='w-8 mb-2 h-w-8 ml-9'
+                          />
                         </div>
-                        Cash on delivery
+                        Thanh toán khi nhận hàng
                       </FormLabel>
                     </FormItem>
                   </RadioGroup>
@@ -158,7 +146,7 @@ export default function CheckoutForm() {
             )}
           />
           <Button>
-            Checkout now <ShoppingBag className='ml-3' size={15}/>
+            Thanh toán ngay <ShoppingBag className='ml-3' size={15} />
           </Button>
         </form>
       </Form>

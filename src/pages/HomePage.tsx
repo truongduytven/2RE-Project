@@ -26,7 +26,7 @@ export default function HomePage() {
           <div className='w-1/3 max-h-full flex flex-col justify-between items-center'>
             <img src={Banner3} alt='banner' />
             <Link to='/products'>
-              <Button>Shop now</Button>
+              <Button>Mua ngay</Button>
             </Link>
             <div className='relative w-full'>
               <img src={Banner4} alt='banner' className='w-full' />
@@ -45,16 +45,16 @@ export default function HomePage() {
         <div className='w-full max-w-5xl flex justify-between'>
           <div className='p-5 flex flex-col gap-14 '>
             <div>
-              <h2 className='text-3xl font-bold volkov-font'>This week's products</h2>
-              <p className='text-sm'>Limited quantity</p>
+              <h2 className='text-3xl font-bold '>Sản phẩm tuần này</h2>
+              <p className='text-sm'>Số lượng có hạn</p>
             </div>
             <div>
               <Link to='/products?collection=DiscountDeals'>
-                <Button>Buy Now</Button>
+                <Button>Mua ngay</Button>
               </Link>
             </div>
             <div>
-              <h3 className='text-xl font-bold'>Hurry, Before It's Too Late!</h3>
+              <h3 className='text-base font-bold'>Hãy nhanh lên, trước khi quá muộn!</h3>
               <CountdownTimer />
             </div>
           </div>
@@ -63,22 +63,22 @@ export default function HomePage() {
       </div>
       <div className='flex justify-center items-center w-full py-20'>
         <div className='flex flex-col items-center justify-center w-full max-w-5xl gap-10'>
-          <div className='text-6xl font-semibold volkov-font'>New Arrivals</div>
+          <div className='text-6xl font-semibold '>Hàng mới về</div>
           <div>
             <Arrivals />
           </div>
           <div>
             <Link to='/products?collection=NewArrivals'>
-              <Button>View More</Button>
+              <Button>Xem thêm</Button>
             </Link>
           </div>
         </div>
       </div>
       <div className='w-full flex flex-col justify-center items-center gap-20 py-20 bg-gradient-to-b from-[#f9f9f9] to-white'>
         <div className='flex flex-col items-center gap-8'>
-          <p className='text-4xl font-semibold volkov-font'>Follow Us On Fanpage</p>
+          <p className='text-4xl font-semibold '>Theo dõi chúng tôi trên Fanpage</p>
           <p className='text-sm'>
-            To not miss the latest offers, new and unique products at extremely affordable prices.
+            Để không bỏ lỡ những ưu đãi mới nhất, sản phẩm mới và độc đáo với mức giá cực kỳ phải chăng.
           </p>
         </div>
         <img src={Follow} />

@@ -30,11 +30,11 @@ export default function Footer() {
               {/* <div className='text-2xl font-bold text-primary'>Contact information</div> */}
               <div className='flex flex-col items-start gap-4 mt-2'>
                 <div className='text-xs sm:text-base'>
-                  <strong>Support</strong>
+                  <strong>Hỗ trợ</strong>
                 </div>
-                <div className='text-xs sm:text-base'>Delivery & Payment</div>
-                <div className='text-xs sm:text-base'>Help & Support</div>
-                <div className='text-xs sm:text-base'>24/7H Services</div>
+                <div className='text-xs sm:text-base'>Giao hàng & Thanh toán</div>
+                <div className='text-xs sm:text-base'>Trợ giúp & Hỗ trợ</div>
+                <div className='text-xs sm:text-base'>Dịch vụ 24/7</div>
               </div>
             </div>
 
@@ -42,7 +42,7 @@ export default function Footer() {
               {/* <div className='text-2xl font-bold text-primary'>Contact information</div> */}
               <div className='flex flex-col items-start gap-4 mt-2'>
                 <div className='text-xs sm:text-base'>
-                  <strong>Infomation</strong>
+                  <strong>Thông tin</strong>
                 </div>
                 <div className='text-xs sm:text-base'>+8496 416 0769</div>
                 <div className='text-xs sm:text-base'>2re2hand@gmail.com</div>
@@ -54,9 +54,7 @@ export default function Footer() {
           </div>
         </div>
       </Container>
-      <div className='flex justify-center items-center text-base h-10 mt-10'>
-        © Copyright 2024. All rights reserved.
-      </div>
+      <div className='flex justify-center items-center text-base h-10 mt-10'>© Bản quyền 2024. Bảo lưu mọi quyền.</div>
     </footer>
   )
 }
