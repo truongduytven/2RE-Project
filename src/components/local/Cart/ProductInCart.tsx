@@ -70,7 +70,11 @@ export default function ProductInCart() {
   return (
     <Container>
       {cart.length === 0 ? (
-        <div>Your cart is empty</div>
+        <div className='flex w-full justify-center'>
+          <div>
+            Your cart is empty.{' '}
+          </div>
+        </div>
       ) : isLoading ? (
         <div>Loading</div>
       ) : products ? (
@@ -86,10 +90,10 @@ export default function ProductInCart() {
                 </TableHead>
                 <TableHead className='w-24 font-bold text-center'>Image</TableHead>
                 <TableHead className='w-64 font-bold'>Name Product</TableHead>
-                <TableHead className='w-64 font-bold'>Shop Name</TableHead>
+                <TableHead className='w-60 font-bold'>Shop Name</TableHead>
                 <TableHead className='w-24 font-bold text-center'>Size</TableHead>
                 <TableHead className='w-24 font-bold text-center'>Cond</TableHead>
-                <TableHead className='w-28 font-bold text-center'>Price</TableHead>
+                <TableHead className='w-32 font-bold text-center'>Price</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -101,11 +105,14 @@ export default function ProductInCart() {
                   <TableCell className='w-24 h-36'>
                     <img src={product.mainImage} className='object-cover w-full h-full' />
                   </TableCell>
-                  <TableCell className='w-64 cursor-pointer' onClick={() => handleViewDetail(product.id.toString())}>{product.name} {product.sale > 0 && <Badge className='bg-red-500 hover:bg-red-600 px-1'>-{product.sale}%</Badge>}</TableCell>
-                  <TableCell className='w-64'>{formatProductType(product.shopName)}</TableCell>
+                  <TableCell className='w-64 cursor-pointer' onClick={() => handleViewDetail(product.id.toString())}>
+                    {product.name}{' '}
+                    {product.sale > 0 && <Badge className='bg-red-500 hover:bg-red-600 px-1'>-{product.sale}%</Badge>}
+                  </TableCell>
+                  <TableCell className='w-60'>{formatProductType(product.shopName)}</TableCell>
                   <TableCell className='w-24 text-center'>{product.size}</TableCell>
                   <TableCell className='w-24 text-center'>{product.cond}%</TableCell>
-                  <TableCell className='w-28 text-center'>
+                  <TableCell className='w-32 text-center'>
                     {formatCurrency(product.price - (product.price * product.sale) / 100)}
                   </TableCell>
                 </TableRow>
@@ -129,7 +136,7 @@ export default function ProductInCart() {
           </Table>
           <div className='flex justify-between'>
             <AlertDialog>
-              <AlertDialogTrigger>
+              <AlertDialogTrigger disabled={selectedProductDetails.length === 0}>
                 <Button variant='destructive' disabled={selectedProducts.length === 0}>
                   Delete {selectedProducts.length} selected
                 </Button>
@@ -150,9 +157,11 @@ export default function ProductInCart() {
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-            <Link to='/checkout' state={{ selectedProducts: selectedProductDetails }}>
-              <Button disabled={selectedProducts.length === 0}>Checkout {selectedProducts.length} products</Button>
-            </Link>
+            <Button disabled={selectedProducts.length === 0}>
+              <Link to='/checkout' state={{ selectedProducts: selectedProductDetails }}>
+                Checkout {selectedProducts.length} products
+              </Link>
+            </Button>
           </div>
         </div>
       ) : (

@@ -1,6 +1,6 @@
-import { Product } from '@/types';
-import { Card } from '@/components/ui/card';
-import { formatCurrency } from '@/lib/utils';
+import { Product } from '@/types'
+import { Card } from '@/components/ui/card'
+import { formatCurrency } from '@/lib/utils'
 
 function ProductCard(props: Product) {
   return (
@@ -12,16 +12,21 @@ function ProductCard(props: Product) {
           alt={props.name}
         />
       </div>
-      <p className='font-semibold mt-2 text-[#484848] transition-colors duration-300 hover:text-black'>
-        {props.name} ({props.size})
-      </p>
+      <div className='flex gap-1'>
+        <div className='truncate font-semibold mt-2 text-[#484848] transition-colors duration-300 hover:text-black'>
+          {props.name}
+        </div>
+        <div className='font-semibold mt-2 text-[#484848] transition-colors duration-300 hover:text-black'>
+          ({props.size})
+        </div>
+      </div>
       {/* <p className='text-sm text-gray-400'>{props.size}</p> */}
       <p className='mt-3 text-xs text-[#484848]'>cond {props.cond}%</p>
       <p className='mt-3 text-xl font-semibold text-[#484848] transition-colors duration-300 hover:text-black'>
         {formatCurrency(props.price)}
       </p>
     </Card>
-  );
+  )
 }
 
-export default ProductCard;
+export default ProductCard

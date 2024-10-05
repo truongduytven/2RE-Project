@@ -4,30 +4,34 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ProductRelated from './ProductRelated'
 import Container from '@/components/global/Container'
 import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Star } from 'lucide-react'
+import { ArrowLeft, Heart, Star } from 'lucide-react'
 import { DataArrivals } from '@/lib/DataArrivals'
 import { formatCurrency, formatProductType } from '@/lib/utils'
 import { toast } from 'sonner'
 import { useCartContext } from '@/contexts/CartContext'
+import { useFavoriteContext } from '@/contexts/FavoriteContext'
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const [product, setProduct] = useState<Product | null>(null)
   const [mainImage, setMainImage] = useState<string>('')
   const [isHovering, setIsHovering] = useState<boolean>(false)
+  const { favorites, toggleFavorite } = useFavoriteContext()
   const { addToCart } = useCartContext()
 
   const navigate = useNavigate()
+
+  const isFavorite = favorites.includes(id!)
 
   useEffect(() => {
     const scrollToTop = () => {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth',
+        behavior: 'smooth'
       })
     }
     scrollToTop()
-  }, [])
+  }, [id])
 
   useEffect(() => {
     const fetchProduct = async (productId: string) => {
@@ -55,6 +59,10 @@ const ProductDetails: React.FC = () => {
   const handleMouseLeave = () => {
     setIsHovering(false)
     setMainImage(product ? product.mainImage : '')
+  }
+
+  const handleFavoriteToggle = () => {
+    toggleFavorite(product!.id.toString())
   }
 
   if (!product) {
@@ -116,7 +124,13 @@ const ProductDetails: React.FC = () => {
             <div className='flex flex-1 flex-col gap-8 flex-grow h-full'>
               <div className='flex justify-between items-center'>
                 <p className='text-3xl volkov-font font-semibold'>{product.name}</p>
-                <Star strokeWidth={1} color='black' className='w-8 h-8 p-2 border rounded-full' />
+                <Heart
+                  strokeWidth={1}
+                  color={isFavorite ? 'red' : 'black'}
+                  fill={isFavorite ? 'red' : 'transparent'}
+                  className='w-9 h-9 p-2 border rounded-full'
+                  onClick={handleFavoriteToggle}
+                />
               </div>
 
               {product.sale > 0 ? (
