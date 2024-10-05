@@ -14,7 +14,7 @@ export default function CartPage() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href='/shop'>Shop</BreadcrumbLink>
+                <BreadcrumbLink href='/products'>Product</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem className='font-bold'>Shopping cart</BreadcrumbItem>
