@@ -9,8 +9,10 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import googleIcon from '@/assets/google.svg'
+import { useAuth } from '@/contexts/AuthContext'
 
 export default function LoginForm() {
+  const { login } = useAuth()
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -22,8 +24,14 @@ export default function LoginForm() {
     console.log('login with google')
   }
 
-  const onSumit = (data: z.infer<typeof loginSchema>) => {
-    console.log(data)
+  async function onSumit(data: z.infer<typeof loginSchema>) {
+    try {
+      console.log(data)
+
+      await login(data.email, data.password)
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <div className='w-full h-full flex justify-center items-center py-4 lg:p-8'>

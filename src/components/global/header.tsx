@@ -8,7 +8,7 @@ import {
   NavigationMenuList
 } from '@/components/ui/navigation-menu'
 import { Button } from '../ui/button'
-import { Search, SearchIcon, ShoppingCart, X } from 'lucide-react' // Import cancel icon
+import { Search, ShoppingCart } from 'lucide-react' // Import cancel icon
 import { useCartContext } from '@/contexts/CartContext'
 import { Link, useNavigate } from 'react-router-dom'
 import ProfileButton from '../local/Profile/ProfileButton'
@@ -21,11 +21,11 @@ export default function Header() {
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       navigate(`/products?search=${searchQuery}`)
-      setIsSearchMode(false) // Close search input after navigation
+      setIsSearchMode(false)
     }
   }
   return (
-    <header className='w-full pt-5 fixed top-0 left-0 bg-white z-50'>
+    <header className='w-full pt-5 fixed top-0 left-0 bg-white z-40'>
       <Container>
         <div className='flex w-full h-20 justify-between items-end'>
           <div className='flex-1'>
