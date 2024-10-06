@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -11,9 +10,9 @@ import { FavoriteProvider } from './contexts/FavoriteContext.tsx'
 import { AuthProvider } from '@/contexts/AuthContext.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
-      <Toaster position='top-right' richColors duration={1000}/>
+      <Toaster position='top-right' richColors duration={2000}/>
       <FavoriteProvider>
         <CartProvider>
           <AuthProvider>
@@ -22,5 +21,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </CartProvider>
       </FavoriteProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 )

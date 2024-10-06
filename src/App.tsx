@@ -11,6 +11,7 @@ import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import ProductsPage from "./pages/ProductsPage"
 import SearchPage from "./pages/SearchPage"
+import ShopPage from "./pages/ShopPage"
 
 function App() {
   return <>
@@ -23,6 +24,7 @@ function App() {
         <Route path='/favorite' element={<FavoritePage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/compare" element={<Compare />} />   
+        <Route path="/shop" element={<ShopPage />} />   
       </Route>
       <Route path="/search" element={<SearchPage />} />
       <Route path="/auth/sign-in" element={<SignIn />} />

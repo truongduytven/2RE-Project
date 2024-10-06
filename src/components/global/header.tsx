@@ -40,7 +40,7 @@ export default function Header() {
                   type='text'
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder='Tìm kiếm...'
+                  placeholder='Tìm kiếm sản phẩm...'
                   className='w-full border border-gray-300 rounded-lg py-2 px-4 mb-1'
                   onKeyDown={handleSearch}
                 />
@@ -67,7 +67,7 @@ export default function Header() {
                     <NavigationMenuLink href='/favorite'>Yêu thích</NavigationMenuLink>
                   </NavigationMenuItem>
                   <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
-                    <NavigationMenuLink href='/compare'>So sánh</NavigationMenuLink>
+                    <NavigationMenuLink href='/shop'>Cửa hàng</NavigationMenuLink>
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>

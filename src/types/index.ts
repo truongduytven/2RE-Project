@@ -24,13 +24,19 @@ export type Product = {
   status: string
 }
 export interface ProductDetail {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  size: string;
-  color: string[];
-  mainImage: string;
-  relatedImages: string[];
+  productId: string
+  shopOwner: string
+  category: string
+  genderCategory: string
+  size: string
+  name: string
+  price: number
+  mainImgUrl: string
+  listImgUrl: string[]
+  description: string
+  brand: string
+  condition: string
+  status: string
+  createdAt: string
+  updatedAt: string
 }
-

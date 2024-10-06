@@ -3,11 +3,17 @@ import CheckoutForm from '@/components/local/Checkout/CheckoutForm'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import { formatCurrency } from '@/lib/utils'
 import { Product } from '@/types'
+import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 export default function Checkout() {
   const location = useLocation()
-  const selectedProducts: Product[] = location.state?.selectedProducts || []
+  const [selectedProducts, setSelectedProducts] = useState<Product[]>(location.state?.selectedProducts || [])
+
+  const handleRemoveSelectedProduct = (productId: string) => {
+    const newSelectedProducts = selectedProducts.filter((product) => product.productId !== productId)
+    setSelectedProducts(newSelectedProducts)
+  }
   return (
     <div className='w-full justify-center my-5'>
       <Container>
@@ -33,27 +39,30 @@ export default function Checkout() {
             <div className='flex-1'>
               <div className='flex flex-col gap-4 px-10'>
                 <div className='flex flex-col gap-4 mt-10'>
-                  {selectedProducts.map((product: any) => (
-                    <div key={product.id} className='flex gap-4 justify-between items-center'>
+                  {selectedProducts.map((product: Product) => (
+                    <div key={product.productId} className='relative flex gap-4 justify-between items-center'>
                       <div className='flex items-center gap-3'>
                         <div className='w-16 h-16 bg-gray-200'>
-                          <img src={product.mainImage} className='w-full h-full object-cover' alt={product.name} />
+                          <img src={product.imgUrl} className='w-full h-full object-cover' alt={product.name} />
                         </div>
                         <div>
                           <div className='text-base'>{product.name}</div>
-                          <div className='text-sm'>{product.size}</div>
+                          <div className='text-sm text-gray-500'>{product.size}</div>
+                          <div className='text-base'>{product.shopOwner}</div>
                         </div>
                       </div>
                       <div className='flex flex-col'>
-                        {product.sale > 0 ? (
+                        {/* {product.sale > 0 ? (
                           <div className='flex flex-col items-center gap-1'>
                             <div>{formatCurrency(product.price - (product.price * product.sale) / 100)}</div>
                             <div className='line-through text-sm'>{formatCurrency(product.price)}</div>
                           </div>
                         ) : (
                           <div>{formatCurrency(product.price)}</div>
-                        )}
+                        )} */}
+                        <div>{formatCurrency(product.price)}</div>
                       </div>
+                      {selectedProducts.length > 1 && (<div onClick={() => handleRemoveSelectedProduct(product.productId)} className='absolute -right-2 -top-2 cursor-pointer'>x</div>)}
                     </div>
                   ))}
                   <hr></hr>
@@ -62,7 +71,7 @@ export default function Checkout() {
                     <div>
                       {formatCurrency(
                         selectedProducts.reduce(
-                          (total, items) => total + (items.price - (items.price * items.sale) / 100),
+                          (total, items) => total + (items.price),
                           0
                         )
                       )}

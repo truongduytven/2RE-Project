@@ -17,7 +17,7 @@ export default function CheckoutForm() {
       email: '',
       address: '',
       phonenumber: '',
-      paymentmethod: 'MOMO'
+      paymentmethod: 'QRPAY'
     }
   })
 
@@ -112,12 +112,12 @@ export default function CheckoutForm() {
                   >
                     <FormItem className='flex items-center pl-4 space-y-0 border rounded-md '>
                       <FormControl>
-                        <RadioGroupItem value='MOMO' />
+                        <RadioGroupItem value='QRPAY' />
                       </FormControl>
                       <FormLabel className='flex items-center gap-4 py-3 font-normal cursor-pointer'>
                         <div>
                           <img
-                            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZcQPC-zWVyFOu9J2OGl0j2D220D49D0Z7BQ&s'
+                            src='https://as2.ftcdn.net/v2/jpg/04/31/66/17/1000_F_431661704_SW673ausblKXa0lg0GCSHeJNpSsPbKou.jpg'
                             alt=''
                             className='w-8 h-w-8 ml-9'
                           />

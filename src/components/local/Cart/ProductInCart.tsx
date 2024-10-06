@@ -1,4 +1,5 @@
 import Container from '@/components/global/Container'
+import Loading from '@/components/global/Loading/Loading'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,37 +11,52 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
-import { Badge } from '@/components/ui/badge'
+
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useCartContext } from '@/contexts/CartContext'
-import { DataArrivals } from '@/lib/DataArrivals'
+import REAPI from '@/lib/2REAPI'
+
 import { formatCurrency, formatProductType } from '@/lib/utils'
 import { Product } from '@/types'
-import { Eye } from 'lucide-react'
+
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 export default function ProductInCart() {
   const { cart, setCart } = useCartContext()
   const [selectedProducts, setSelectedProducts] = useState<string[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
   const navigate = useNavigate()
   useEffect(() => {
-    const fetchedProducts: Product[] = []
-
-    cart.forEach((productId) => {
-      const product = DataArrivals.find((product) => product.id.toString() === productId)
-      if (product) {
-        fetchedProducts.push(product)
+    const fetchedProducts = async () => {
+      try {
+        setIsLoading(true)
+        let paramsId = ''
+        cart.forEach((productId) => {
+          if(paramsId !== '') {
+            paramsId += '&'
+          }
+          paramsId += `listId=${productId}`
+        })
+        const response = await REAPI.get(`/product/list?${paramsId}`)
+        const data = await response.data
+        setProducts(data)
+        toast.success('Tải sản phẩm thành công!')
+      } catch (error) {
+        console.error('Fetching products failed:', error)
+        toast.error('Tải sản phẩm thất bại!')
+      } finally {
+        setIsLoading(false)
       }
-    })
-
-    setProducts(fetchedProducts)
-    setIsLoading(false)
-  }, [cart])
+    }
+    if(cart.length > 0) {
+      fetchedProducts()
+    }
+  }, [])
 
   const handleCheckboxChange = (productId: string) => {
     setSelectedProducts((prevSelected) =>
@@ -62,10 +78,14 @@ export default function ProductInCart() {
     if (selectedProducts.length === products.length) {
       setSelectedProducts([])
     } else {
-      setSelectedProducts(products.map((product) => product.id.toString()))
+      setSelectedProducts(products.map((product) => product.productId.toString()))
     }
   }
-  const selectedProductDetails = products.filter((product) => selectedProducts.includes(product.id.toString()))
+  const selectedProductDetails = products.filter((product) => selectedProducts.includes(product.productId.toString()))
+
+  if(isLoading) {
+    return <Loading />
+  }
 
   return (
     <Container>
@@ -98,22 +118,22 @@ export default function ProductInCart() {
             </TableHeader>
             <TableBody>
               {products.map((product) => (
-                <TableRow key={product.id}>
-                  <TableCell className='w-12' onClick={() => handleCheckboxChange(product.id.toString())}>
-                    <Checkbox checked={selectedProducts.includes(product.id.toString())} />
+                <TableRow key={product.productId}>
+                  <TableCell className='w-12' onClick={() => handleCheckboxChange(product.productId.toString())}>
+                    <Checkbox checked={selectedProducts.includes(product.productId.toString())} />
                   </TableCell>
                   <TableCell className='w-24 h-36'>
-                    <img src={product.mainImage} className='object-cover w-full h-full' />
+                    <img src={product.imgUrl} className='object-cover w-full h-full' />
                   </TableCell>
-                  <TableCell className='w-64 cursor-pointer' onClick={() => handleViewDetail(product.id.toString())}>
+                  <TableCell className='w-64 cursor-pointer' onClick={() => handleViewDetail(product.productId.toString())}>
                     {product.name}{' '}
-                    {product.sale > 0 && <Badge className='bg-red-500 hover:bg-red-600 px-1'>-{product.sale}%</Badge>}
+                    {/* {product.sale > 0 && <Badge className='bg-red-500 hover:bg-red-600 px-1'>-{product.sale}%</Badge>} */}
                   </TableCell>
-                  <TableCell className='w-60'>{formatProductType(product.shopName)}</TableCell>
+                  <TableCell className='w-60'>{formatProductType(product.shopOwner)}</TableCell>
                   <TableCell className='w-24 text-center'>{product.size}</TableCell>
-                  <TableCell className='w-24 text-center'>{product.cond}%</TableCell>
+                  <TableCell className='w-24 text-center'>{product.condition}%</TableCell>
                   <TableCell className='w-32 text-center'>
-                    {formatCurrency(product.price - (product.price * product.sale) / 100)}
+                    {formatCurrency(product.price)}
                   </TableCell>
                 </TableRow>
               ))}
@@ -126,7 +146,7 @@ export default function ProductInCart() {
                 <TableCell className='font-bold text-center'>
                   {formatCurrency(
                     products.reduce(
-                      (total, product) => total + (product.price - (product.price * product.sale) / 100),
+                      (total, product) => total + (product.price),
                       0
                     )
                   )}
