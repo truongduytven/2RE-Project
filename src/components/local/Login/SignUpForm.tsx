@@ -9,8 +9,14 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import googleIcon from '@/assets/google.svg'
+import { useState } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
+import { Shell } from 'lucide-react'
+import { toast } from 'sonner'
 
 export default function SignUpForm() {
+  const [isLoading, setIsLoading] = useState(false)
+  const { signup } = useAuth()
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -18,15 +24,22 @@ export default function SignUpForm() {
       password: '',
       confirmPassword: '',
       fullName: '',
-      phoneNumber: ''
+      phoneNumber: '',
+      address: ''
     }
   })
   const handleGoogleLogin = () => {
     console.log('login with google')
   }
 
-  const onSumit = (data: z.infer<typeof registerSchema>) => {
-    console.log(data)
+  const onSumit = async (data: z.infer<typeof registerSchema>) => {
+    try {
+      setIsLoading(true)
+      await signup(data)
+      setIsLoading(false)
+    } catch (error) {
+      toast.error('Đăng kí tài khoản thất bại')
+    }
   }
   return (
     <div className='w-full h-full flex justify-center items-center py-4 lg:p-8'>
@@ -49,18 +62,19 @@ export default function SignUpForm() {
                         Tên đầy đủ
                         {/* <span className='text-red-500'>*</span> */}
                       </Label>
-                      <Input {...field} id='email' placeholder='Ex: Alex' />
+                      <Input {...field} id='email' placeholder='Vd: Nguyễn Văn A' />
                     </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+            <div className='flex gap-3'>
               <FormField
                 control={form.control}
                 name='email'
                 render={({ field }) => (
-                  <FormItem className='flex-1'>
+                  <FormItem style={{ flex: '2' }}>
                     <FormControl>
                       <div className='w-full grid items-center gap-1.5'>
                         <Label htmlFor='email'>
@@ -85,14 +99,33 @@ export default function SignUpForm() {
                           Số điện thoại
                           {/* <span className='text-red-500'>*</span> */}
                         </Label>
-                        <Input {...field} id='password' type='tel' placeholder='Ex: 0xxxxxxxx' />
+                        <Input {...field} id='password' type='tel' placeholder='Vd: 0xxxxxxxx' />
                       </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-            <div className='flex gap-6'>
+            </div>
+            <FormField
+              control={form.control}
+              name='address'
+              render={({ field }) => (
+                <FormItem className='flex-1'>
+                  <FormControl>
+                    <div className='w-full grid items-center gap-1.5'>
+                      <Label htmlFor='address'>
+                        Địa chỉ
+                        {/* <span className='text-red-500'>*</span> */}
+                      </Label>
+                      <Input {...field} id='address' type='tel' placeholder='Nhập địa chỉ của bạn' />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className='flex gap-3'>
               <FormField
                 control={form.control}
                 name='password'
@@ -100,10 +133,7 @@ export default function SignUpForm() {
                   <FormItem className='flex-1'>
                     <FormControl>
                       <div className='w-full grid items-center gap-1.5'>
-                        <Label htmlFor='password'>
-                          Mật khẩu
-                          {/* <span className='text-red-500'>*</span> */}
-                        </Label>
+                        <Label htmlFor='password'>Mật khẩu</Label>
                         <Input {...field} id='password' type='password' placeholder='Nhập mật khẩu' />
                       </div>
                     </FormControl>
@@ -118,10 +148,7 @@ export default function SignUpForm() {
                   <FormItem className='flex-1'>
                     <FormControl>
                       <div className='w-full grid items-center gap-1.5'>
-                        <Label htmlFor='password'>
-                          Xác nhận mật khẩu
-                          {/* <span className='text-red-500'>*</span> */}
-                        </Label>
+                        <Label htmlFor='password'>Xác nhận mật khẩu</Label>
                         <Input {...field} id='password' type='password' placeholder='Xác nhận' />
                       </div>
                     </FormControl>
@@ -131,8 +158,8 @@ export default function SignUpForm() {
               />
             </div>
 
-            <Button type='submit' className='w-full'>
-              Đăng kí
+            <Button disabled={isLoading} type='submit' className='w-full'>
+              Đăng kí {isLoading && <Shell className='w-4 h-4 ml-1 animate-spin' />}
             </Button>
           </form>
         </Form>

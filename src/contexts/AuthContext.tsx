@@ -2,12 +2,14 @@ import REAPI from '@/lib/2REAPI'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { createContext, useState, useEffect, useContext, ReactNode } from 'react'
+import { User } from '@/types'
 
 interface AuthContextType {
   token: string | null
-  user: any
+  user: User | null
   login: (email: string, password: string) => Promise<void>
   logout: () => void
+  signup: (data: any) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -55,10 +57,37 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setToken(AccessToken)
       localStorage.setItem('token', AccessToken)
       toast.success('Đăng nhập tài khoản thành công')
-      navigate(-1)
+      navigate('/')
     } catch (error) {
       toast.error('Đăng nhập thất bại')
       console.error('Login failed:', error)
+    }
+  }
+
+  const signup = async (data: any) => {
+    const formData = {
+      email: data.email,
+      passWord: data.password,
+      userName: data.fullName,
+      phoneNumber: data.phoneNumber,
+      address: data.address,
+      isShopOwner: false,
+      shopName: '',
+      shopAddress: '',
+      shopDescription: '',
+      shopLogo: ''
+    }
+    try {
+      const response = await REAPI.post('/api/Auth/Signup', formData)
+      if(response.data.includes('success')) {
+        toast.success('Đăng ký tài khoản thành công')
+        setTimeout(() => {
+          navigate('/auth/sign-in')
+        }, 2000)
+      }
+    } catch (error) {
+      toast.error('Đăng ký thất bại')
+      console.error('Signup failed:', error)
     }
   }
 
@@ -70,5 +99,5 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     navigate('/')
   }
 
-  return <AuthContext.Provider value={{ token, user, login, logout }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ token, user, login, logout, signup }}>{children}</AuthContext.Provider>
 }

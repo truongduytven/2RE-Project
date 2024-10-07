@@ -34,7 +34,7 @@ export default function Checkout() {
           </Breadcrumb>
           <div className='w-full flex '>
             <div className='flex-1'>
-              <CheckoutForm />
+              <CheckoutForm products={selectedProducts}/>
             </div>
             <div className='flex-1'>
               <div className='flex flex-col gap-4 px-10'>
@@ -52,14 +52,6 @@ export default function Checkout() {
                         </div>
                       </div>
                       <div className='flex flex-col'>
-                        {/* {product.sale > 0 ? (
-                          <div className='flex flex-col items-center gap-1'>
-                            <div>{formatCurrency(product.price - (product.price * product.sale) / 100)}</div>
-                            <div className='line-through text-sm'>{formatCurrency(product.price)}</div>
-                          </div>
-                        ) : (
-                          <div>{formatCurrency(product.price)}</div>
-                        )} */}
                         <div>{formatCurrency(product.price)}</div>
                       </div>
                       {selectedProducts.length > 1 && (<div onClick={() => handleRemoveSelectedProduct(product.productId)} className='absolute -right-2 -top-2 cursor-pointer'>x</div>)}

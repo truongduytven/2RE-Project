@@ -66,18 +66,18 @@ export default function ShopPage() {
             {listShop.length > 0 ? (
               <div className='grid grid-cols-3 gap-10 px-10 mt-3'>
                 {listShop.map((shop) => (
-                  <Link to={`/productDetails/` + shop.shopId}>
+                  <Link to={`/shopDetails/` + shop.shopId}>
                     <Card className='flex flex-col justify-center items-start p-4 shadow-md border-none transition-transform duration-300 hover:shadow-lg hover:-translate-y-2'>
                       <div className='w-64 h-44 overflow-hidden rounded-md'>
                         <img
                           className='w-full h-full object-cover transition-transform duration-300 hover:scale-110'
-                          src={shop.shopLogo}
+                          src={shop.shopLogo ? shop.shopLogo : 'https://mir-s3-cdn-cf.behance.net/project_modules/1400/b8beed59949097.5a357be858f77.jpg'}
                           alt={shop.shopName}
                         />
                       </div>
                       <div className='flex gap-1'>
                         <div className='truncate font-semibold mt-2 text-[#484848] transition-colors duration-300 hover:text-black'>
-                          Tên shop: {shop.shopName}
+                          Tên cửa hàng: {shop.shopName}
                         </div>
                       </div>
                       <div className='flex items-center justify-end w-full'>

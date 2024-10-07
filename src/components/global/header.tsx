@@ -74,9 +74,9 @@ export default function Header() {
             )}
           </div>
 
-          {/* Action Buttons */}
+
           <div className='flex-1 flex gap-4 mb-2 justify-end'>
-            {/* Search Button */}
+
             {isSearchMode ? (
               <Button variant='outline' onClick={() => setIsSearchMode(false)}>
                 Hủy bỏ
@@ -87,7 +87,7 @@ export default function Header() {
               </Button>
             )}
 
-            {/* Cart Button */}
+
             <Button variant='outline' size='icon' className='relative shrink-0'>
               <Link to='/cart'>
                 <ShoppingCart className='h-6 w-6' />
@@ -99,7 +99,7 @@ export default function Header() {
               </Link>
             </Button>
 
-            {/* Profile Button */}
+
             <ProfileButton className='shrink-0' />
           </div>
         </div>

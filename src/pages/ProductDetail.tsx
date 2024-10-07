@@ -13,6 +13,7 @@ import { useFavoriteContext } from '@/contexts/FavoriteContext'
 import REAPI from '@/lib/2REAPI'
 import Loading from '@/components/global/Loading/Loading'
 import { useAuth } from '@/contexts/AuthContext'
+import { Badge } from '@/components/ui/badge'
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -169,6 +170,9 @@ const ProductDetails: React.FC = () => {
                   <strong>Tên cửa hàng:</strong> {product.shopOwner}
                 </div>
                 <div className='flex gap-2 items-center'>
+                  <strong>Mô tả:</strong> {product.description}
+                </div>
+                <div className='flex gap-2 items-center'>
                   <strong>Kích cỡ:</strong> {product.size}
                 </div>
                 <div className='flex gap-2 items-center'>
@@ -180,6 +184,10 @@ const ProductDetails: React.FC = () => {
                 <div className='flex gap-2 items-center'>
                   <strong>Loại:</strong> {formatProductType(product.category)}
                 </div>
+                <div className='flex gap-2 items-center'>
+                  {product.status === 'Có sẵn' ? (<Badge className='bg-green-500'>{product.status}</Badge>) : (<Badge className='bg-red-500'>{product.status}</Badge>)}
+                </div>
+
               </div>
               <div className='w-full h-full flex items-end gap-10'>
                 {product.status === 'Có sẵn' && (
