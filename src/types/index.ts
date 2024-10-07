@@ -5,35 +5,69 @@ export enum Gender {
 }
 
 export type User = {
-  name: string
-  address?: string
-  gender: Gender
+  userId: string
+  userName: string
+  passWord: string
+  email: string
+  address: string
+  phoneNumber: string
+  roleId: string
+  isShopOwner: boolean
+  shopName: string
+  shopAddress: string
+  shopDescription: string
+  shopLogo: string
+  createdAt: string
+  updatedAt: string
 }
 
 export type Product = {
-  id: number
-  name: string
-  mainImage: string
-  relatedImages: string[]
+  imgUrl: string
   size: string
-  // color: string
-  cond: string
+  condition: string
   price: number
-  type: string
   brand: string
-  sale: number
-  shopName: string
-  shopId: string
-  collection: string
+  name: string
+  productId: string
+  shopOwner: string
+  category: string
+  genderCategory: string
+  status: string
 }
 export interface ProductDetail {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  size: string;
-  color: string[];
-  mainImage: string;
-  relatedImages: string[];
+  productId: string
+  shopOwner: string
+  category: string
+  genderCategory: string
+  size: string
+  name: string
+  price: number
+  mainImgUrl: string
+  listImgUrl: string[]
+  description: string
+  brand: string
+  condition: string
+  status: string
+  createdAt: string
+  updatedAt: string
 }
 
+export interface Order {
+  orderId: string
+  totalPrice: number
+  dateTime: string
+  address: string
+  email: string
+  fullName: string
+  phone: string
+  listProducts: CartItem[]
+  status: string
+}
+
+export interface CartItem {
+  productId: string
+  name: string
+  size: string
+  imageUrl: string
+  price: number
+}

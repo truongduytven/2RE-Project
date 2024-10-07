@@ -7,9 +7,21 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Button } from '@/components/ui/button'
-import { ShoppingBag } from 'lucide-react'
+import { Shell, ShoppingBag } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
+import REAPI from '@/lib/2REAPI'
+import { toast } from 'sonner'
+import { useNavigate } from 'react-router-dom'
 
-export default function CheckoutForm() {
+interface CheckoutFormProps {
+  products: any[]
+}
+
+export default function CheckoutForm({ products }: CheckoutFormProps) {
+  const [isLoading, setIsLoading] = useState(false)
+  const { user } = useAuth()
+  const navigate = useNavigate()
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
@@ -17,12 +29,54 @@ export default function CheckoutForm() {
       email: '',
       address: '',
       phonenumber: '',
-      paymentmethod: 'MOMO'
+      paymentmethod: 'QRPAY'
     }
   })
 
-  function onSubmit(data: z.infer<typeof checkoutSchema>) {
-    console.log(data)
+  useEffect(() => {
+    if (user) {
+      form.reset({
+        fullname: user.userName,
+        email: user.email,
+        address: user.address,
+        phonenumber: user.phoneNumber,
+        paymentmethod: 'QRPAY'
+      })
+    }
+  }, [user])
+
+  const onSubmit = async (data: z.infer<typeof checkoutSchema>) => {
+    const formData = {
+      userId: user?.userId,
+      email: data.email,
+      fullName: data.fullname,
+      address: data.address,
+      phone: data.phonenumber,
+      paymentMethod: data.paymentmethod,
+      products: products.map((product) => product.productId),
+      price: products.reduce((acc, product) => acc + product.price, 0)
+    }
+    if (data.paymentmethod === 'QRPAY') {
+      setIsLoading(true)
+      const response = await REAPI.post('/cart/checkout', formData)
+      setIsLoading(false)
+      navigate('/qrpay', { state: { qrCode: response.data } })
+    } else {
+      setIsLoading(true)
+      try {
+        const response = await REAPI.post('/cart/checkout', formData)
+        if(response.data.includes('success')) {
+          toast.success('Thanh toán thành công')
+          setTimeout(() => {
+            setIsLoading(false)
+            navigate('/payment-success')
+          }, 2000)
+        }
+      } catch (error) {
+        toast.error('Thanh toán thất bại')
+        setIsLoading(false)
+      }
+    }
   }
   return (
     <div className='flex flex-col w-full'>
@@ -112,12 +166,12 @@ export default function CheckoutForm() {
                   >
                     <FormItem className='flex items-center pl-4 space-y-0 border rounded-md '>
                       <FormControl>
-                        <RadioGroupItem value='MOMO' />
+                        <RadioGroupItem value='QRPAY' />
                       </FormControl>
                       <FormLabel className='flex items-center gap-4 py-3 font-normal cursor-pointer'>
                         <div>
                           <img
-                            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZcQPC-zWVyFOu9J2OGl0j2D220D49D0Z7BQ&s'
+                            src='https://as2.ftcdn.net/v2/jpg/04/31/66/17/1000_F_431661704_SW673ausblKXa0lg0GCSHeJNpSsPbKou.jpg'
                             alt=''
                             className='w-8 h-w-8 ml-9'
                           />
@@ -145,8 +199,8 @@ export default function CheckoutForm() {
               </FormItem>
             )}
           />
-          <Button>
-            Thanh toán ngay <ShoppingBag className='ml-3' size={15} />
+          <Button disabled={isLoading} type='submit' >
+            Thanh toán ngay {isLoading ? <Shell className='w-4 h-4 animate-spin' /> : <ShoppingBag className='ml-3' size={15} />}
           </Button>
         </form>
       </Form>

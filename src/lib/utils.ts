@@ -10,10 +10,14 @@ export function formatCurrency(value: number) {
     style: 'decimal', 
     minimumFractionDigits: 0,
   });
-  return `${formatter.format(value)} (VNĐ)`;
+  return `${formatter.format(value)} (VND)`;
 }
 
 export function formatProductType(type: string) {
   return type.replace(/([A-Z])/g, ' $1').trim();
+}
+
+export function formatProductCategory(category: string) {
+  return category.replace(/([A-Z])/g, ' $1').trim();
 }
 

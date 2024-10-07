@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { Product } from '@/types'
+import { ProductDetail } from '@/types'
 import { useNavigate, useParams } from 'react-router-dom'
 import ProductRelated from './ProductRelated'
 import Container from '@/components/global/Container'
-import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Heart, Star } from 'lucide-react'
-import { DataArrivals } from '@/lib/DataArrivals'
+
+import { ArrowLeft, Heart } from 'lucide-react'
+
 import { formatCurrency, formatProductType } from '@/lib/utils'
 import { toast } from 'sonner'
 import { useCartContext } from '@/contexts/CartContext'
 import { useFavoriteContext } from '@/contexts/FavoriteContext'
+import REAPI from '@/lib/2REAPI'
+import Loading from '@/components/global/Loading/Loading'
+import { useAuth } from '@/contexts/AuthContext'
+import { Badge } from '@/components/ui/badge'
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
-  const [product, setProduct] = useState<Product | null>(null)
+  const [product, setProduct] = useState<ProductDetail | null>(null)
   const [mainImage, setMainImage] = useState<string>('')
   const [isHovering, setIsHovering] = useState<boolean>(false)
-  const { favorites, toggleFavorite } = useFavoriteContext()
+  const [isFavorite, setIsFavorite] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const { user } = useAuth()
   const { addToCart } = useCartContext()
 
   const navigate = useNavigate()
-
-  const isFavorite = favorites.includes(id!)
 
   useEffect(() => {
     const scrollToTop = () => {
@@ -35,19 +39,41 @@ const ProductDetails: React.FC = () => {
 
   useEffect(() => {
     const fetchProduct = async (productId: string) => {
-      const productData = DataArrivals.filter((product) => product.id.toString() === productId)[0]
-      setProduct(productData)
-      setMainImage(productData.mainImage)
+      try {
+        setIsLoading(true)
+        const response = await REAPI.get(`/product/${productId}`)
+        const product = response.data
+        setProduct(product)
+        setMainImage(product.mainImgUrl)
+        toast.success('Tải chi tiết sản phẩm thành công!')
+      } catch (error) {
+        console.error('Fetching product detail failed:', error)
+        toast.error('Tải chi tiết sản phẩm thất bại!')
+      } finally {
+        setIsLoading(false)
+      }
     }
-
     if (id) {
       fetchProduct(id)
     }
   }, [id])
 
+  useEffect(() => {
+    const fetchFavorite = async () => {
+      try {
+        if (!user || !product) return
+        const response = await REAPI.get(`/favorite/${user.userId}`)
+        setIsFavorite(response.data.includes(product.productId))
+      } catch (error) {
+        console.error('Fetching favorite products failed:', error)
+      }
+    }
+    fetchFavorite()
+  }, [user, product])
+
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    addToCart(product!.id.toString())
+    addToCart(product!.productId.toString())
     toast.success('Thêm sản phẩm vào giỏ hàng thành công!')
   }
 
@@ -58,37 +84,43 @@ const ProductDetails: React.FC = () => {
 
   const handleMouseLeave = () => {
     setIsHovering(false)
-    setMainImage(product ? product.mainImage : '')
+    setMainImage(product ? product.mainImgUrl : '')
   }
 
-  const handleFavoriteToggle = () => {
-    toggleFavorite(product!.id.toString())
+  const handleFavoriteToggle = async () => {
+    if (user) {
+      try {
+        const response = await REAPI.post(`/favorite/${user.userId}/${product!.productId}`)
+        console.log(`${user.userId}/${product!.productId}`)
+        const data = response.data.type
+        if (data === 'Add') {
+          setIsFavorite(true)
+          toast.success('Thêm sản phẩm vào yêu thích thành công!')
+        }
+      } catch (error) {
+        setIsFavorite(false)
+        toast.error('Xóa sản phẩm khỏi yêu thích thành công!')
+      }
+    } else {
+      toast.error('Vui lòng đăng nhập để thêm sản phẩm vào yêu thích!')
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className='w-full flex justify-center mt-32 items-center'>
+        <Loading />
+      </div>
+    )
   }
 
   if (!product) {
-    return <div>Đang tải chi tiết sản phẩm...</div>
+    return (
+      <div className='w-full flex justify-center mt-30 items-center'>
+        <div>Không tìm thấy sản phẩm</div>
+      </div>
+    )
   }
-
-  const relatedProducts = [
-    {
-      id: 1,
-      title: 'Mai 1',
-      imgSrc:
-        'https://scontent.fsgn2-10.fna.fbcdn.net/v/t1.6435-9/95490582_269326424238394_6090282016777961472_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=6KL885QXp64Q7kNvgFbtC1M&_nc_ht=scontent.fsgn2-10.fna&_nc_gid=AEywV9PSaXUFexajUsDM19D&oh=00_AYB0_6YYbbc99aw7e85P0hkPx2ei0rpv2pxGk4Q6sxgWyw&oe=671B83BF',
-      price: '$49.99',
-      discount: 20,
-      hasSold: 100
-    },
-    {
-      id: 2,
-      title: 'Mai 2',
-      imgSrc:
-        'https://scontent.fsgn2-10.fna.fbcdn.net/v/t1.6435-9/95490582_269326424238394_6090282016777961472_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=6KL885QXp64Q7kNvgFbtC1M&_nc_ht=scontent.fsgn2-10.fna&_nc_gid=AEywV9PSaXUFexajUsDM19D&oh=00_AYB0_6YYbbc99aw7e85P0hkPx2ei0rpv2pxGk4Q6sxgWyw&oe=671B83BF',
-      price: '$59.99',
-      discount: 10,
-      hasSold: 200
-    }
-  ]
 
   return (
     <Container className=''>
@@ -103,7 +135,7 @@ const ProductDetails: React.FC = () => {
           <div className='flex flex-row gap-14'>
             <div className='flex flex-1 flex-row gap-4'>
               <div className='flex flex-col gap-2 overflow-scroll h-[500px]'>
-                {product.relatedImages.map((image, index) => (
+                {product.listImgUrl.map((image, index) => (
                   <img
                     key={index}
                     src={image}
@@ -128,53 +160,48 @@ const ProductDetails: React.FC = () => {
                   strokeWidth={1}
                   color={isFavorite ? 'red' : 'black'}
                   fill={isFavorite ? 'red' : 'transparent'}
-                  className='w-9 h-9 p-2 border rounded-full'
+                  className='w-9 h-9 p-2 border rounded-full hover:cursor-pointer'
                   onClick={handleFavoriteToggle}
                 />
               </div>
-
-              {product.sale > 0 ? (
-                <div className='flex justify-start gap-3 items-center'>
-                  <p className='text-2xl font-bold'>
-                    {formatCurrency(product.price - (product.price * product.sale) / 100)}
-                  </p>
-                  <p className='text-lg text-gray-600 line-through'>{formatCurrency(product.price)}</p>
-                  <Badge className='bg-red-500 hover:bg-red-600'>Giảm {product.sale}%</Badge>
-                </div>
-              ) : (
-                <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
-              )}
-
+              <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
               <div className='flex flex-col gap-4'>
                 <div className='flex gap-2 items-center'>
-                  <strong>Tên cửa hàng:</strong> {product.shopName}
+                  <strong>Tên cửa hàng:</strong> {product.shopOwner}
+                </div>
+                <div className='flex gap-2 items-center'>
+                  <strong>Mô tả:</strong> {product.description}
                 </div>
                 <div className='flex gap-2 items-center'>
                   <strong>Kích cỡ:</strong> {product.size}
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <strong>Thương hiệu:</strong> {product.brand}
+                  <strong>Thương hiệu:</strong> {product.brand ? product.brand : 'Không xác định'}
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <strong>Tình trạng:</strong> {product.cond}%
+                  <strong>Tình trạng:</strong> {product.condition ? product.condition : 'Không xác định'}
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <strong>Loại:</strong> {formatProductType(product.type)}
+                  <strong>Loại:</strong> {formatProductType(product.category)}
                 </div>
+                <div className='flex gap-2 items-center'>
+                  {product.status === 'Có sẵn' ? (<Badge className='bg-green-500'>{product.status}</Badge>) : (<Badge className='bg-red-500'>{product.status}</Badge>)}
+                </div>
+
               </div>
               <div className='w-full h-full flex items-end gap-10'>
-                <button
-                  onClick={handleAddToCart}
-                  className='bg-white border-2 border-black rounded-md px-4 py-2 font-bold hover:bg-black hover:text-white'
-                >
-                  Thêm vào giỏ
-                </button>
+                {product.status === 'Có sẵn' && (
+                  <button
+                    onClick={handleAddToCart}
+                    className='bg-white border-2 border-black rounded-md px-4 py-2 font-bold hover:bg-black hover:text-white'
+                  >
+                    Thêm vào giỏ
+                  </button>
+                )}
               </div>
             </div>
           </div>
-          <div className='mt-10'>
-            <ProductRelated products={relatedProducts} />
-          </div>
+          <div className='mt-10'>{product.status === 'Có sẵn' && <ProductRelated productId={id} />}</div>
         </div>
       </div>
     </Container>

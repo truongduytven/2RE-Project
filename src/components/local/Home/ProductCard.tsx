@@ -8,7 +8,7 @@ function ProductCard(props: Product) {
       <div className='w-64 h-44 overflow-hidden rounded-md'>
         <img
           className='w-full h-full object-cover transition-transform duration-300 hover:scale-110'
-          src={props.mainImage}
+          src={props.imgUrl}
           alt={props.name}
         />
       </div>
@@ -21,7 +21,7 @@ function ProductCard(props: Product) {
         </div>
       </div>
       {/* <p className='text-sm text-gray-400'>{props.size}</p> */}
-      <p className='mt-3 text-xs text-[#484848]'>cond {props.cond}%</p>
+      <p className='mt-3 text-xs text-[#484848]'>cond {props.condition}</p>
       <p className='mt-3 text-xl font-semibold text-[#484848] transition-colors duration-300 hover:text-black'>
         {formatCurrency(props.price)}
       </p>

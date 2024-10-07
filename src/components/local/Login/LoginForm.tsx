@@ -9,8 +9,13 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import googleIcon from '@/assets/google.svg'
+import { useAuth } from '@/contexts/AuthContext'
+import { useState } from 'react'
+import { Shell } from 'lucide-react'
 
 export default function LoginForm() {
+  const { login } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -22,8 +27,14 @@ export default function LoginForm() {
     console.log('login with google')
   }
 
-  const onSumit = (data: z.infer<typeof loginSchema>) => {
-    console.log(data)
+  async function onSumit(data: z.infer<typeof loginSchema>) {
+    try {
+      setIsLoading(true)
+      await login(data.email, data.password)
+      setIsLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <div className='w-full h-full flex justify-center items-center py-4 lg:p-8'>
@@ -62,7 +73,7 @@ export default function LoginForm() {
                       <Label htmlFor='password'>
                         Mật khẩu<span className='text-red-500'>*</span>
                       </Label>
-                      <Input {...field} id='password' type='password' placeholder='input password' />
+                      <Input {...field} id='password' type='password' placeholder='nhập mật khẩu' />
                       <div className='w-full flex justify-end'>
                         <Link to='/forgetpassword'>
                           <div className='text-xs hover:font-bold hover:underline'>Quên mật khẩu ?</div>
@@ -74,8 +85,8 @@ export default function LoginForm() {
                 </FormItem>
               )}
             />
-            <Button type='submit' className='w-full'>
-              Đăng nhập
+            <Button disabled={isLoading} type='submit' className='w-full'>
+              Đăng nhập {isLoading && <Shell className='w-4 h-4 ml-1 animate-spin' />}
             </Button>
           </form>
         </Form>
