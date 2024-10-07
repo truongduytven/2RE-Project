@@ -2,6 +2,7 @@ import Loading from '@/components/global/Loading/Loading'
 import ProductCard from '@/components/local/Shop/ProductCard'
 import REAPI from '@/lib/2REAPI'
 import { Product } from '@/types'
+import { format } from 'date-fns'
 import { Star } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -16,12 +17,25 @@ interface ShopDetailInterface {
   quantityRating: number
 }
 
+interface Review {
+  reviewId: string
+  userId: string
+  userName: string
+  shopId: string
+  rating: number
+  comment: string
+  createdAt: string
+}
+
 export default function ShopDetail() {
   const { id } = useParams<{ id: string }>()
   const [listProduct, setListProduct] = useState<Product[]>([])
   const [shopDetail, setShopDetail] = useState<ShopDetailInterface>()
   const [isLoading, setIsLoading] = useState(false)
+  const [filteredReviews, setFilteredReviews] = useState<Review[]>([])
+  const [reviews, setViews] = useState<Review[]>([])
   const [activeTab, setActiveTab] = useState<'products' | 'contact' | 'rating'>('products')
+  const [selectedRating, setSelectedRating] = useState<number | null>(0)
 
   useEffect(() => {
     const fetchShopDetail = async () => {
@@ -31,6 +45,8 @@ export default function ShopDetail() {
         const responseProduct = await REAPI.get(`/product/product-from-shop/${id}`)
         setShopDetail(response.data)
         setListProduct(responseProduct.data)
+        setViews(response.data.reviews)
+        setFilteredReviews(response.data.reviews)
         toast.success('Tải chi tiết cửa hàng thành công!')
       } catch (error) {
         console.error('Fetching shop detail failed:', error)
@@ -42,6 +58,14 @@ export default function ShopDetail() {
       fetchShopDetail()
     }
   }, [id])
+
+  useEffect(() => {
+    selectedRating === 0 ? setFilteredReviews(reviews) : setFilteredReviews(reviews.filter((review) => review.rating === selectedRating))
+  }, [selectedRating, reviews])
+
+  const formatDate = (dateString: string) => {
+    return format(new Date(dateString), 'dd/MM/yyyy HH:mm')
+  }
 
   if (isLoading) {
     return <Loading />
@@ -119,9 +143,39 @@ export default function ShopDetail() {
             </div>
           )}
           {activeTab === 'rating' && (
-            <div>
-              <div>Total Rating: {shopDetail.totalRating}</div>
-              <div>Quantity of Ratings: {shopDetail.quantityRating}</div>
+            <div className='flex justify-center w-full'>
+              <div className='flex flex-col w-full max-w-2xl'>
+                <div className='flex gap-2 mb-5'>
+                  {[0, 5, 4, 3, 2, 1].map((star) => (
+                    <button
+                      key={star}
+                      onClick={() => setSelectedRating(star)}
+                      className={`flex items-center px-4 py-2 border rounded-lg ${selectedRating === star ? 'font-bold border-black border-3' : ''}`}
+                    >
+                      {star === 0 ? 'All' : star} {star !== 0 && <Star size={16} fill='yellow' color='yellow' />}
+                    </button>
+                  ))}
+                </div>
+
+                {filteredReviews.length > 0 ? (
+                  filteredReviews.map((review) => (
+                    <div key={review.reviewId} className='border p-4 mb-4 rounded-lg'>
+                      <div className='flex items-center gap-2'>
+                        <div className='font-bold'>{review.userName}</div>
+                        <div className='flex items-center gap-1'>
+                          {[...Array(review.rating)].map((_, index) => (
+                            <Star key={index} size={16} fill='yellow' color='yellow' />
+                          ))}
+                        </div>
+                      </div>
+                      <div className='text-sm text-gray-500'>{formatDate(review.createdAt)}</div>
+                      <div className='mt-2'>{review.comment}</div>
+                    </div>
+                  ))
+                ) : (
+                  <div>No reviews available for this rating.</div>
+                )}
+              </div>
             </div>
           )}
         </div>

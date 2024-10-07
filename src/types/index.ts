@@ -52,24 +52,6 @@ export interface ProductDetail {
   updatedAt: string
 }
 
-// {
-//   "totalPrice": 200000,
-//   "dateTime": "2024-10-07T10:43:47.5724782",
-//   "address": "Bến tre",
-//   "email": "duyvo1066@gmail.com",
-//   "fullName": "Duy Võ",
-//   "phone": "0987654321",
-//   "listProducts": [
-//     {
-//       "productId": "5a6e2f3e-9c3e-4f87-9e8c-ea1d4f6e8b0e",
-//       "name": "Áo Thun Cổ Điển Nam",
-//       "size": "S",
-//       "imageUrl": "https://down-vn.img.susercontent.com/file/c7db377b177fc8e2ff75a769022dcc23",
-//       "price": 200000
-//     }
-//   ]
-// },
-
 export interface Order {
   orderId: string
   totalPrice: number
@@ -79,6 +61,7 @@ export interface Order {
   fullName: string
   phone: string
   listProducts: CartItem[]
+  status: string
 }
 
 export interface CartItem {
