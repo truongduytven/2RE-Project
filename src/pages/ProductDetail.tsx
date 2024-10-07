@@ -167,10 +167,10 @@ const ProductDetails: React.FC = () => {
               <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
               <div className='flex flex-col gap-4'>
                 <div className='flex gap-2 items-center'>
-                  <strong>Tên cửa hàng:</strong> {product.shopOwner}
+                  <strong className='min-w-14'>Tên cửa hàng:</strong> {product.shopOwner}
                 </div>
-                <div className='flex gap-2 items-center'>
-                  <strong>Mô tả:</strong> {product.description}
+                <div className='flex gap-2'>
+                  <strong className='min-w-14'>Mô tả:</strong> {product.description}
                 </div>
                 <div className='flex gap-2 items-center'>
                   <strong>Kích cỡ:</strong> {product.size}
