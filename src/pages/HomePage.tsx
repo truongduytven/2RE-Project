@@ -1,7 +1,7 @@
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Banner1 from '@/assets/banner1.png'
-import Banner2 from '@/assets/banner2.png'
+import Banner1 from '@/assets/banner1.jpg'
+import Banner2 from '@/assets/banner2.jpg'
 import Banner3 from '@/assets/bannerx.png'
 import Banner4 from '@/assets/banner4.png'
 import Brand from '@/assets/brands.png'
@@ -20,8 +20,8 @@ export default function HomePage() {
     <div className='min-h-screen flex flex-col mx-auto'>
       <div className='w-full flex justify-center'>
         <div className='w-full gap-3 flex justify-between max-w-5xl'>
-          <div className='w-1/3 bg-[#E0E0E0] p-4 rounded-lg'>
-            <img src={Banner1} alt='banner' />
+          <div className='w-1/3 bg-[#E0E0E0] h-full p-4 rounded-lg'>
+            <img src={Banner1} className='w-full h-full object-cover' alt='banner' />
           </div>
           <div className='w-1/3 max-h-full flex flex-col justify-between items-center'>
             <img src={Banner3} alt='banner' />
@@ -33,8 +33,8 @@ export default function HomePage() {
               <div className='absolute bottom-0 w-full h-1/2 rounded-lg bg-[#E0E0E0] -z-50'></div>
             </div>
           </div>
-          <div className='w-1/3 bg-[#E0E0E0] p-4 rounded-lg'>
-            <img src={Banner2} alt='banner' />
+          <div className='w-1/3 bg-[#E0E0E0] h-full p-4 rounded-lg'>
+            <img src={Banner2} className='w-full h-full object-cover' alt='banner' />
           </div>
         </div>
       </div>

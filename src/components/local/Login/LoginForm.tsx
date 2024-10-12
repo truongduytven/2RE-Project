@@ -31,7 +31,9 @@ export default function LoginForm() {
     try {
       setIsLoading(true)
       await login(data.email, data.password)
-      setIsLoading(false)
+      setTimeout(() => {
+        setIsLoading(false)   
+      }, 2000)
     } catch (error) {
       console.log(error)
     }

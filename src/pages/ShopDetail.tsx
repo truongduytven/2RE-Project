@@ -94,7 +94,7 @@ export default function ShopDetail() {
           <div className='text-3xl font-bold'>{shopDetail.shopName}</div>
           <div className='flex items-center gap-2'>
             <div>{shopDetail.totalRating}</div>
-            <Star size={20} />
+            <Star size={20} color='yellow' fill='yellow'/>
             <div>({shopDetail.quantityRating} đánh giá)</div>
           </div>
         </div>
