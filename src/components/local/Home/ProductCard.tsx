@@ -22,9 +22,14 @@ function ProductCard(props: Product) {
       </div>
       {/* <p className='text-sm text-gray-400'>{props.size}</p> */}
       <p className='mt-3 text-xs text-[#484848]'>cond {props.condition}</p>
-      <p className='mt-3 text-xl font-semibold text-[#484848] transition-colors duration-300 hover:text-black'>
-        {formatCurrency(props.price)}
-      </p>
+      <div className='flex justify-around w-full items-center'>
+        <p className='mt-3 text-md font-semibold text-[#484848] transition-colors duration-300 hover:text-black'>
+          {formatCurrency(props.price)}
+        </p>
+        <p className='mt-3 line-through text-sm font-extralight text-[#484848] transition-colors duration-300 hover:text-black'>
+          {formatCurrency(props.sale)}
+        </p>
+      </div>
     </Card>
   )
 }

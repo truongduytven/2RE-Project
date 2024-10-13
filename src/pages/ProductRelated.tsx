@@ -39,9 +39,9 @@ const ProductRelated = ({ productId }: ProductRelatedProps) => {
         <h2 className='text-3xl font-bold pt-4 pb-2 pl-2'>Sản phẩm liên quan</h2>
       </div>
       {listProducts.length > 0 ? (
-        <div className='grid grid-cols-5'>
+        <div className='grid grid-cols-4 mt-10'>
           {listProducts.map((product) => (
-            <div key={product.productId} className='scale-75 flex justify-center'>
+            <div key={product.productId} className='flex justify-center'>
               <ProductCard key={product.productId} product={product} />
             </div>
           ))}

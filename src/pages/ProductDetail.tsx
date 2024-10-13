@@ -9,7 +9,6 @@ import { ArrowLeft, Heart } from 'lucide-react'
 import { formatCurrency, formatProductType } from '@/lib/utils'
 import { toast } from 'sonner'
 import { useCartContext } from '@/contexts/CartContext'
-import { useFavoriteContext } from '@/contexts/FavoriteContext'
 import REAPI from '@/lib/2REAPI'
 import Loading from '@/components/global/Loading/Loading'
 import { useAuth } from '@/contexts/AuthContext'
@@ -45,10 +44,8 @@ const ProductDetails: React.FC = () => {
         const product = response.data
         setProduct(product)
         setMainImage(product.mainImgUrl)
-        toast.success('Tải chi tiết sản phẩm thành công!')
       } catch (error) {
         console.error('Fetching product detail failed:', error)
-        toast.error('Tải chi tiết sản phẩm thất bại!')
       } finally {
         setIsLoading(false)
       }
@@ -104,6 +101,10 @@ const ProductDetails: React.FC = () => {
     } else {
       toast.error('Vui lòng đăng nhập để thêm sản phẩm vào yêu thích!')
     }
+  }
+
+  const calculatePercent = (price: number, sale: number) => {
+    return Math.floor(((sale - price) / sale) * 100)
   }
 
   if (isLoading) {
@@ -164,7 +165,15 @@ const ProductDetails: React.FC = () => {
                   onClick={handleFavoriteToggle}
                 />
               </div>
-              <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
+              {product.sale > 0 ? (
+                <div className='flex gap-2 items-center'>
+                  <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
+                  <p className='line-through text-gray-400 text-xl'>{formatCurrency(product.sale)}</p>
+                  <Badge className='bg-red-500'> -{calculatePercent(product.price, product.sale)}%</Badge>
+                </div>
+              ) : (
+                <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
+              )}
               <div className='flex flex-col gap-4'>
                 <div className='flex gap-2 items-center'>
                   <strong className='min-w-14'>Tên cửa hàng:</strong> {product.shopOwner}

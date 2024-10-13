@@ -22,10 +22,15 @@ export default function ProductCard({ product }: Props) {
   }
   return (
     <Link key={product.productId} to={`/productDetails/` + product.productId}>
-      <div className='rounded-lg group w-full h-full flex flex-col gap-3 items-center transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
+      <div className='rounded-lg group min-w-60 w-full h-full flex flex-col gap-3 items-center transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
         <div className='w-full h-80 rounded-lg overflow-hidden relative'>
           <img className='w-full h-full object-cover' src={product.imgUrl} alt={product.name} />
-          <Button onClick={handleAddToCart} className='absolute top-3 right-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100' variant='outline' size='icon'>
+          <Button
+            onClick={handleAddToCart}
+            className='absolute top-3 right-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'
+            variant='outline'
+            size='icon'
+          >
             <img src={ShoppingCartPlus} alt='Add to cart' className='w-6 h-6' />
           </Button>
         </div>
@@ -37,10 +42,10 @@ export default function ProductCard({ product }: Props) {
         <div className='flex gap-1 w-full justify-start ml-8 text-gray-500'>Thương hiệu: {product.brand}</div>
         <div className='flex gap-1 w-full justify-start ml-8  text-gray-500'>Tình trạng: {product.condition}</div>
         <div className='flex gap-2 items-center w-full justify-start ml-8'>
-          {/* {( product.sale && product.sale > 0) ? (
-            <div className='font-medium'>
+          {product.sale && product.sale > 0 ? (
+            <div className='font-semibold'>
               <span className='text-sm'></span>
-              {formatCurrency(calNewPrice(product.price, 0))}
+              {formatCurrency(product.price)}
             </div>
           ) : (
             <div className='font-medium'>
@@ -49,11 +54,8 @@ export default function ProductCard({ product }: Props) {
             </div>
           )}
           {product.sale > 0 && (
-            <div className='line-through text-gray-500 opacity-70 text-xs'>{formatCurrency(product.price)}</div>
-          )} */}
-          <div className='font-semibold'>
-            {formatCurrency(product.price)}
-          </div>
+            <div className='line-through text-gray-500 opacity-70 text-xs'>{formatCurrency(product.sale)}</div>
+          )}
         </div>
         <div className='flex items-center justify-end w-full gap-3'>
           {/* <Button className='flex-1' variant='outline'>

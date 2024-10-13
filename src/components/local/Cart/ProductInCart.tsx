@@ -45,10 +45,8 @@ export default function ProductInCart() {
         const response = await REAPI.get(`/product/list?${paramsId}`)
         const data = await response.data
         setProducts(data)
-        toast.success('Tải sản phẩm thành công!')
       } catch (error) {
         console.error('Fetching products failed:', error)
-        toast.error('Tải sản phẩm thất bại!')
       } finally {
         setIsLoading(false)
       }
@@ -56,7 +54,7 @@ export default function ProductInCart() {
     if(cart.length > 0) {
       fetchedProducts()
     }
-  }, [])
+  }, [cart])
 
   const handleCheckboxChange = (productId: string) => {
     setSelectedProducts((prevSelected) =>
