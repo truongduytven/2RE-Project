@@ -36,7 +36,9 @@ export default function SignUpForm() {
     try {
       setIsLoading(true)
       await signup(data)
-      setIsLoading(false)
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 2000)
     } catch (error) {
       toast.error('Đăng kí tài khoản thất bại')
     }

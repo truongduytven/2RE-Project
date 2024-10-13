@@ -25,6 +25,7 @@ export type Product = {
   imgUrl: string
   size: string
   condition: string
+  sale: number
   price: number
   brand: string
   name: string
@@ -37,6 +38,7 @@ export type Product = {
 export interface ProductDetail {
   productId: string
   shopOwner: string
+  sale: number
   category: string
   genderCategory: string
   size: string
