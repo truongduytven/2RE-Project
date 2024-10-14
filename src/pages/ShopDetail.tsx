@@ -134,10 +134,10 @@ export default function ShopDetail() {
             <div className='w-full flex justify-center'>
               <div className='flex w-full max-w-4xl justify-center items-center gap-3 flex-col'>
                 <div className='text-lg'>
-                  <strong>Address:</strong> {shopDetail.shopAddress}
+                  <strong>Địa chỉ:</strong> {shopDetail.shopAddress}
                 </div>
                 <div className='text-lg'>
-                  <strong>Description:</strong> {shopDetail.shopDescription}
+                  <strong>Mô tả:</strong> {shopDetail.shopDescription}
                 </div>
               </div>
             </div>
@@ -173,7 +173,7 @@ export default function ShopDetail() {
                     </div>
                   ))
                 ) : (
-                  <div>No reviews available for this rating.</div>
+                  <div>Không có đánh giá nào cho cửa hàng</div>
                 )}
               </div>
             </div>

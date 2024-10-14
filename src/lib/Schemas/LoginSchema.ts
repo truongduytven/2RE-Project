@@ -1,19 +1,19 @@
 import { z } from 'zod'
 
 export const loginSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(6, { message: 'Password must be at least 6 characters long' }),
+    email: z.string().email({ message: 'Email không hợp lệ'}),
+    password: z.string().min(6, { message: 'Mật khẩu có ít nhất 6 kí tự' }),
 })
 
 export const registerSchema = z.object({
-    fullName: z.string().min(2, { message: 'Last name must be at least 2 characters long' }),
+    fullName: z.string().min(2, { message: 'Tên có ít nhất 2 kí tự' }),
     // firstName: z.string().min(2, { message: 'First name must be at least 2 characters long' }),
-    address: z.string().min(2, { message: 'Address must be at least 2 characters long' }),
+    address: z.string().min(2, { message: 'Địa chỉ có ít nhất 2 kí tự' }),
     email: z.string().email(),
-    phoneNumber: z.string().startsWith('0', {message: 'Phone number must be start with 0'}).min(10, { message: 'Phone number must be at 10-digit number' }).max(10, { message: 'Phone number must be at 10-digit number' }),
-    password: z.string().min(6, { message: 'Password must be at least 6 characters long' }),
+    phoneNumber: z.string().startsWith('0', {message: 'Số điện thoại nên bắt đầu bằng 0'}).min(10, { message: 'Số điện thoại phải có 10 chữ số' }).max(10, { message: 'Số điện thoại phải có 10 chữ số' }),
+    password: z.string().min(6, { message: 'Mật khẩu có ít nhất 6 kí tự' }),
     confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {
-    message: "Confirm password doesn't match",
+    message: "Xác nhận mật khẩu không khớp",
     path: ['confirmPassword'], // path of error
 })

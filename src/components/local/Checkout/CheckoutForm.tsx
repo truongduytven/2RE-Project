@@ -127,7 +127,7 @@ export default function CheckoutForm({ products }: CheckoutFormProps) {
                     <Label htmlFor='phonenumber'>
                       Số điện thoại<span className='text-red-500'>*</span>
                     </Label>
-                    <Input {...field} id='phonenumber' placeholder='It must be 10 digits' />
+                    <Input {...field} id='phonenumber' placeholder='Phải là 10 số' />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -144,7 +144,7 @@ export default function CheckoutForm({ products }: CheckoutFormProps) {
                     <Label htmlFor='address'>
                       Địa chỉ<span className='text-red-500'>*</span>
                     </Label>
-                    <Input {...field} id='address' placeholder='Ex: Duong so 6, phuong 12, Go Vap' />
+                    <Input {...field} id='address' placeholder='Vd: Đường số 6, phường 12, Gò Vấp' />
                   </div>
                 </FormControl>
                 <FormMessage />
