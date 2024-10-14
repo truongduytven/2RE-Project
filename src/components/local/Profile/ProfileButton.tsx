@@ -52,7 +52,7 @@ export default function ProfileButton({ className }: Props) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className='ml-3 cursor-pointer'>
-          <AvatarImage src={user.imageUrl || 'https://github.com/shadcn.png'} />
+          <AvatarImage src={user.shopLogo || 'https://github.com/shadcn.png'} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -66,7 +66,7 @@ export default function ProfileButton({ className }: Props) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild className='cursor-pointer'>
-            <Link to='/user/profile'>
+            <Link to='/profile'>
               <UserIcon className='w-4 h-4 mr-2' />
               <span>Hồ sơ người dùng</span>
             </Link>

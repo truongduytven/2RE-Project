@@ -16,6 +16,7 @@ import ShopDetail from "./pages/ShopDetail"
 import QRpage from "./pages/QRpage"
 import PaymentSuccess from "./pages/PaymentSuccess"
 import OrderPage from "./pages/OrderPage"
+import ProfilePage from "./pages/ProfilePage"
 
 function App() {
   return <>
@@ -31,6 +32,7 @@ function App() {
         <Route path="/compare" element={<Compare />} />   
         <Route path="/shop" element={<ShopPage />} />   
         <Route path="/orders" element={<OrderPage />} />   
+        <Route path="/profile" element={<ProfilePage />} />   
         <Route path="/payment-success" element={<PaymentSuccess />} />   
       </Route>
         <Route path="/qrpay" element={<QRpage />} />   

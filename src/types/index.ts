@@ -12,6 +12,7 @@ export type User = {
   address: string
   phoneNumber: string
   roleId: string
+  roleName: string
   isShopOwner: boolean
   shopName: string
   shopAddress: string

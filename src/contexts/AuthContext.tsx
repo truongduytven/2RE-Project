@@ -7,6 +7,8 @@ import { User } from '@/types'
 interface AuthContextType {
   token: string | null
   user: User | null
+  isError: boolean
+  isLoading: boolean
   login: (email: string, password: string) => Promise<void>
   logout: () => void
   signup: (data: any) => Promise<void>
@@ -29,6 +31,8 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'))
   const [user, setUser] = useState<any>(null)
+  const [isError, setIsError] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const navigate = useNavigate()
   
   
@@ -40,13 +44,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const fetchUser = async () => {
     try {
+      setIsLoading(true)
       const response = await REAPI.get('/api/Auth/CheckToken')
       setUser(response.data.result.user || null)
       console.log(response.data.result.user)
     } catch (error) {
+      setIsError(true)
       localStorage.removeItem('token')
       localStorage.removeItem('token')
       console.error('Fetching user information failed:', error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -99,5 +107,5 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     navigate('/')
   }
 
-  return <AuthContext.Provider value={{ token, user, login, logout, signup }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ token, user, login, logout, signup, isError, isLoading }}>{children}</AuthContext.Provider>
 }
