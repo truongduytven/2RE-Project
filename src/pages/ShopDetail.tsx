@@ -44,10 +44,10 @@ export default function ShopDetail() {
         const response = await REAPI.get(`/detail/${id}`)
         const responseProduct = await REAPI.get(`/product/product-from-shop/${id}`)
         setShopDetail(response.data)
-        setListProduct(responseProduct.data)
+        const listProduct = responseProduct.data.filter((product: Product) => product.status === 'Có sẵn' || product.status === 'CÓ SẴN')
+        setListProduct(listProduct)
         setViews(response.data.reviews)
         setFilteredReviews(response.data.reviews)
-        toast.success('Tải chi tiết cửa hàng thành công!')
       } catch (error) {
         console.error('Fetching shop detail failed:', error)
       } finally {
@@ -152,7 +152,7 @@ export default function ShopDetail() {
                       onClick={() => setSelectedRating(star)}
                       className={`flex items-center px-4 py-2 border rounded-lg ${selectedRating === star ? 'font-bold border-black border-3' : ''}`}
                     >
-                      {star === 0 ? 'All' : star} {star !== 0 && <Star size={16} fill='yellow' color='yellow' />}
+                      {star === 0 ? 'Tất cả' : star} {star !== 0 && <Star size={16} fill='yellow' color='yellow' />}
                     </button>
                   ))}
                 </div>

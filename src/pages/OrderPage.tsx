@@ -58,16 +58,16 @@ export default function OrderPage() {
   useEffect(() => {
     switch (activeTab) {
       case 'pending':
-        setFilteredOrders(orders.filter((order) => order.status === 'pending'))
+        setFilteredOrders(orders.filter((order) => order.status === 'CHƯA THANH TOÁN'))
         break
       case 'shipping':
-        setFilteredOrders(orders.filter((order) => order.status === 'shipping'))
+        setFilteredOrders(orders.filter((order) => order.status === 'ĐANG VẬN CHUYỂN'))
         break
       case 'completed':
-        setFilteredOrders(orders.filter((order) => order.status === 'completed'))
+        setFilteredOrders(orders.filter((order) => order.status === 'ĐÃ HOÀN THÀNH'))
         break
       case 'canceled':
-        setFilteredOrders(orders.filter((order) => order.status === 'canceled'))
+        setFilteredOrders(orders.filter((order) => order.status === 'ĐÃ HỦY'))
         break
       default:
         setFilteredOrders(orders)
@@ -106,7 +106,7 @@ export default function OrderPage() {
     <div className='w-full flex flex-col gap-10 my-10'>
       <div className='w-full flex justify-center'>
         <div className='flex flex-col justify-center items-center'>
-          <div className='text-4xl mb-5'>Danh sách sản phẩm</div>
+          <div className='text-4xl mb-5'>Danh sách đơn hàng</div>
         </div>
       </div>
 
@@ -122,7 +122,7 @@ export default function OrderPage() {
             className={`px-4 py-2 ${activeTab === 'pending' ? 'font-bold border-b-2 border-black' : ''}`}
             onClick={() => setActiveTab('pending')}
           >
-            Chờ xác nhận
+            Chưa thanh toán
           </button>
           <button
             className={`px-4 py-2 ${activeTab === 'shipping' ? 'font-bold border-b-2 border-black' : ''}`}
@@ -145,7 +145,6 @@ export default function OrderPage() {
         </div>
       </div>
 
-      {/* Orders List */}
       <div className='w-full flex justify-center'>
         <div className='flex flex-col gap-4 w-full max-w-4xl'>
           {filteredOrders.map((order) => (

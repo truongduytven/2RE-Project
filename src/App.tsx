@@ -17,6 +17,7 @@ import QRpage from "./pages/QRpage"
 import PaymentSuccess from "./pages/PaymentSuccess"
 import OrderPage from "./pages/OrderPage"
 import ProfilePage from "./pages/ProfilePage"
+import PaymentFailure from "./pages/PaymentFailure"
 
 function App() {
   return <>
@@ -34,6 +35,7 @@ function App() {
         <Route path="/orders" element={<OrderPage />} />   
         <Route path="/profile" element={<ProfilePage />} />   
         <Route path="/payment-success" element={<PaymentSuccess />} />   
+        <Route path="/payment-failure" element={<PaymentFailure />} />   
       </Route>
         <Route path="/qrpay" element={<QRpage />} />   
       <Route path="/search" element={<SearchPage />} />

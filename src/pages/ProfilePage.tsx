@@ -2,15 +2,15 @@ import { useAuth } from '@/contexts/AuthContext'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button, ConfigProvider, Form, Input } from 'antd'
 import { RuleObject } from 'antd/lib/form'
-import { Key, PiggyBank } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
+import { Key, PiggyBank, Shell } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import Loading from '@/components/global/Loading/Loading'
 import REAPI from '@/lib/2REAPI'
 
 
 function ProfilePage() {
-  const { user, isError, isLoading } = useAuth()
+  const { user, isError, isLoading, fetchUser } = useAuth()
   const [loading, setLoading] = useState(false)
   const [hasChanges, setHasChanges] = useState(false)
   const [form] = Form.useForm()
@@ -60,12 +60,13 @@ function ProfilePage() {
 
   const onSubmit = async (values: any) => {
     const formData = new FormData()
-    formData.append('userName', values.userName || user?.userName)
+    // formData.append('userName', values.userName || user?.userName)
+    formData.append('passWord', values.Password)
+    formData.append('newPassWord', values.NewPassword)
     formData.append('address', values.Address || user?.address)
     formData.append('phoneNumber', values.PhoneNumber || user?.phoneNumber)
-    formData.append('password', values.Password)
-    formData.append('newPassword', values.NewPassword)
-    formData.append('confirmPassword', values.ConfirmPassword)
+    // formData.append('newPassword', values.NewPassword)
+    // formData.append('confirmPassword', values.ConfirmPassword)
     formData.append('shopName', '')
     formData.append('shopAddress', '')
     formData.append('shopDescription', '')
@@ -84,9 +85,10 @@ function ProfilePage() {
       const response = await REAPI.put(`/update/profile/${user?.userId}`, formData)
       setLoading(false)
       toast.success('Cập nhật profile thành công')
-      console.log('Profile updated su ccessfully:', response)
+      console.log('Profile updated successfully:', response)
       console.log('Profile updated successfully:', response.data)
       setHasChanges(false)
+      await fetchUser()
     } catch (error: any) {
       setLoading(false)
       toast.error(error.response?.data?.result?.message || 'Mật khẩu cũ không chính xác!')
@@ -264,9 +266,9 @@ function ProfilePage() {
                     type='dashed'
                     htmlType='submit'
                     className={`${loading ? 'bg-orange-500 text-white' : ''}`}
-                    disabled={!hasChanges}
+                    disabled={!hasChanges || loading}
                   >
-                    {loading && <Loading />}
+                    {loading && <Shell className='w-4 h-4 ml-1 animate-spin' />}
                     Cập nhật
                   </Button>
                 </Form.Item>

@@ -157,19 +157,24 @@ const ProductDetails: React.FC = () => {
             <div className='flex flex-1 flex-col gap-8 flex-grow h-full'>
               <div className='flex justify-between items-center'>
                 <p className='text-3xl font-semibold'>{product.name}</p>
-                <Heart
-                  strokeWidth={1}
-                  color={isFavorite ? 'red' : 'black'}
-                  fill={isFavorite ? 'red' : 'transparent'}
-                  className='w-9 h-9 p-2 border rounded-full hover:cursor-pointer'
-                  onClick={handleFavoriteToggle}
-                />
+                {(product.status === 'Có sẵn' || product.status === 'CÓ SẴN') && (
+                  <Heart
+                    strokeWidth={1}
+                    color={isFavorite ? 'red' : 'black'}
+                    fill={isFavorite ? 'red' : 'transparent'}
+                    className='w-9 h-9 p-2 border rounded-full hover:cursor-pointer'
+                    onClick={handleFavoriteToggle}
+                  />
+                )}
               </div>
               {product.sale > 0 ? (
                 <div className='flex gap-2 items-center'>
                   <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
                   <p className='line-through text-gray-400 text-xl'>{formatCurrency(product.sale)}</p>
-                  <Badge className='bg-red-500 hover:bg-red-600'> -{calculatePercent(product.price, product.sale)}%</Badge>
+                  <Badge className='bg-red-500 hover:bg-red-600'>
+                    {' '}
+                    -{calculatePercent(product.price, product.sale)}%
+                  </Badge>
                 </div>
               ) : (
                 <p className='text-2xl font-bold'>{formatCurrency(product.price)}</p>
@@ -179,7 +184,8 @@ const ProductDetails: React.FC = () => {
                   <strong className='min-w-14'>Tên cửa hàng:</strong> {product.shopOwner}
                 </div>
                 <div className='flex'>
-                  <strong className='min-w-14'>Mô tả:</strong>{product.description}
+                  <strong className='min-w-14'>Mô tả:</strong>
+                  {product.description}
                 </div>
                 <div className='flex gap-2 items-center'>
                   <strong>Kích cỡ:</strong> {product.size}
@@ -194,9 +200,12 @@ const ProductDetails: React.FC = () => {
                   <strong>Loại:</strong> {formatProductType(product.category)}
                 </div>
                 <div className='flex gap-2 items-center'>
-                  {product.status === 'Có sẵn' ? (<Badge className='bg-green-500 hover:bg-green-600'>{product.status}</Badge>) : (<Badge className='bg-red-500'>{product.status}</Badge>)}
+                  {product.status === 'Có sẵn' || product.status === 'CÓ SẴN' ? (
+                    <Badge className='bg-green-500 hover:bg-green-600'>{product.status}</Badge>
+                  ) : (
+                    <Badge className='bg-red-500 hover:bg-red-600'>{product.status}</Badge>
+                  )}
                 </div>
-
               </div>
               <div className='w-full h-full flex items-end gap-10'>
                 {product.status === 'Có sẵn' && (

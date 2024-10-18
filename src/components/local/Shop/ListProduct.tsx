@@ -55,7 +55,6 @@ export default function ListProduct() {
         const response = await REAPI.get('/product')
         const products = response.data
         setProducts(products)
-        toast.success('Lấy dữ liệu thành công')
       } catch (error) {
         console.error('Fetching products failed:', error)
       } finally {

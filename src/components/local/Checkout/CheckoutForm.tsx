@@ -60,7 +60,8 @@ export default function CheckoutForm({ products }: CheckoutFormProps) {
       setIsLoading(true)
       const response = await REAPI.post('/cart/checkout', formData)
       setIsLoading(false)
-      navigate('/qrpay', { state: { qrCode: response.data } })
+      const link = response.data.checkoutUrl
+      window.location.href = link
     } else {
       setIsLoading(true)
       try {

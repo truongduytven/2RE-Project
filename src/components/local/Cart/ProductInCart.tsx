@@ -26,7 +26,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 export default function ProductInCart() {
-  const { cart, setCart } = useCartContext()
+  const { cart, setCart, removeFromCart } = useCartContext()
   const [selectedProducts, setSelectedProducts] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
@@ -45,6 +45,13 @@ export default function ProductInCart() {
         const response = await REAPI.get(`/product/list?${paramsId}`)
         const data = await response.data
         setProducts(data)
+        const availableProducts = data.filter((product: Product) => {
+          if (product.status.toLowerCase() !== 'có sẵn') {
+            removeFromCart(product.productId.toString());
+            return false;
+          }
+          return true;
+        });
       } catch (error) {
         console.error('Fetching products failed:', error)
       } finally {
@@ -129,7 +136,7 @@ export default function ProductInCart() {
                   </TableCell>
                   <TableCell className='w-60'>{formatProductType(product.shopOwner)}</TableCell>
                   <TableCell className='w-24 text-center'>{product.size}</TableCell>
-                  <TableCell className='w-24 text-center'>{product.condition}%</TableCell>
+                  <TableCell className='w-24 text-center'>{product.condition}</TableCell>
                   <TableCell className='w-32 text-center'>
                     {formatCurrency(product.price)}
                   </TableCell>
@@ -161,16 +168,15 @@ export default function ProductInCart() {
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogTitle>Bạn có chắc chắn xóa?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    Are you sure you want to remove {selectedProducts.length} items from your cart? You can still add
-                    them back to your cart from the shop.
+                    Bạn có chắc chắn xóa {selectedProducts.length} ra khỏi giỏ hàng không? Hành động sẽ không được hoàn lại sau khi thực hiện.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogCancel>Hủy</AlertDialogCancel>
                   <AlertDialogAction className='bg-red-500 hover:bg-red-600' onClick={handleDeleteSelected}>
-                    Continue
+                    Tiếp tục xóa
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>

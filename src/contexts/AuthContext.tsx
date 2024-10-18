@@ -12,6 +12,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>
   logout: () => void
   signup: (data: any) => Promise<void>
+  fetchUser: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -73,18 +74,31 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   const signup = async (data: any) => {
-    const formData = {
-      email: data.email,
-      passWord: data.password,
-      userName: data.fullName,
-      phoneNumber: data.phoneNumber,
-      address: data.address,
-      isShopOwner: false,
-      shopName: '',
-      shopAddress: '',
-      shopDescription: '',
-      shopLogo: ''
-    }
+    const formData = new FormData()
+    formData.append('userName', data.fullName)
+    formData.append('passWord', data.password)
+    formData.append('email', data.email)
+    formData.append('address', data.address)
+    formData.append('phoneNumber', data.phoneNumber)
+    formData.append('isShopOwner', String(false))
+    formData.append('shopName', '')
+    formData.append('shopAddress', '')
+    formData.append('shopDescription', '')
+    formData.append('shopLogo', '')
+    
+    // const formData = {
+    //   email: data.email,
+    //   passWord: data.password,
+    //   userName: data.fullName,
+    //   phoneNumber: data.phoneNumber,
+    //   address: data.address,
+    //   isShopOwner: false,
+    //   shopName: '',
+    //   shopAddress: '',
+    //   shopDescription: '',
+    //   shopLogo: ''
+    // }
+
     try {
       const response = await REAPI.post('/api/Auth/Signup', formData)
       if(response.data.includes('success')) {
@@ -107,5 +121,5 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     navigate('/')
   }
 
-  return <AuthContext.Provider value={{ token, user, login, logout, signup, isError, isLoading }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ token, user, login, logout, signup, isError, isLoading, fetchUser }}>{children}</AuthContext.Provider>
 }
