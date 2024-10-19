@@ -208,7 +208,7 @@ const ProductDetails: React.FC = () => {
                 </div>
               </div>
               <div className='w-full h-full flex items-end gap-10'>
-                {product.status === 'Có sẵn' && (
+                {product.status.toLowerCase() === 'có sẵn' && (
                   <button
                     onClick={handleAddToCart}
                     className='bg-white border-2 border-black rounded-md px-4 py-2 font-bold hover:bg-black hover:text-white'
