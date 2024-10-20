@@ -71,6 +71,8 @@ function ProfilePage() {
     formData.append('shopAddress', '')
     formData.append('shopDescription', '')
     formData.append('shopLogo', '')
+    formData.append('shopBank', '')
+    formData.append('shopBankId', '')
 
     // if (file) {
     //   formData.append('Avatar', file)
@@ -208,7 +210,7 @@ function ProfilePage() {
                   label={<span className='font-medium'>Tên người dùng</span>}
                   rules={[{ required: false }]}
                 >
-                  <Input placeholder='Tên người dùng' />
+                  <Input placeholder='Tên người dùng' disabled/>
                 </Form.Item>
                 <Form.Item
                   name='Address'

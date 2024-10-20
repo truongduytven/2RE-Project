@@ -85,6 +85,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     formData.append('shopAddress', '')
     formData.append('shopDescription', '')
     formData.append('shopLogo', '')
+    formData.append('shopBank', '')
+    formData.append('shopBankId', '')
     
     // const formData = {
     //   email: data.email,
@@ -112,6 +114,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       console.error('Signup failed:', error)
     }
   }
+
+  useEffect(() => {
+    fetchUser()
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === 'token') {
+        window.location.reload()
+      }
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange)
+    }
+  }, [])
 
   const logout = () => {
     setToken(null)
