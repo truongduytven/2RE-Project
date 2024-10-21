@@ -25,7 +25,7 @@ export default function Header() {
     }
   }
   return (
-    <header className='w-full pt-5 fixed top-0 left-0 bg-white z-40'>
+    <header className='w-full pt-5 fixed top-0 left-0 z-40 bg-teriary'>
       <Container>
         <div className='flex w-full h-20 justify-between items-end'>
           <div className='flex-1'>

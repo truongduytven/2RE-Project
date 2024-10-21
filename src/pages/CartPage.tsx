@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbS
 
 export default function CartPage() {
   return (
-    <div className='w-full min-h-screen flex flex-col gap-20 my-10'>
+    <div className='w-full min-h-screen flex flex-col gap-20 py-10'>
       <div className='w-full flex justify-center'>
         <div className='flex flex-col justify-center items-center'>
           <div className='text-4xl mb-5'>Giỏ hàng mua sắm</div>

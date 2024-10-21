@@ -1,11 +1,11 @@
-import { Facebook, Instagram, Mail, PhoneCall } from 'lucide-react'
+import { Facebook, Instagram, PhoneCall } from 'lucide-react'
 import { Button } from '../ui/button'
 import Container from './Container'
 import Tiktok from '@/assets/tiktok.svg'
 
 export default function Footer() {
   return (
-    <footer className='border border-gray-100'>
+    <footer className='border border-gray-100 bg-teriary'>
       <Container>
         <div className='w-full h-full pt-5'>
           <div className='flex mt-6 gap-14 justify-between'>

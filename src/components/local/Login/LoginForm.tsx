@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
-import googleIcon from '@/assets/google.svg'
+// import googleIcon from '@/assets/google.svg'
 import { useAuth } from '@/contexts/AuthContext'
 import { useState } from 'react'
 import { Shell } from 'lucide-react'
@@ -23,9 +23,9 @@ export default function LoginForm() {
       password: ''
     }
   })
-  const handleGoogleLogin = () => {
-    console.log('login with google')
-  }
+  // const handleGoogleLogin = () => {
+  //   console.log('login with google')
+  // }
 
   async function onSumit(data: z.infer<typeof loginSchema>) {
     try {
@@ -92,7 +92,7 @@ export default function LoginForm() {
             </Button>
           </form>
         </Form>
-        <div className='relative'>
+        {/* <div className='relative'>
           <div className='absolute inset-0 flex items-center'>
             <span className='w-full border-t' />
           </div>
@@ -110,8 +110,7 @@ export default function LoginForm() {
         >
           <img className='mr-2 w-7 h-7' alt='google' src={googleIcon} />
           Đăng nhập với Google
-          {/* {isLoggingGoogle && <Shell className='w-4 h-4 ml-1 animate-spin' />} */}
-        </Button>
+        </Button> */}
         <p className='mx-auto text-sm'>
           Không có tài khoản?{' '}
           <Link className='text-primary hover:underline font-bold' to='/auth/sign-up'>

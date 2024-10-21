@@ -219,7 +219,7 @@ const ProductDetails: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className='mt-10'>{product.status === 'Có sẵn' && <ProductRelated productId={id} />}</div>
+          <div className='mt-10'>{product.status.toLowerCase() === 'có sẵn' && <ProductRelated productId={id} />}</div>
         </div>
       </div>
     </Container>

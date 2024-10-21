@@ -149,7 +149,7 @@ export default function OrderPage() {
         <div className='flex flex-col gap-4 w-full max-w-4xl'>
           {filteredOrders.map((order) => (
             <div className='w-full justify-center flex'>
-              <div key={order.orderId} className='border p-4 flex flex-col gap-3 w-full max-w-2xl rounded-xl'>
+              <div key={order.orderId} className='bg-white border p-4 flex flex-col gap-3 w-full max-w-2xl rounded-xl'>
                 <div className='w-full flex justify-between'>
                     <div style={{ flex: '4' }}><strong>Sản phẩm:</strong> {order.listProducts.map((product, index) => index === 0 ? product.name : ', ' + product.name)}</div>
                   <Sheet>

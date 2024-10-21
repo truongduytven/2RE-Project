@@ -45,7 +45,7 @@ export default function ShopPage() {
   }
 
   return (
-    <div className='w-full flex flex-col gap-20 my-10'>
+    <div className='w-full flex flex-col gap-20 py-10'>
       <div className='w-full flex justify-center'>
         <div className='flex flex-col justify-center items-center'>
           <div className='text-4xl mb-5'>Cửa hàng</div>
@@ -67,7 +67,7 @@ export default function ShopPage() {
               <div className='grid grid-cols-3 gap-10 px-10 mt-3'>
                 {listShop.map((shop) => (
                   <Link to={`/shopDetails/` + shop.shopId}>
-                    <Card className='flex flex-col justify-center items-start p-4 shadow-md border-none transition-transform duration-300 hover:shadow-lg hover:-translate-y-2'>
+                    <Card className='bg-teriary flex flex-col justify-center items-start p-4 shadow-md border-none transition-transform duration-300 hover:shadow-lg hover:-translate-y-2'>
                       <div className='w-64 h-64 overflow-hidden rounded-md'>
                         <img
                           className='w-full h-full object-cover transition-transform duration-300 hover:scale-110'

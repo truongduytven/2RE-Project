@@ -27,7 +27,7 @@ const CountdownTimer: React.FC = () => {
   }, [])
 
   return (
-    <div className='flex justify-center items-center bg-cover mt-4'>
+    <div className='flex justify-center items-center mt-4'>
       <div className='flex justify-center items-center'>
         {Object.entries(timeLeft).map(([unit, value]) => (
           <div className='flex flex-col gap-4 items-center'>

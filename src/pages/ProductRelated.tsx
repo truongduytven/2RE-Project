@@ -11,6 +11,7 @@ interface ProductRelatedProps {
 const ProductRelated = ({ productId }: ProductRelatedProps) => {
   const [listProducts, setListProducts] = useState<Product[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -27,7 +28,7 @@ const ProductRelated = ({ productId }: ProductRelatedProps) => {
     if (productId) {
       fetchProducts()
     }
-  }, [])
+  }, [productId])
 
   if (isLoading) {
     return <Loading />

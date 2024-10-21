@@ -6,7 +6,6 @@ import { format } from 'date-fns'
 import { Star } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { toast } from 'sonner'
 
 interface ShopDetailInterface {
   shopName: string
@@ -145,12 +144,12 @@ export default function ShopDetail() {
           {activeTab === 'rating' && (
             <div className='flex justify-center w-full'>
               <div className='flex flex-col w-full max-w-2xl'>
-                <div className='flex gap-2 mb-5'>
+                <div className='flex gap-2 mb-5 justify-center'>
                   {[0, 5, 4, 3, 2, 1].map((star) => (
                     <button
                       key={star}
                       onClick={() => setSelectedRating(star)}
-                      className={`flex items-center px-4 py-2 border rounded-lg ${selectedRating === star ? 'font-bold border-black border-3' : ''}`}
+                      className={`flex items-center bg-white px-4 py-2 border rounded-lg ${selectedRating === star ? 'font-bold border-black border-3' : ''}`}
                     >
                       {star === 0 ? 'Tất cả' : star} {star !== 0 && <Star size={16} fill='yellow' color='yellow' />}
                     </button>
@@ -173,7 +172,7 @@ export default function ShopDetail() {
                     </div>
                   ))
                 ) : (
-                  <div>Không có đánh giá nào cho cửa hàng</div>
+                  <div className='w-full flex justify-center'>Không có đánh giá nào cho cửa hàng</div>
                 )}
               </div>
             </div>

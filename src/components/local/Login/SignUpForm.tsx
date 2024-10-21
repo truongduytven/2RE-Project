@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
-import googleIcon from '@/assets/google.svg'
+// import googleIcon from '@/assets/google.svg'
 import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { Shell } from 'lucide-react'
@@ -28,9 +28,9 @@ export default function SignUpForm() {
       address: ''
     }
   })
-  const handleGoogleLogin = () => {
-    console.log('login with google')
-  }
+  // const handleGoogleLogin = () => {
+  //   console.log('login with google')
+  // }
 
   const onSumit = async (data: z.infer<typeof registerSchema>) => {
     try {
@@ -165,7 +165,7 @@ export default function SignUpForm() {
             </Button>
           </form>
         </Form>
-        <div className='relative'>
+        {/* <div className='relative'>
           <div className='absolute inset-0 flex items-center'>
             <span className='w-full border-t' />
           </div>
@@ -179,12 +179,10 @@ export default function SignUpForm() {
           }}
           variant='outline'
           type='button'
-          //   disabled={isLoggingGoogle}
         >
           <img className='mr-2 w-7 h-7' alt='google' src={googleIcon} />
           Tiếp tục với Google
-          {/* {isLoggingGoogle && <Shell className='w-4 h-4 ml-1 animate-spin' />} */}
-        </Button>
+        </Button> */}
         <p className='mx-auto text-sm'>
           Bạn đã có tài khoản?{' '}
           <Link className='text-primary hover:underline font-bold' to='/auth/sign-in'>

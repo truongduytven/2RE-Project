@@ -15,7 +15,6 @@ import REAPI from '@/lib/2REAPI'
 import { toast } from 'sonner'
 import Loading from '@/components/global/Loading/Loading'
 import { Product } from '@/types'
-import { set } from 'react-hook-form'
 
 const PRODUCTS_PER_PAGE = 9
 
@@ -250,7 +249,7 @@ export default function ListProduct() {
                     {sizes.map((size) => (
                       <button
                         key={size}
-                        className={`border border-gray-300 px-1 py-1 rounded ${selectedSize === size ? 'bg-gray-300' : ''}`}
+                        className={`border  border-gray-300 px-1 py-1 rounded ${selectedSize === size ? 'bg-gray-300' : 'bg-white'}`}
                         onClick={() => handleSizeSelection(size)}
                       >
                         {size}
@@ -267,7 +266,7 @@ export default function ListProduct() {
                     {genders.map((gender) => (
                       <button
                         key={gender}
-                        className={`border border-gray-300 px-1 py-1 rounded ${selectedGender === gender ? 'bg-gray-300' : ''}`}
+                        className={`border border-gray-300 px-1 py-1 rounded ${selectedGender === gender ? 'bg-gray-300' : 'bg-white'}`}
                         onClick={() => handleGenderSelection(gender)}
                       >
                         {gender}
@@ -281,11 +280,11 @@ export default function ListProduct() {
               <AccordionItem value='item-2'>
                 <AccordionTrigger>Giá</AccordionTrigger>
                 <AccordionContent>
-                  <div className='flex flex-col'>
+                  <div className='flex flex-col gap-2'>
                     {priceRanges.map((range, index) => (
                       <button
                         key={index}
-                        className={`text-left text-sm p-2 ${selectedPriceRange === range ? 'font-bold' : 'font-normal'}`}
+                        className={`text-left text-sm p-2 border border-gray-300 rounded-lg ${selectedPriceRange === range ? 'font-bold bg-gray-300' : 'font-normal bg-white'}`}
                         onClick={() => handlePriceSelection(range)}
                       >
                         {range}
@@ -302,7 +301,7 @@ export default function ListProduct() {
                     {brands.map((brand) => (
                       <button
                         key={brand}
-                        className={`border px-2 py-1 rounded ${selectedBrand.includes(brand) ? 'border-gray-300' : 'border-white'}`}
+                        className={`border px-2 py-1 rounded border-gray-300 ${selectedBrand.includes(brand) ? ' bg-gray-300' : ' bg-white'}`}
                         onClick={() => handleBrandSelection(brand)}
                       >
                         {brand}
@@ -346,10 +345,9 @@ export default function ListProduct() {
                         className='flex justify-between'
                         onClick={() => handleCategorySelection(category)}
                       >
-                        <button className={`border-none border-gray-300 text-left px-2 py-1 rounded`}>
+                        <button className={`border border-gray-300 text-left px-2 py-1 rounded  ${selectedCategory === category ? 'bg-gray-300' : 'bg-white'}`}>
                           {category === 'T-Shirts' ? 'Áo thun' : category === 'Jeans' ? 'Jean' : 'Áo khoác'}
-                        </button>
-                        {selectedCategory === category && <Check size={20} />}
+                        </button>              
                       </div>
                     ))}
                   </div>

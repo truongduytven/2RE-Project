@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const REAPI = axios.create({
-    baseURL: 'https://localhost:7145/',
+    baseURL: 'https://exe201-hedgfudpdahubgh9.southeastasia-01.azurewebsites.net/',
     timeout: 40000,
     headers: {
       "Content-Type": "application/json"
