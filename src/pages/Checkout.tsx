@@ -46,7 +46,7 @@ export default function Checkout() {
                           <img src={product.imgUrl} className='w-full h-full object-cover' alt={product.name} />
                         </div>
                         <div>
-                          <div className='text-base'>{product.name}</div>
+                          <div className='text-base font-bold'>{product.name}</div>
                           <div className='text-sm text-gray-500'>{product.size}</div>
                           <div className='text-base'>{product.shopOwner}</div>
                         </div>
@@ -59,8 +59,8 @@ export default function Checkout() {
                   ))}
                   <hr></hr>
                   <div className='w-full flex justify-between'>
-                    <div>Tổng cộng</div>
-                    <div>
+                    <div className='font-semibold'>Tổng cộng</div>
+                    <div className='font-semibold'>
                       {formatCurrency(
                         selectedProducts.reduce(
                           (total, items) => total + (items.price),

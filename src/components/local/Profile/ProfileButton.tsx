@@ -28,7 +28,7 @@ export default function ProfileButton({ className }: Props) {
             <UserIcon className='w-6 h-6' />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className='w-56'>
+        <DropdownMenuContent className='w-56 bg-teriary text-primary'>
           <DropdownMenuGroup>
             <DropdownMenuItem asChild className='cursor-pointer'>
               <Link to='/auth/sign-in'>
@@ -56,10 +56,10 @@ export default function ProfileButton({ className }: Props) {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-56'>
+      <DropdownMenuContent className='w-56 bg-teriary text-primary'>
         <DropdownMenuLabel>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none line-clamp-1'>{user.userName}</p>
+            <p className='text-sm font-bold leading-none line-clamp-1'>{user.userName}</p>
             <p className='text-xs leading-none text-muted-foreground line-clamp-1'>{user.email}</p>
           </div>
         </DropdownMenuLabel>

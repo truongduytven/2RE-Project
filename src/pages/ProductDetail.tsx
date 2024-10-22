@@ -13,6 +13,7 @@ import REAPI from '@/lib/2REAPI'
 import Loading from '@/components/global/Loading/Loading'
 import { useAuth } from '@/contexts/AuthContext'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -209,12 +210,12 @@ const ProductDetails: React.FC = () => {
               </div>
               <div className='w-full h-full flex items-end gap-10'>
                 {product.status.toLowerCase() === 'có sẵn' && (
-                  <button
+                  <Button
                     onClick={handleAddToCart}
-                    className='bg-white border-2 border-black rounded-md px-4 py-2 font-bold hover:bg-black hover:text-white'
+                    className='rounded-md px-4 py-2 font-bold hover:text-white'
                   >
                     Thêm vào giỏ
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>

@@ -144,7 +144,7 @@ export default function ProductInCart() {
               ))}
             </TableBody>
             <TableFooter>
-              <TableRow>
+              <TableRow className='bg-teriary'>
                 <TableCell colSpan={6} className='font-bold py-4'>
                   Tổng số tiền
                 </TableCell>

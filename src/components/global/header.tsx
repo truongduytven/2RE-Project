@@ -41,32 +41,24 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder='Tìm kiếm sản phẩm...'
-                  className='w-full border border-gray-300 rounded-lg py-2 px-4 mb-1'
+                  className='w-full border border-[#b2927b]/30 bg-[#e8dfd7] rounded-lg py-2 px-4 mb-1 focus:outline-none focus:ring-1 focus:ring-primary/50'
                   onKeyDown={handleSearch}
                 />
-                {/* <Button
-                  variant='ghost'
-                  size='icon'
-                  className='absolute right-0'
-                  onClick={() => setIsSearchMode(false)} // Cancel search
-                >
-                  <SearchIcon />
-                </Button> */}
               </div>
             ) : (
               // Navigation Menu
               <NavigationMenu>
                 <NavigationMenuList className='flex gap-10 justify-center items-center mb-2'>
-                  <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
+                  <NavigationMenuItem className='relative after:absolute after:bg-primary after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
                     <NavigationMenuLink href='/'>Trang chủ</NavigationMenuLink>
                   </NavigationMenuItem>
-                  <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
+                  <NavigationMenuItem className='relative after:absolute after:bg-primary after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
                     <NavigationMenuLink href='/products'>Sản phẩm</NavigationMenuLink>
                   </NavigationMenuItem>
-                  <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
+                  <NavigationMenuItem className='relative after:absolute after:bg-primary after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
                     <NavigationMenuLink href='/favorite'>Yêu thích</NavigationMenuLink>
                   </NavigationMenuItem>
-                  <NavigationMenuItem className='relative after:absolute after:bg-gray-500 after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
+                  <NavigationMenuItem className='relative after:absolute after:bg-primary after:h-0.5 after:w-0 after:left-0 after:-bottom-1 after:hover:w-full after:duration-300'>
                     <NavigationMenuLink href='/shop'>Cửa hàng</NavigationMenuLink>
                   </NavigationMenuItem>
                 </NavigationMenuList>

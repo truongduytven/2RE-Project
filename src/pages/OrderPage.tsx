@@ -113,31 +113,31 @@ export default function OrderPage() {
       <div className='w-full flex justify-center'>
         <div className='flex gap-4'>
           <button
-            className={`px-4 py-2 ${activeTab === 'all' ? 'font-bold border-b-2 border-black' : ''}`}
+            className={`px-4 py-2 ${activeTab === 'all' ? 'font-bold border-b-2 border-primary' : ''}`}
             onClick={() => setActiveTab('all')}
           >
             Tất cả
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'pending' ? 'font-bold border-b-2 border-black' : ''}`}
+            className={`px-4 py-2 ${activeTab === 'pending' ? 'font-bold border-b-2 border-primary' : ''}`}
             onClick={() => setActiveTab('pending')}
           >
             Chưa thanh toán
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'shipping' ? 'font-bold border-b-2 border-black' : ''}`}
+            className={`px-4 py-2 ${activeTab === 'shipping' ? 'font-bold border-b-2 border-primary' : ''}`}
             onClick={() => setActiveTab('shipping')}
           >
             Đang vận chuyển
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'completed' ? 'font-bold border-b-2 border-black' : ''}`}
+            className={`px-4 py-2 ${activeTab === 'completed' ? 'font-bold border-b-2 border-primary' : ''}`}
             onClick={() => setActiveTab('completed')}
           >
             Đã hoàn thành
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === 'canceled' ? 'font-bold border-b-2 border-black' : ''}`}
+            className={`px-4 py-2 ${activeTab === 'canceled' ? 'font-bold border-b-2 border-primary' : ''}`}
             onClick={() => setActiveTab('canceled')}
           >
             Đã hủy
@@ -160,9 +160,9 @@ export default function OrderPage() {
                     </SheetTrigger>
                     <SheetContent>
                       <SheetHeader>
-                        <SheetTitle>Chi tiết đơn hàng</SheetTitle>
+                        <SheetTitle className='text-primary font-semibold'>Chi tiết đơn hàng</SheetTitle>
                         <SheetDescription>
-                          <div className='flex flex-col mt-10 gap-2'>
+                          <div className='flex flex-col mt-10 gap-2 text-primary'>
                             <div className='text-lg'>
                               <span className='font-bold'>Tên:</span> {order.fullName}
                             </div>
@@ -202,7 +202,7 @@ export default function OrderPage() {
                                       <div>
                                         <div className='text-base'>{product.name}</div>
                                         <div className='text-sm text-gray-500'>{product.size}</div>
-                                        <div className='text-black'>{formatCurrency(product.price)}</div>
+                                        <div className='text-red-500'>{formatCurrency(product.price)}</div>
                                       </div>
                                     </div>
                                   </div>

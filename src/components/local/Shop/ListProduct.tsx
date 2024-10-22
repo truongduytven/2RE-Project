@@ -231,7 +231,7 @@ export default function ListProduct() {
                 searchQuery ||
                 selectedGender ||
                 selectedCategory) && (
-                <button className='border px-2 rounded-md text-sm' onClick={handleReset}>
+                <button className='border bg-primary text-teriary px-2 rounded-md text-sm' onClick={handleReset}>
                   Tạo lại
                 </button>
               )}
@@ -249,7 +249,7 @@ export default function ListProduct() {
                     {sizes.map((size) => (
                       <button
                         key={size}
-                        className={`border  border-gray-300 px-1 py-1 rounded ${selectedSize === size ? 'bg-gray-300' : 'bg-white'}`}
+                        className={`border  border-primary px-1 py-1 rounded ${selectedSize === size ? 'bg-primary text-teriary' : 'bg-teriary'}`}
                         onClick={() => handleSizeSelection(size)}
                       >
                         {size}
@@ -266,7 +266,7 @@ export default function ListProduct() {
                     {genders.map((gender) => (
                       <button
                         key={gender}
-                        className={`border border-gray-300 px-1 py-1 rounded ${selectedGender === gender ? 'bg-gray-300' : 'bg-white'}`}
+                        className={`border border-primary px-1 py-1 rounded ${selectedGender === gender ? 'bg-primary text-teriary' : 'bg-teriary'}`}
                         onClick={() => handleGenderSelection(gender)}
                       >
                         {gender}
@@ -284,7 +284,7 @@ export default function ListProduct() {
                     {priceRanges.map((range, index) => (
                       <button
                         key={index}
-                        className={`text-left text-sm p-2 border border-gray-300 rounded-lg ${selectedPriceRange === range ? 'font-bold bg-gray-300' : 'font-normal bg-white'}`}
+                        className={`text-left text-sm p-2 border border-primary rounded-lg ${selectedPriceRange === range ? 'font-bold bg-primary text-teriary' : 'font-normal bg-teriary'}`}
                         onClick={() => handlePriceSelection(range)}
                       >
                         {range}
@@ -301,7 +301,7 @@ export default function ListProduct() {
                     {brands.map((brand) => (
                       <button
                         key={brand}
-                        className={`border px-2 py-1 rounded border-gray-300 ${selectedBrand.includes(brand) ? ' bg-gray-300' : ' bg-white'}`}
+                        className={`border px-2 py-1 rounded border-primary ${selectedBrand.includes(brand) ? ' bg-primary text-teriary' : ' bg-teriary'}`}
                         onClick={() => handleBrandSelection(brand)}
                       >
                         {brand}
@@ -345,7 +345,7 @@ export default function ListProduct() {
                         className='flex justify-between'
                         onClick={() => handleCategorySelection(category)}
                       >
-                        <button className={`border border-gray-300 text-left px-2 py-1 rounded  ${selectedCategory === category ? 'bg-gray-300' : 'bg-white'}`}>
+                        <button className={`border border-primary text-left px-2 py-1 rounded  ${selectedCategory === category ? 'bg-primary text-teriary' : 'bg-teriary'}`}>
                           {category === 'T-Shirts' ? 'Áo thun' : category === 'Jeans' ? 'Jean' : 'Áo khoác'}
                         </button>              
                       </div>
@@ -371,13 +371,13 @@ export default function ListProduct() {
           <div className='mt-4 flex justify-center'>
             <Pagination>
               {totalPages > 0 && (
-                <PaginationPrevious className='cursor-pointer' onClick={handlePreviousPage}>
+                <PaginationPrevious className='cursor-pointer hover:bg-primary hover:text-teriary' onClick={handlePreviousPage}>
                   Trước
                 </PaginationPrevious>
               )}
               <PaginationContent>
                 {[...Array(totalPages)].map((_, index) => (
-                  <PaginationItem key={index}>
+                  <PaginationItem key={index} className='mx-1'>
                     <PaginationLink isActive={currentPage === index + 1} onClick={() => handlePageChange(index + 1)}>
                       {index + 1}
                     </PaginationLink>
@@ -385,7 +385,7 @@ export default function ListProduct() {
                 ))}
               </PaginationContent>
               {totalPages > 0 && (
-                <PaginationNext className='cursor-pointer' onClick={handleNextPage}>
+                <PaginationNext className='cursor-pointer hover:bg-primary hover:text-teriary' onClick={handleNextPage}>
                   Sau
                 </PaginationNext>
               )}

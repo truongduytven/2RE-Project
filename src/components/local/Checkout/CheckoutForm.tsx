@@ -13,6 +13,8 @@ import { useAuth } from '@/contexts/AuthContext'
 import REAPI from '@/lib/2REAPI'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
+import COD from '@/assets/COD.png'
+import QRPAY from '@/assets/QRCode.png'
 
 interface CheckoutFormProps {
   products: any[]
@@ -22,6 +24,7 @@ export default function CheckoutForm({ products }: CheckoutFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { user } = useAuth()
   const navigate = useNavigate()
+  const [selectedMethod, setSelectedMethod] = useState('QRPAY')
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
@@ -79,11 +82,17 @@ export default function CheckoutForm({ products }: CheckoutFormProps) {
       }
     }
   }
+
+  const handlePaymentChange = (value: any) => {
+    setSelectedMethod(value)
+    form.setValue('paymentmethod', value)
+  }
+
   return (
     <div className='flex flex-col w-full'>
       <Form {...form}>
         <form className='flex flex-col gap-4 px-10' onSubmit={form.handleSubmit(onSubmit)}>
-          <div className='w-full flex text-2xl'>Liên hệ</div>
+          <div className='w-full flex text-2xl font-bold'>Liên hệ</div>
           <FormField
             control={form.control}
             name='email'
@@ -152,7 +161,7 @@ export default function CheckoutForm({ products }: CheckoutFormProps) {
               </FormItem>
             )}
           />
-          <div className='w-full flex  text-2xl'>Phương thức thanh toán</div>
+          <div className='w-full flex  text-2xl font-bold'>Phương thức thanh toán</div>
           <FormField
             control={form.control}
             name='paymentmethod'
@@ -161,18 +170,22 @@ export default function CheckoutForm({ products }: CheckoutFormProps) {
                 <FormMessage />
                 <FormControl>
                   <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    onValueChange={handlePaymentChange}
+                    defaultValue={selectedMethod}
                     className='flex flex-col space-y-1'
                   >
-                    <FormItem className='flex items-center pl-4 space-y-0 border rounded-md '>
+                    <FormItem className={`flex items-center pl-4 space-y-0 border rounded-md ${
+                        selectedMethod === 'QRPAY'
+                          ? 'border-[#b2927b] bg-[#e8dfd7]'
+                          : 'bg-teriary border-primary/20'
+                      }`}>
                       <FormControl>
                         <RadioGroupItem value='QRPAY' />
                       </FormControl>
-                      <FormLabel className='flex items-center gap-4 py-3 font-normal cursor-pointer'>
+                      <FormLabel className={`flex items-center gap-4 py-3 cursor-pointer ${selectedMethod === 'QRPAY' && 'font-bold'}`}>
                         <div>
                           <img
-                            src='https://as2.ftcdn.net/v2/jpg/04/31/66/17/1000_F_431661704_SW673ausblKXa0lg0GCSHeJNpSsPbKou.jpg'
+                            src={QRPAY}
                             alt=''
                             className='w-8 h-w-8 ml-9'
                           />
@@ -180,14 +193,18 @@ export default function CheckoutForm({ products }: CheckoutFormProps) {
                         QR Pay
                       </FormLabel>
                     </FormItem>
-                    <FormItem className='flex items-center pl-4 space-y-0 border rounded-md'>
+                    <FormItem className={`flex items-center pl-4 space-y-0 border rounded-md ${
+                        selectedMethod === 'COD'
+                          ? 'border-[#b2927b] bg-[#e8dfd7]'
+                          : 'bg-teriary border-primary/20'
+                      }`}>
                       <FormControl>
                         <RadioGroupItem value='COD' />
                       </FormControl>
-                      <FormLabel className='flex items-center gap-4 py-3 font-normal cursor-pointer'>
+                      <FormLabel className={`flex items-center gap-4 py-3 cursor-pointer ${selectedMethod === 'COD' && 'font-bold'}`}>
                         <div>
                           <img
-                            src='https://img.freepik.com/free-vector/gold-coins-banknotes-3d-cartoon-style-icon-stack-coins-with-dollar-sign-wad-money-cash-savings-flat-vector-illustration-wealth-economy-finance-profit-currency-concept_74855-25998.jpg'
+                            src={COD}
                             alt=''
                             className='w-8 mb-2 h-w-8 ml-9'
                           />

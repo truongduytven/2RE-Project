@@ -44,7 +44,7 @@ export default function SignUpForm() {
     }
   }
   return (
-    <div className='w-full h-full flex justify-center items-center py-4 lg:p-8'>
+    <div className='w-full h-full text-primary flex justify-center items-center py-4 lg:p-8'>
       <div className='w-2/3 mx-auto flex flex-col justify-center space-y-6'>
         <div className='flex flex-col items-center'>
           <div className='font-medium text-2xl flex items-center'>

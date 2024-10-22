@@ -23,7 +23,7 @@ const FavoritePage: React.FC = () => {
     const fetchFavoriteProducts = async () => {
       try {
         setIsLoading(true)
-        const response = await REAPI.get(`/favorite/${user.userId}`)
+        const response = await REAPI.get(`/favorite/${user?.userId}`)
         setListId(response.data)
       } catch (error) {
         console.error('Fetching favorite products failed:', error)
@@ -94,7 +94,7 @@ const FavoritePage: React.FC = () => {
               </div>
             ) : (
               <div className='flex items-center justify-center'>
-                <p className='text-center text-gray-500'>Không có sản phẩm yêu thích nào được thêm!</p>
+                <p className='text-center'>Không có sản phẩm yêu thích nào được thêm!</p>
               </div>
             )
           ) : (

@@ -177,7 +177,7 @@ function ProfilePage() {
               ConfirmPassword: ''
             }}
           >
-            <div className='flex flex-col items-center justify-center'>
+            <div className='flex flex-col items-center justify-center text-primary'>
               <div className='shadow-3xl shadow-shadow-500 dark:!bg-navy-800 relative mx-auto w-full rounded-[20px] drop-shadow-md bg-white bg-clip-border p-4 dark:text-white dark:!shadow-none'>
                 <div className='relative flex h-36 w-full justify-center rounded-xl bg-cover'>
                   <img
@@ -197,7 +197,7 @@ function ProfilePage() {
                 </div>
                 <div className='mt-16 flex flex-col items-center'>
                   <h4 className='text-navy-700 text-xl font-bold dark:text-white'>{user?.userName}</h4>
-                  <p className='flex items-center gap-2 text-base font-normal text-gray-600'>
+                  <p className='flex items-center gap-2 text-base font-normal text-primary/60'>
                     <Key size={16} /> {user?.roleName === 'User' ? 'Người dùng' : 'Quản trị viên'}
                   </p>
                   {/* <p className='flex items-center gap-2 text-lg text-primary font-medium text-gray-600'>
@@ -207,28 +207,28 @@ function ProfilePage() {
 
                 <Form.Item
                   name='userName'
-                  label={<span className='font-medium'>Tên người dùng</span>}
+                  label={<span className='font-medium text-primary'>Tên người dùng</span>}
                   rules={[{ required: false }]}
                 >
-                  <Input placeholder='Tên người dùng' disabled/>
+                  <Input className='border-primary' placeholder='Tên người dùng' disabled/>
                 </Form.Item>
                 <Form.Item
                   name='Address'
-                  label={<span className='font-medium'>Địa chỉ</span>}
+                  label={<span className='font-medium text-primary'>Địa chỉ</span>}
                   rules={[{ required: false }]}
                 >
-                  <Input placeholder='Địa chỉ' />
+                  <Input className='bg-teriary text-primary focus:ring-primary/50' placeholder='Địa chỉ' />
                 </Form.Item>
                 <Form.Item className='hidden' name='avatar' label='Avatar' />
 
                 <Form.Item
                   name='PhoneNumber'
-                  label={<span className='font-medium'>PhoneNumber</span>}
+                  label={<span className='font-medium text-primary'>PhoneNumber</span>}
                   rules={[{ required: false }, { validator: validatePhoneNumber }]}
                 >
-                  <Input placeholder='Số điện thoại' />
+                  <Input className='bg-teriary text-primary focus:ring-primary/50' placeholder='Số điện thoại' />
                 </Form.Item>
-                <Form.Item name='email' label={<span className='font-medium'>Email</span>} rules={[{ required: true }]}>
+                <Form.Item name='email' label={<span className='font-medium text-primary'>Email</span>} rules={[{ required: true }]}>
                   <Input className='cursor-not-allowed' disabled />
                 </Form.Item>
 
@@ -242,26 +242,26 @@ function ProfilePage() {
                 )}
                 <Form.Item
                   name='Password'
-                  label={<span className='font-medium'>Mật khẩu cũ</span>}
+                  label={<span className='font-medium text-primary'>Mật khẩu cũ</span>}
                   hidden={!showPasswordFields}
                 >
-                  <Input.Password placeholder='Nhập mật khẩu cũ' />
+                  <Input.Password className='bg-teriary text-primary focus:ring-primary/50' placeholder='Nhập mật khẩu cũ' />
                 </Form.Item>
                 <Form.Item
                   name='NewPassword'
-                  label={<span className='font-medium'>Mật khẩu mới</span>}
+                  label={<span className='font-medium text-primary'>Mật khẩu mới</span>}
                   hidden={!showPasswordFields}
                 >
-                  <Input.Password placeholder='Nhập mật khẩu mới' />
+                  <Input.Password className='bg-teriary text-primary focus:ring-primary/50' placeholder='Nhập mật khẩu mới' />
                 </Form.Item>
 
                 <Form.Item
                   name='ConfirmPassword'
-                  label={<span className='font-medium'>Xác nhận mật khẩu</span>}
+                  label={<span className='font-medium text-primary'>Xác nhận mật khẩu</span>}
                   rules={[{ validator: validateConfirmPassword }]}
                   hidden={!showPasswordFields}
                 >
-                  <Input.Password placeholder='Xác nhận mật khẩu' />
+                  <Input.Password className='bg-teriary text-primary focus:ring-primary/50' placeholder='Xác nhận mật khẩu' />
                 </Form.Item>
                 <Form.Item className='mb-2 flex justify-center'>
                   <Button

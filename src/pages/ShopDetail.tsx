@@ -149,7 +149,7 @@ export default function ShopDetail() {
                     <button
                       key={star}
                       onClick={() => setSelectedRating(star)}
-                      className={`flex items-center bg-white px-4 py-2 border rounded-lg ${selectedRating === star ? 'font-bold border-black border-3' : ''}`}
+                      className={`flex items-center bg-white px-4 py-2 border rounded-lg ${selectedRating === star ? 'font-bold border-primary border-3' : ''}`}
                     >
                       {star === 0 ? 'Tất cả' : star} {star !== 0 && <Star size={16} fill='yellow' color='yellow' />}
                     </button>
