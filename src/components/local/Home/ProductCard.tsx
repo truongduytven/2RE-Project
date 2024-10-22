@@ -20,9 +20,8 @@ function ProductCard(props: Product) {
           ({props.size})
         </div>
       </div>
-      {/* <p className='text-sm text-gray-400'>{props.size}</p> */}
-      <p className='mt-3 text-xs text-[#484848]'>cond {props.condition}</p>
-      <div className='flex justify-around w-full items-center'>
+      <p className='mt-3 text-xs text-[#484848]'>Tình trạng {props.condition}</p>
+      <div className='flex gap-2 w-full items-center'>
         <p className='mt-3 text-md font-semibold text-[#484848] transition-colors duration-300 hover:text-black'>
           {formatCurrency(props.price)}
         </p>

@@ -218,7 +218,7 @@ export default function ListProduct() {
   return (
     <div className='flex flex-col items-center'>
       {searchQuery && <div className='font-semibold text-xl mb-2'>Kết quả tìm kiếm cho '{searchQuery}'</div>}
-      <div className='w-full flex justify-center max-w-6xl mr-5'>
+      <div className='w-full flex justify-center max-w-6xl mr-5 gap-10'>
         <div className='flex flex-grow' style={{ flex: '1' }}>
           {/* Filter Sidebar */}
           <div className='flex flex-col gap-5 w-full'>
@@ -357,7 +357,7 @@ export default function ListProduct() {
           </div>
         </div>
         {/* Product Grid */}
-        <div className='flex flex-grow flex-col' style={{ flex: '3.5' }}>
+        <div className='flex flex-grow flex-col' style={{ flex: '4' }}>
           {paginatedProducts.length > 0 ? (
             <div className='grid grid-cols-3 p-5 gap-4 gap-y-14'>
               {paginatedProducts.map((product, index) => (

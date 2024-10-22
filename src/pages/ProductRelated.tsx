@@ -18,6 +18,7 @@ const ProductRelated = ({ productId }: ProductRelatedProps) => {
         setIsLoading(true)
         const response = await REAPI.get(`/product/related/${productId}`)
         const data = await response.data
+        response.data.length = 4
         setListProducts(data)
       } catch (error) {
         console.error('Fetching related products failed:', error)
