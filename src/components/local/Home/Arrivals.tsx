@@ -3,21 +3,25 @@ import ProductCard from './ProductCard'
 import { Link } from 'react-router-dom'
 import REAPI from '@/lib/2REAPI'
 import { Product } from '@/types'
+import Loading from '@/components/global/Loading/Loading'
 
 export default function Arrivals() {
   const [selectedType, setSelectedType] = useState<string>('Nam')
   const [products, setProducts] = useState<Product[]>([])
+  const [isLoading, setIsLoading] = useState(false)
   
   useEffect(() => {
+    setIsLoading(true)
     const filteredProducts = async () => {
       try {
         const response = await REAPI.get('/product/newest')
       setProducts(response.data)
       } catch {
         console.log('Error')
-      } 
+      } finally {
+        setIsLoading(false)
+      }
     }
-
     filteredProducts()
   }, [])
   
@@ -35,6 +39,10 @@ export default function Arrivals() {
   // const getButtonClass = (type: string) => {
   //   return `${selectedType === type ? 'hover:bg-black hover:text-white' : 'bg-[#FAFAFA] text-[#8A8A8A] shadow-none hover:bg-[#FAFAFA] hover:text-[#8A8A8A]'}`
   // }
+  if(isLoading) {
+    return <Loading />
+  }
+
 
   return (
     <div>

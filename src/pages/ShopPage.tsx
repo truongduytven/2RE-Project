@@ -76,13 +76,13 @@ export default function ShopPage() {
                         />
                       </div>
                       <div className='flex gap-1'>
-                        <div className='truncate font-semibold max-w-60 mt-2 text-[#484848] transition-colors duration-300 hover:text-black'>
+                        <div className='truncate font-semibold max-w-60 mt-2 text-primary transition-colors duration-300 hover:text-black'>
                           {shop.shopName}
                         </div>
                       </div>
                       <div className='flex items-center justify-end w-full'>
                         <div>{shop.totalRating}</div>
-                        <Star size={16} className='mx-2' fill='yellow' color='yellow'/>
+                        <Star size={16} className='mx-2' fill='yellow' color='gray'/>
                         <div>({shop.quantityRating})</div>
                       </div>
                     </Card>

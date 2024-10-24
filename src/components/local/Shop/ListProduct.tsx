@@ -18,7 +18,7 @@ import { Product } from '@/types'
 
 const PRODUCTS_PER_PAGE = 9
 
-const sizes = ['S', 'M', 'L', 'XL', 'Free']
+const sizes = ['S', 'M', 'L', 'XL', 'FREE']
 const priceRanges = [
   '0 VND - 200.000 VND',
   '200.000 VND - 400.000 VND',
@@ -29,7 +29,7 @@ const priceRanges = [
 const catelogies = ['Jackets', 'Jeans', 'T-Shirts']
 const brands = ['Adidas', 'Nike', 'Puma', 'Converse', 'Vans', 'New Balance', 'Reebok', 'Fila', 'Balenciaga', 'Gucci']
 const collections = ['NewArrivals', 'Trending', 'DiscountDeals']
-const genders = ['Nam', 'Nữ']
+const genders = ['Nam', 'Nữ', 'Tất cả']
 
 export default function ListProduct() {
   const [selectedBrand, setSelectedBrand] = useState<string[]>([])
@@ -216,9 +216,9 @@ export default function ListProduct() {
   }
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='w-full flex flex-col items-center px-20'>
       {searchQuery && <div className='font-semibold text-xl mb-2'>Kết quả tìm kiếm cho '{searchQuery}'</div>}
-      <div className='w-full flex justify-center max-w-6xl mr-5 gap-10'>
+      <div className='w-full flex justify-center gap-20'>
         <div className='flex flex-grow' style={{ flex: '1' }}>
           {/* Filter Sidebar */}
           <div className='flex flex-col gap-5 w-full'>
@@ -361,7 +361,9 @@ export default function ListProduct() {
           {paginatedProducts.length > 0 ? (
             <div className='grid grid-cols-3 p-5 gap-4 gap-y-14'>
               {paginatedProducts.map((product, index) => (
-                <ProductCard key={index} product={product} />
+                <div className='flex justify-center'>
+                  <ProductCard key={index} product={product} />
+                </div>
               ))}
             </div>
           ) : (

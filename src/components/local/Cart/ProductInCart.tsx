@@ -45,7 +45,7 @@ export default function ProductInCart() {
         const response = await REAPI.get(`/product/list?${paramsId}`)
         const data = await response.data
         setProducts(data)
-        const availableProducts = data.filter((product: Product) => {
+        data.filter((product: Product) => {
           if (product.status.toLowerCase() !== 'có sẵn') {
             removeFromCart(product.productId.toString());
             return false;

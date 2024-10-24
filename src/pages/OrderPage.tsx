@@ -103,7 +103,7 @@ export default function OrderPage() {
   }
 
   return (
-    <div className='w-full flex flex-col gap-10 my-10'>
+    <div className='w-full flex flex-col gap-10 py-10'>
       <div className='w-full flex justify-center'>
         <div className='flex flex-col justify-center items-center'>
           <div className='text-4xl mb-5'>Danh sách đơn hàng</div>

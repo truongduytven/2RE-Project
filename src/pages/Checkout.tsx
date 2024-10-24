@@ -15,7 +15,7 @@ export default function Checkout() {
     setSelectedProducts(newSelectedProducts)
   }
   return (
-    <div className='w-full justify-center my-5'>
+    <div className='w-full justify-center py-5'>
       <Container>
         <div className='flex flex-col items-center gap-8'>
           <div className='text-4xl'>Thanh toán</div>

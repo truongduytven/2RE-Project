@@ -93,7 +93,7 @@ export default function ShopDetail() {
           <div className='text-3xl font-bold'>{shopDetail.shopName}</div>
           <div className='flex items-center gap-2'>
             <div>{shopDetail.totalRating}</div>
-            <Star size={20} color='yellow' fill='yellow'/>
+            <Star size={20} color='gray' fill='yellow'/>
             <div>({shopDetail.quantityRating} đánh giá)</div>
           </div>
         </div>
@@ -125,7 +125,9 @@ export default function ShopDetail() {
           {activeTab === 'products' && (
             <div className='grid grid-cols-3 p-5 gap-4 gap-y-14'>
               {listProduct.map((product) => (
-                <ProductCard key={product.productId} product={product} />
+                <div className='flex justify-center'>
+                  <ProductCard key={product.productId} product={product} />
+                </div>
               ))}
             </div>
           )}
@@ -151,7 +153,7 @@ export default function ShopDetail() {
                       onClick={() => setSelectedRating(star)}
                       className={`flex items-center bg-white px-4 py-2 border rounded-lg ${selectedRating === star ? 'font-bold border-primary border-3' : ''}`}
                     >
-                      {star === 0 ? 'Tất cả' : star} {star !== 0 && <Star size={16} fill='yellow' color='yellow' />}
+                      {star === 0 ? 'Tất cả' : star} {star !== 0 && <Star size={16} fill='yellow' color='gray'/>}
                     </button>
                   ))}
                 </div>
