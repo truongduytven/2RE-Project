@@ -12,8 +12,8 @@ function ProductCard(props: Product) {
           alt={props.name}
         />
       </div>
-      <div className='flex gap-1'>
-        <div className='truncate font-semibold mt-2 text-[#484848] transition-colors duration-300 hover:text-black'>
+      <div className='flex gap-1 w-full'>
+        <div className='truncate font-semibold mt-2 text-[#484848] transition-colors duration-300 hover:text-black w-full'>
           {props.name}
         </div>
         <div className='font-semibold mt-2 text-[#484848] transition-colors duration-300 hover:text-black'>
