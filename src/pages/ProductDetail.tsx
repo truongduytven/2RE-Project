@@ -142,7 +142,7 @@ const ProductDetails: React.FC = () => {
                     key={index}
                     src={image}
                     alt={`related-${index}`}
-                    className='w-full h-[80px] object-cover border border-gray-300 cursor-pointer transition duration-300 hover:border-black'
+                    className='w-14 h-[80px] object-cover border border-gray-300 cursor-pointer transition duration-300 hover:border-black'
                     onMouseEnter={() => handleImageHover(image)}
                     onMouseLeave={handleMouseLeave}
                   />
