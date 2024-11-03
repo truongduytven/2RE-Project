@@ -20,14 +20,14 @@ const PRODUCTS_PER_PAGE = 9
 
 const sizes = ['S', 'M', 'L', 'XL', 'FREE']
 const priceRanges = [
-  '0 VND - 200.000 VND',
-  '200.000 VND - 400.000 VND',
-  '400.000 VND - 600.000 VND',
-  '600.000 VND - 800.000 VND',
-  'Trên 800.000 VND'
+  '0 VND - 50.000 VND',
+  '50.000 VND - 100.000 VND',
+  '100.000 VND - 150.000 VND',
+  '150.000 VND - 200.000 VND',
+  'Trên 200.000 VND'
 ]
-const catelogies = ['Jackets', 'Jeans', 'T-Shirts']
-const brands = ['Adidas', 'Nike', 'Puma', 'Converse', 'Vans', 'New Balance', 'Reebok', 'Fila', 'Balenciaga', 'Gucci']
+// const catelogies = ['Jackets', 'Jeans', 'T-Shirts']
+// const brands = ['Adidas', 'Nike', 'Puma', 'Converse', 'Vans', 'New Balance', 'Reebok', 'Fila', 'Balenciaga', 'Gucci']
 const collections = ['NewArrivals', 'Trending', 'DiscountDeals']
 const genders = ['Nam', 'Nữ', 'Tất cả']
 
@@ -38,6 +38,8 @@ export default function ListProduct() {
   const [selectedCollection, setSelectedCollection] = useState<string | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [selectedGender, setSelectedGender] = useState<string | null>(null)
+  const [catelogies, setCatelogies] = useState<string[]>([])
+  const [brands, setBrands] = useState<string[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [currentPage, setCurrentPage] = useState<number>(() => {
@@ -54,6 +56,10 @@ export default function ListProduct() {
         const response = await REAPI.get('/product')
         const products = response.data
         setProducts(products)
+        const responseCate = await REAPI.get('/product/categories')
+        setCatelogies(responseCate.data.map((cate: any) => cate.name))
+        const responseBrand = await REAPI.get('/product/brands')
+        setBrands(responseBrand.data)
       } catch (error) {
         console.error('Fetching products failed:', error)
       } finally {
@@ -97,11 +103,11 @@ export default function ListProduct() {
 
       const matchesPrice = selectedPriceRange
         ? (() => {
-            if (selectedPriceRange === '0 VND - 200.000 VND') return newPrice >= 0 && newPrice <= 200000
-            if (selectedPriceRange === '200.000 VND - 400.000 VND') return newPrice > 200000 && newPrice <= 400000
-            if (selectedPriceRange === '400.000 VND - 600.000 VND') return newPrice > 400000 && newPrice <= 600000
-            if (selectedPriceRange === '600.000 VND - 800.000 VND') return newPrice > 600000 && newPrice <= 800000
-            if (selectedPriceRange === 'Trên 800.000 VND') return newPrice > 800000
+            if (selectedPriceRange === '0 VND - 50.000 VND') return newPrice >= 0 && newPrice <= 50000
+            if (selectedPriceRange === '50.000 VND - 100.000 VND') return newPrice > 50000 && newPrice <= 100000
+            if (selectedPriceRange === '100.000 VND - 150.000 VND') return newPrice > 100000 && newPrice <= 150000
+            if (selectedPriceRange === '150.000 VND - 200.000 VND') return newPrice > 150000 && newPrice <= 200000
+            if (selectedPriceRange === 'Trên 200.000 VND') return newPrice > 200000
             return true
           })()
         : true
@@ -338,7 +344,7 @@ export default function ListProduct() {
               <AccordionItem value='item-5'>
                 <AccordionTrigger>Loại sản phẩm</AccordionTrigger>
                 <AccordionContent>
-                  <div className='flex flex-col gap-2'>
+                  <div className='flex flex-wrap gap-2 mb-4'>
                     {catelogies.map((category) => (
                       <div
                         key={category}
@@ -346,7 +352,7 @@ export default function ListProduct() {
                         onClick={() => handleCategorySelection(category)}
                       >
                         <button className={`border border-primary text-left px-2 py-1 rounded  ${selectedCategory === category ? 'bg-primary text-teriary' : 'bg-teriary'}`}>
-                          {category === 'T-Shirts' ? 'Áo thun' : category === 'Jeans' ? 'Jean' : 'Áo khoác'}
+                          {category}
                         </button>              
                       </div>
                     ))}

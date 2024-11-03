@@ -41,7 +41,7 @@ export default function ProductCard({ product }: Props) {
             <div className='font-bold'>({product.size})</div>
           </div>
           <div className='flex gap-1 w-full justify-start text-gray-500'>Thương hiệu: {product.brand}</div>
-          <div className='flex gap-1 w-full justify-start  text-gray-500'>Tình trạng: {product.condition}</div>
+          <div className='flex gap-1 w-full justify-start  text-gray-500'>Tình trạng: {product.condition}%</div>
           <div className='flex gap-2 items-center w-full justify-start'>
             {product.sale && product.sale > 0 ? (
               <div className='font-semibold'>

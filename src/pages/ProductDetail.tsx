@@ -195,7 +195,7 @@ const ProductDetails: React.FC = () => {
                   <strong>Thương hiệu:</strong> {product.brand ? product.brand : 'Không xác định'}
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <strong>Tình trạng:</strong> {product.condition ? product.condition : 'Không xác định'}
+                  <strong>Tình trạng:</strong> {product.condition ? product.condition : 'Không xác định'}%
                 </div>
                 <div className='flex gap-2 items-center'>
                   <strong>Loại:</strong> {formatProductType(product.category)}
